@@ -1,0 +1,95 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux:
+    name: Linux GCC 13 / ${{ matrix.configuration }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - configuration: Debug
+            directory: build/debug
+          - configuration: Release
+            directory: build/release
+    env:
+      CC: gcc-13
+      CXX: g++-13
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Configure
+        run: cmake -S . -B ${{ matrix.directory }} -G Ninja -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+      - name: Build
+        run: cmake --build ${{ matrix.directory }} --parallel 2
+      - name: Test existing contracts
+        run: ctest --test-dir ${{ matrix.directory }} --output-on-failure --timeout 180
+
+  sanitizers:
+    name: Linux GCC 15 / ${{ matrix.name }}
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: ASan-UBSan
+            option: address,undefined
+            directory: build/asan-ubsan
+          - name: TSan
+            option: thread
+            directory: build/tsan
+    env:
+      CC: gcc-15
+      CXX: g++-15
+      ASAN_OPTIONS: detect_leaks=1:halt_on_error=1
+      UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+      TSAN_OPTIONS: halt_on_error=1
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Configure isolated sanitizer build
+        run: cmake -S . -B ${{ matrix.directory }} -G Ninja -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug -DHPTS_SANITIZERS=${{ matrix.option }}
+      - name: Build
+        run: cmake --build ${{ matrix.directory }} --parallel 2
+      - name: Test existing contracts
+        run: ctest --test-dir ${{ matrix.directory }} --output-on-failure --timeout 180
+
+  windows:
+    name: Windows MSVC / Release
+    runs-on: windows-2025
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Configure
+        run: cmake -S . -B build/windows-release -A x64 -DBUILD_TESTING=ON
+      - name: Build
+        run: cmake --build build/windows-release --config Release --parallel 2
+      - name: Test existing contracts
+        run: ctest --test-dir build/windows-release -C Release --output-on-failure --timeout 180
