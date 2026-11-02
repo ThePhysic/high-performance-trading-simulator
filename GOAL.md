@@ -1,9 +1,17 @@
-# Project goal
+# Project scope and acceptance criteria
 
-Build and verify a complete Linux-native C++20 event-processing engine and exchange simulator, operated through a terminal.
+Provide a locally operated, Linux-oriented C++20 event-processing engine whose main workload is a miniature electronic exchange. A single authoritative writer owns the book and simulated accounts; terminal, file, and benchmark modes use the same business engine.
 
-Deliver interactive order submission, cancellation, modification, and book/account inspection; correct price-time matching, FIFO priority, partial fills, and documented order lifecycle rules; simulated position limits, buying-power reservations, coherent accounting, and a sequenced kill switch; command-file execution and deterministic replay with identical logical outputs and final state; bounded processing, clear state ownership, and explicit handling of invalid inputs, duplicates, overload, and output failures; correctness evidence through reference-model comparisons, deterministic examples, randomized invariant checks, and appropriate sanitizer testing; reproducible workload generation, benchmarks, and profiling-backed performance analysis covering throughput, p50/p95/p99 latency, CPU, and memory; and documented Linux build/run instructions, design decisions, limitations, and an end-to-end terminal demonstration.
+The implemented scope is judged by observable behavior and reproducible evidence:
 
-Follow the original [downloaded requirements](docs/requirements/README.md). Keep TCP networking and durable crash recovery optional. Exclude live trading, strategy research, a web frontend, and unnecessary cloud infrastructure. Base all correctness and performance claims on actual verification.
+- Interactive submit/cancel/replace and book/account inspection; best-price/FIFO matching, partial fills, and explicit replacement priority.
+- Checked integer prices, quantities, positions, and cash; conservative outstanding-order reservations, limits, and sequenced kill controls.
+- Complete command-file journals and replay with identical canonical events and final state under the same inputs/rules/configuration.
+- Bounded handoffs and identity ledgers, clear state ownership, and explicit parse, duplicate, capacity, and output-failure behavior.
+- Independent reference comparisons, deterministic fixtures, stateful invariant tests, meaningful sanitizer checks, and the existing CTest contracts in CI.
+- Reproducible synthetic workloads and profiling-backed analysis of throughput, p50/p95/p99 latency, CPU, and memory, with precise timing/build/environment qualifiers.
+- Copyable build/test/demo commands, documented design tradeoffs, and retained evidence that distinguishes recorded experiments from hosted CI results.
 
-Use parallel agents where useful and maintain commits at meaningful feature boundaries. After implementation and relevant validation, iterate through independent Astra medium adversarial review until the reviewer has no remaining complaints. Create a private GitHub repository and push the finished project, verifying visibility and that the remote commit matches the reviewed local commit. Completion requires implementation, verification, clean review, and verified private publication.
+TCP ingress and durable crash recovery are optional extensions and are not implemented. Live trading, real funds, profitability/strategy research, a frontend, and a cloud service are outside scope. Neither production certification nor a fixed performance target is claimed.
+
+See [Usage](docs/USAGE.md), [Design](docs/DESIGN.md), [Performance](docs/PERFORMANCE.md), and [Validation](reports/VALIDATION.md). The original [historical requirements](docs/requirements/README.md) remain unchanged for provenance.

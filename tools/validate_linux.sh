@@ -14,7 +14,8 @@ Optional checks fail explicitly if the runtime or perf permissions are missing.
 
 Environment: HPTS_JOBS (default 2), HPTS_COUNT (default 10000),
 HPTS_REPETITIONS (default 3), HPTS_SEED (default 42).
-Outputs: build/linux-* and reports/linux/ under the project directory.
+Outputs: build/linux-* and build/linux-reports/ under the project directory.
+Generated outputs are overwritten; committed reports/ artifacts are unchanged.
 EOF
 }
 
@@ -40,14 +41,14 @@ jobs=${HPTS_JOBS:-2}
 count=${HPTS_COUNT:-10000}
 repetitions=${HPTS_REPETITIONS:-3}
 seed=${HPTS_SEED:-42}
-mkdir -p reports/linux
+mkdir -p build/linux-reports
 {
     uname -a
     cmake --version
     c++ --version
     python3 --version
     printf 'jobs=%s count=%s repetitions=%s seed=%s\n' "$jobs" "$count" "$repetitions" "$seed"
-} > reports/linux/environment.txt 2>&1
+} > build/linux-reports/environment.txt 2>&1
 
 cmake -S . -B build/linux-debug -DCMAKE_BUILD_TYPE=Debug
 cmake --build build/linux-debug --parallel "$jobs"
@@ -66,16 +67,16 @@ fi
 cmake -S . -B build/linux-release -DCMAKE_BUILD_TYPE=Release
 cmake --build build/linux-release --parallel "$jobs"
 ctest --test-dir build/linux-release --output-on-failure
-python3 tools/benchmark_suite.py --binary build/linux-release/hpts --output-dir reports/linux/benchmarks --count "$count" --repetitions "$repetitions" --seed "$seed"
+python3 tools/benchmark_suite.py --binary build/linux-release/hpts --output-dir build/linux-reports/benchmarks --count "$count" --repetitions "$repetitions" --seed "$seed"
 
 if [ "$run_perf" -eq 1 ]; then
     if ! command -v perf >/dev/null 2>&1; then
         printf '%s\n' 'Requested perf collection is unavailable: perf was not found.' >&2
         exit 1
     fi
-    perf stat -o reports/linux/perf-stat.txt -- build/linux-release/hpts bench --config reports/linux/benchmarks/burst/accounts.cfg --input reports/linux/benchmarks/burst/commands.txt --mode queued --output reports/linux/perf-bench.json
-    perf record -o reports/linux/perf.data -- build/linux-release/hpts bench --config reports/linux/benchmarks/burst/accounts.cfg --input reports/linux/benchmarks/burst/commands.txt --mode queued --output reports/linux/perf-record-bench.json
-    perf report --stdio -i reports/linux/perf.data > reports/linux/perf-report.txt
+    perf stat -o build/linux-reports/perf-stat.txt -- build/linux-release/hpts bench --config build/linux-reports/benchmarks/burst/accounts.cfg --input build/linux-reports/benchmarks/burst/commands.txt --mode queued --output build/linux-reports/perf-bench.json
+    perf record -o build/linux-reports/perf.data -- build/linux-release/hpts bench --config build/linux-reports/benchmarks/burst/accounts.cfg --input build/linux-reports/benchmarks/burst/commands.txt --mode queued --output build/linux-reports/perf-record-bench.json
+    perf report --stdio -i build/linux-reports/perf.data > build/linux-reports/perf-report.txt
 fi
 
 printf '%s\n' 'Linux validation commands completed successfully; inspect generated evidence and environment before making claims.'

@@ -1,6 +1,6 @@
 # Executed validation
 
-This record links actual execution evidence to the project requirements. Current implementation verification uses source commit `98ea79593f8abdc98cf5409ba94627a0749c2996`; later release documentation commits do not change the tested C++/build/test/tool sources. All performance claims retain their specific workload, binary, compiler, timing boundary, and limitations.
+This record links actual execution evidence to the project requirements. The retained implementation tests and performance measurements use source commit `98ea79593f8abdc98cf5409ba94627a0749c2996`; the initial published revision `ab5cf7858bcab85266da2908d7c315ef3ac02ff9` added documentation and reports without changing those implementation sources. Subsequent polish preserves the C++/CMake sources, tests, Python workload tools, canonical schema, and original measurement artifacts. The shell validation helper now directs generated output to ignored `build/linux-reports/`; historical logs keep their original paths and source identity. New hosted CI results identify their own tested revisions and are separate from the measurements below.
 
 ## Linux correctness and sanitizers
 
@@ -43,8 +43,14 @@ The same implementation commit was rebuilt independently with MSVC 19.51, C++20,
 
 Retained [build identity and source/binary hashes](native-final/build.json), [full build/test log](native-final/build-and-test.log), and [CTest details](native-final/ctest-details.log) prove this final portability check. Earlier `native-*` artifacts at this directory's top level document the historical native implementation at commit `814aa56`; their source hashes and measured performance refer to that earlier version, not the optimized final binary. Historical Windows ASan results are retained, while final memory/race/UB claims use the Linux sanitizer runs above.
 
-## Review and release gates
+## Output-failure regression history
 
-Astra medium adversarial review previously identified buffered stdout false success. Checked successful exits fixed the native case; actual Linux testing then exposed recursive flushing through tied stderr, which was fixed in `fec21af`. The exercised stdout failures now return the documented error exit 2 on Linux and Windows. The subsequent serializer experiment preserves the output contract and has independent byte fixtures and baseline comparisons.
+Development review identified buffered stdout false success. Checked successful exits fixed the native case; actual Linux testing then exposed recursive flushing through tied stderr, which was fixed in `fec21af`. The exercised stdout failures return the documented error exit 2 on Linux and Windows. The subsequent serializer experiment preserves the output contract and has independent byte fixtures and baseline comparisons.
 
-Independent final Astra medium review and verified private GitHub publication remain mandatory release gates, separate from these local verification results. Publication must verify private visibility and exact remote/local commit equality after pushing the reviewed source. A benchmark result or helper script alone does not establish those gates.
+## Hosted CI and public evidence
+
+Current hosted checks are visible in [GitHub Actions](https://github.com/ThePhysic/high-performance-trading-simulator/actions/workflows/ci.yml); their configuration and scope are documented in [CI](../docs/CI.md). A workflow file is not itself a passing result. Assess the linked run's revision, individual jobs, and conclusion; platform-specific skips remain visible in CTest output. CI does not rerun the historical performance experiment or enforce speed thresholds.
+
+The [first verified hosted run](https://github.com/ThePhysic/high-performance-trading-simulator/actions/runs/41390129509) tested revision `b742dcf7f8c34533529a4ec32b2d4a100917c272`: all five jobs passed, and each ran all three CTest targets. This confirms that run, not every future revision; the live workflow page and badge show current status.
+
+The repository is [publicly available](https://github.com/ThePhysic/high-performance-trading-simulator). No separate independent review attestation is published; this record relies on reproducible checks and retained evidence.

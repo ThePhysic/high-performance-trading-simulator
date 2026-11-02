@@ -65,7 +65,7 @@ All input is synthetic. The file has no wall-clock arrival model; `burst` change
 ## Repeated suite and artifacts
 
 ```sh
-python3 tools/benchmark_suite.py --binary ./build/release/hpts --output-dir reports/local --count 10000 --seed 42 --repetitions 3 --profiles resting crossing cancel replace dense sparse burst mixed
+python3 tools/benchmark_suite.py --binary ./build/release/hpts --output-dir build/benchmarks --count 10000 --seed 42 --repetitions 3 --profiles resting crossing cancel replace dense sparse burst mixed
 ```
 
 For each profile the suite:
@@ -91,7 +91,7 @@ sh tools/validate_linux.sh
 HPTS_COUNT=10000 HPTS_REPETITIONS=3 sh tools/validate_linux.sh --tsan --perf
 ```
 
-It builds/tests Debug, ASan/UBSan, and Release configurations and runs a repeated suite. `--tsan` adds a separate ThreadSanitizer build. `--perf` collects actual `perf stat`, sampling, and text-report artifacts for the queued burst case, and fails explicitly if `perf` or permissions are unavailable. Results are written under `reports/linux/`; build outputs are under `build/linux-*`. See the helper's `--help` for environment variables.
+It builds/tests Debug, ASan/UBSan, and Release configurations and runs a repeated suite. `--tsan` adds a separate ThreadSanitizer build. `--perf` collects actual `perf stat`, sampling, and text-report artifacts for the queued burst case, and fails explicitly if `perf` or permissions are unavailable. Generated results are written under ignored `build/linux-reports/`; build outputs are under `build/linux-*`. Selected generated files are overwritten. Committed historical `reports/` artifacts are not modified. See the helper's `--help` for environment variables.
 
 The helper's existence does not establish that a Linux runtime, sanitizer runtime, or profiler was accessible, or that any check passed. Native Windows verification remains labelled Windows evidence. A requested but unavailable Linux/profiler check is a limitation to resolve and record, not a successful check.
 
@@ -112,12 +112,13 @@ A defensible optimization report starts from a measured baseline, identifies a c
 The retained [Linux baseline profile](../reports/linux/profile-baseline/README.md) identifies canonical outcome formatting as a material cost. Commit `fec21af` is the pre-optimization baseline. The candidate changes only outcome formatting to direct escaping/string append and integer `to_chars`; matching, risk, and canonical bytes are preserved. Independent byte fixtures cover numeric extremes and escaping, and the comparison tool checks complete generated event/state/journal equality.
 
 ```sh
+mkdir -p build
 git worktree add --detach build/baseline-source fec21af
 cmake -S build/baseline-source -B build/baseline -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS=-fno-omit-frame-pointer
 cmake --build build/baseline --parallel 4
 cmake -S . -B build/candidate -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS=-fno-omit-frame-pointer
 cmake --build build/candidate --parallel 4
-python3 tools/compare_binaries.py --baseline build/baseline/hpts --candidate build/candidate/hpts --output-dir reports/comparison --count 100000 --seed 42 --repetitions 5
+python3 tools/compare_binaries.py --baseline build/baseline/hpts --candidate build/candidate/hpts --output-dir build/comparison --count 100000 --seed 42 --repetitions 5
 ```
 
 This experiment compares the same compiler, flags, input, timing boundaries, and execution topology. It attributes a measured gain or regression to the serialization change, without claiming faster matching. Five interleaved repetitions and raw CPU/memory/latency reports support assessing variability. Frame-pointer sampling and full-process hardware counts include work outside the CLI's timed execution interval; their scope must remain separate from throughput/core latency. The validation record identifies the actual runs and limitations.

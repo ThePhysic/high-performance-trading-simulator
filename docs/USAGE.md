@@ -20,7 +20,7 @@ The default build requires Python 3.10+ for the complete test suite. A C++-only 
 
 For multi-configuration generators, select the configuration with `cmake --build BUILD_DIR --config Debug` and `ctest --test-dir BUILD_DIR -C Debug`; the executable may be in a `Debug` subdirectory. Native MSVC is supported, but native Windows results do not establish Linux behavior or performance.
 
-See [reports/VALIDATION.md](../reports/VALIDATION.md) for executed evidence. The build commands above do not imply that Linux checks have run.
+See [reports/VALIDATION.md](../reports/VALIDATION.md) for recorded Linux results and current hosted CI links. Build commands describe how to reproduce checks; their presence alone is not a test result.
 
 ## Help and operating modes
 

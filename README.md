@@ -1,16 +1,34 @@
 # High-Performance Trading Simulator
 
-A C++20 event-processing engine and miniature electronic exchange, operated through a local terminal. The engine combines authoritative command sequencing, price-time matching, simulated account/risk controls, bounded processing, and reproducible logical replay. Linux is the intended execution and measurement platform; the implementation also supports native MSVC builds.
+[![CI](https://github.com/ThePhysic/high-performance-trading-simulator/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/ThePhysic/high-performance-trading-simulator/actions/workflows/ci.yml)
 
-This is a systems simulator using synthetic accounts and orders. Live trading, real funds, strategy research, a web interface, and cloud infrastructure are outside scope. TCP ingress and durable crash recovery are optional and are not implemented.
+A Linux-oriented **C++20 event-processing and exchange simulator** with one authoritative book writer, deterministic commands, and synthetic accounts/orders. It runs entirely from a terminal; native MSVC builds are also supported.
 
-## Build and demonstrate on Linux
+The engineering focus is price-time/FIFO matching, coherent risk/accounting invariants, exact replay, bounded backpressure, and a measured formatting optimization that preserves every canonical output byte.
 
-Prerequisites: CMake 3.20+, a C++20 compiler, thread support, and Python 3.10+ for the complete test suite and workload tools.
+## Measured serialization optimization
+
+Replacing stream-based canonical formatting with direct string appends and integer `to_chars` improved these recorded **synthetic, direct-mode, in-process** results. The matching algorithm did not change.
+
+| Profile | Baseline commands/s | Candidate commands/s | Ratio |
+|---|---:|---:|---:|
+| crossing | 331,669 | 548,819 | 1.655× |
+| cancel | 403,400 | 770,497 | 1.910× |
+| mixed | 396,486 | 677,853 | 1.710× |
+
+Means of **five interleaved measured repetitions per implementation**, 100,000 commands/run, seed 42, GNU C++ 15.2 `RelWithDebInfo` (`-O2 -g -DNDEBUG`, frame pointers), Ubuntu 26.04 under WSL2, AMD Ryzen 9 7940HS. The timed interval includes processing, canonical serialization, and trace hashing; it excludes input parsing, final-state generation, network transport, and durable output. The shared host was not isolated or pinned. These are not live-feed results, bare-metal latency guarantees, or universal speedups.
+
+[Experiment and tradeoffs](reports/linux/SERIALIZATION_EXPERIMENT.md) · [Raw samples and variability](reports/linux/serialization-comparison.json) · [Timing boundaries](docs/PERFORMANCE.md)
+
+## Build, test, and replay
+
+Prerequisites: CMake 3.20+, a C++20 compiler, thread support, and Python 3.10+. From a fresh Linux checkout:
 
 ```sh
-cmake -S . -B build/debug -DCMAKE_BUILD_TYPE=Debug
-cmake --build build/debug --parallel
+git clone https://github.com/ThePhysic/high-performance-trading-simulator.git
+cd high-performance-trading-simulator
+cmake -S . -B build/debug -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON
+cmake --build build/debug --parallel 2
 ctest --test-dir build/debug --output-on-failure
 
 mkdir -p build/demo
@@ -19,22 +37,42 @@ mkdir -p build/demo
 ./build/debug/hpts interactive --config examples/accounts.cfg
 ```
 
-The example demonstrates FIFO and partial fills, replacement and cancellation, aggregate risk rejection, kill-switch behavior, execution at the resting price, and explicit unknown-order/self-trade rejection. Replay compares exact canonical event and state bytes as well as completion fingerprints. The journal includes configuration, normalized commands, and a required completion footer.
+The recorded demo output is:
 
-Linux Debug, Release, ASan/UBSan, and TSan validation passed on the implemented source, as did a separate native MSVC Release check. Read the [validation record](reports/VALIDATION.md) for actual logs, source/binary identity, skipped platform-specific cases, environment, and measurement limits.
+```text
+processed=22 trace_digest=2fd7789a4a51cdad state_digest=994dfc9066d8a373
+replay verified: commands=22 trace_digest=2fd7789a4a51cdad state_digest=994dfc9066d8a373
+```
 
-## What is implemented
+The 22 commands exercise partial fills/FIFO, replacement, cancellation, risk rejection, and kill-switch transitions. Replay checks exact event/state bytes and a complete journal containing configuration, ordered commands, and a completion footer. Output files are overwritten; keep generated work under ignored `build/` directories. [Full command reference](docs/USAGE.md).
 
-- Limit buys/sells on `SIM`, best-price/FIFO matching, partial fills, cancellation, and documented remaining-quantity replacement rules.
-- Checked integer prices, quantities, positions, and cash; conservative outstanding-order reservations and position limits.
-- A sequenced kill switch, duplicate-command protection, terminal order IDs, and explicit finite-session capacity rejections.
-- Single-writer state ownership, bounded producer/consumer queues, and deterministic typed/canonical outcomes.
-- Interactive state inspection, file execution, self-contained replay verification, and direct/queued benchmarks.
-- An independent vector-scan reference model, deterministic fixtures, seeded differential/invariant tests, queue tests, and CLI failure/replay checks.
-- Eight seeded synthetic workload profiles, repeated benchmark collection, and an actual-Linux validation/sanitizer/`perf` helper.
-- A profile-driven canonical-formatting optimization, checked against the original binary with exact output equality and interleaved performance trials; see the [experiment](reports/linux/SERIALIZATION_EXPERIMENT.md).
+## How it works
 
-No fixed throughput or latency target is promised. Benchmark results must retain their workload, build, platform, and timing boundaries; the presence of a helper script is not evidence that its checks passed.
+```mermaid
+flowchart LR
+    I["Interactive / file commands"] --> P["Parse and validate"]
+    P --> E["Sequenced single-writer engine"]
+    J["Replay journal: config + commands"] --> E
+    E --> O["Canonical events + final state"]
+    O --> R["Exact replay comparison"]
+```
+
+File and interactive modes execute directly. Queued benchmarks put bounded ingress and egress handoffs around the same writer and serializer. Queues use **mutexes and condition variables**; full queues apply blocking backpressure.
+
+- Ordered price maps select the best price; per-price FIFO lists preserve time priority. Order-ID lookup is `O(log N)`, and removal of a known FIFO node is `O(1)`.
+- Risk reservations and match effects are prepared before domain-state commit; invalid replacements preserve the original order and priority.
+- Identity ledgers never evict IDs. Explicit capacity rejections bound finite sessions, with the exact policy documented in [Design](docs/DESIGN.md).
+- One book writer makes ordering and ownership inspectable. Specialized lock-free matching and custom allocators were not needed to establish these behaviors.
+
+## Correctness and verification
+
+The existing CTest targets check matching/risk contracts against an independent reference model, 16 seeds × 1,200 stateful commands with invariants, exact replay, integer/escaping extremes, bounded queues with 8,000 concurrent items, and CLI failures including malformed inputs and broken output streams.
+
+Recorded Linux Debug/Release, ASan/UBSan, TSan, and native MSVC Release results are retained in the [validation record](reports/VALIDATION.md). Hosted checks run through [GitHub Actions](https://github.com/ThePhysic/high-performance-trading-simulator/actions/workflows/ci.yml); their current results are separate from the recorded performance experiment. [CI configuration](.github/workflows/ci.yml).
+
+## Boundaries
+
+One simulated instrument (`SIM`), integer tick prices/unit quantities, and synthetic balances. **No live trading, real funds, profitability claims, network ingress, or durable crash recovery.** No guaranteed throughput/latency or production-exchange certification. There is no frontend, strategy research, or cloud service.
 
 ## Documentation
 
@@ -45,5 +83,6 @@ No fixed throughput or latency target is promised. Benchmark results must retain
 | [Performance](docs/PERFORMANCE.md) | Metric boundaries, workload methodology, and Linux profiling |
 | [Tooling](tools/README.md) | Generator, benchmark suite, and validation helper options |
 | [Validation](reports/VALIDATION.md) | Actual verification evidence and known limitations |
-| [Goal](GOAL.md) | Project acceptance criteria |
-| [Original requirements](docs/requirements/README.md) | Preserved downloaded specification |
+| [CI](docs/CI.md) | Hosted build/test matrix and status links |
+
+[Public scope](GOAL.md) · [Historical requirements](docs/requirements/README.md)
