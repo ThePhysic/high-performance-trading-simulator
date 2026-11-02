@@ -21,7 +21,7 @@ Astra medium review reproduced a buffered stdout error: version, benchmark stdou
 
 The corrected build passed 16 registered native CLI cases (14 passed, two expected Linux-only skips) in 3.392 seconds. An affected-target AddressSanitizer rebuild then passed the same CLI suite in 8.76 seconds, with no runtime findings; [retained fix validation](native-asan-cli-stdout.log). The unchanged engine and queue retain their full prior sanitizer evidence. Linux closed-pipe and `/dev/full` stdout cases remain to execute on Linux. The benchmark artifact below was regenerated with the corrected binary, and its hash matches the refreshed build record.
 
-Astra found no additional concrete matching/risk/replay/concurrency defect in its first review, but explicitly withheld completion approval because actual Linux validation/profiling and private publication are still missing. Re-review of the corrected final implementation is pending.
+Astra found no additional concrete matching/risk/replay/concurrency defect in its first review. Its second review of commit `814aa56675c649f586fd0d968cb73bdbea93194f` independently verified the corrected stdout paths and evidence consistency and reported **no further code complaints**. It explicitly withheld unconditional completion approval because actual Linux validation/profiling and private publication are still missing. These requirements remain open and must be included in the eventual final completion review.
 
 ## Measured native topology comparison
 
