@@ -1,0 +1,9 @@
+# Project goal
+
+Build and verify a complete Linux-native C++20 event-processing engine and exchange simulator, operated through a terminal.
+
+Deliver interactive order submission, cancellation, modification, and book/account inspection; correct price-time matching, FIFO priority, partial fills, and documented order lifecycle rules; simulated position limits, buying-power reservations, coherent accounting, and a sequenced kill switch; command-file execution and deterministic replay with identical logical outputs and final state; bounded processing, clear state ownership, and explicit handling of invalid inputs, duplicates, overload, and output failures; correctness evidence through reference-model comparisons, deterministic examples, randomized invariant checks, and appropriate sanitizer testing; reproducible workload generation, benchmarks, and profiling-backed performance analysis covering throughput, p50/p95/p99 latency, CPU, and memory; and documented Linux build/run instructions, design decisions, limitations, and an end-to-end terminal demonstration.
+
+Follow the original [downloaded requirements](docs/requirements/README.md). Keep TCP networking and durable crash recovery optional. Exclude live trading, strategy research, a web frontend, and unnecessary cloud infrastructure. Base all correctness and performance claims on actual verification.
+
+Use parallel agents where useful and maintain commits at meaningful feature boundaries. After implementation and relevant validation, iterate through independent Astra medium adversarial review until the reviewer has no remaining complaints. Create a private GitHub repository and push the finished project, verifying visibility and that the remote commit matches the reviewed local commit. Completion requires implementation, verification, clean review, and verified private publication.

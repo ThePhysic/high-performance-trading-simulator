@@ -1,0 +1,11 @@
+/build*/
+/out/
+/.cache/
+/CMakeUserPresets.json
+/compile_commands.json
+__pycache__/
+*.pyc
+*.profraw
+*.profdata
+perf.data*
+/reports/generated/
