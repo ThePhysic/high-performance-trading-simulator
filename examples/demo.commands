@@ -1,0 +1,28 @@
+# Price-time FIFO: A's 10 units fill first, then 2 of B's 7.
+submit 1 A 1 buy 100 10
+submit 2 B 2 buy 100 7
+submit 3 D 3 sell 100 12
+# Same-price reduction, followed by cancellation.
+replace 4 B 2 100 4
+cancel 5 B 2
+# C has a maximum position of 10 and 1000 cash.
+submit 6 C 4 buy 100 11
+submit 7 C 5 buy 100 8
+submit 8 C 6 buy 100 5
+cancel 9 C 5
+submit 10 C 7 buy 100 5
+# Kill switch blocks new exposure and permits cancellation.
+kill 11 on
+submit 12 A 8 buy 99 1
+cancel 13 C 7
+kill 14 off
+# Crossing executes at the resting price, with partial fill/replacement.
+submit 15 D 9 sell 103 5
+submit 16 A 10 buy 104 3
+replace 17 D 9 102 4
+submit 18 B 11 buy 102 4
+# Unknown cancellation and self-crossing are explicit rejections.
+cancel 19 B 999
+submit 20 A 12 buy 98 1
+submit 21 A 13 sell 98 1
+cancel 22 A 12
