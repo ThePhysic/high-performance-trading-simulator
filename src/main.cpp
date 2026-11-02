@@ -502,6 +502,10 @@ int main(int argc, char* argv[]) {
         if (mode == "bench") return checked_success(benchmark(args));
         return checked_success(interactive(args));
     } catch (const std::exception& error) {
+        // cerr is normally tied to cout. Do not flush a failed stdout again
+        // while reporting its exception or during process shutdown.
+        std::cout.exceptions(std::ios::goodbit);
+        std::cerr.tie(nullptr);
         std::cerr << "error: " << error.what() << '\n';
         return 2;
     }

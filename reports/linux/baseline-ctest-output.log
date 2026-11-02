@@ -1,0 +1,11 @@
+Test project /home/ridle/.cache/hpts-builds/baseline
+    Start 1: engine_contract
+1/3 Test #1: engine_contract ..................   Passed    1.58 sec
+    Start 2: queue_contract
+2/3 Test #2: queue_contract ...................   Passed    0.18 sec
+    Start 3: cli_contract
+3/3 Test #3: cli_contract .....................   Passed   12.38 sec
+
+100% tests passed, 0 tests failed out of 3
+
+Total Test time (real) =  14.16 sec
