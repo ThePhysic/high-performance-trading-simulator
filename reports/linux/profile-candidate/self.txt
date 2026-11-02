@@ -1,0 +1,474 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 517  of event 'cycles:Pu'
+# Event count (approx.): 2188633616
+#
+# Overhead  Shared Object         Symbol                  IPC   [IPC Coverage]
+# ........  ....................  ......................  ....................
+#
+     4.84%  libc.so.6             [.] 0x00000000001b0a39  -      -            
+            |
+            ---0x72fae1db0a39
+               |          
+               |--1.22%--0x5633eaa5e3f9
+               |          0x5633eaa508bd
+               |          0x5633eaa51f92
+               |          0x5633eaa4cb10
+               |          0x72fae1c2a601
+               |          0x72fae1c2a718
+               |          0x5633eaa4e8c5
+               |          
+               |--1.08%--0x5633eaa5e2cb
+               |          0x5633eaa508bd
+               |          0x5633eaa51f92
+               |          0x5633eaa4cb10
+               |          0x72fae1c2a601
+               |          0x72fae1c2a718
+               |          0x5633eaa4e8c5
+               |          
+               |--0.82%--0x5633eaa5e79d
+               |          0x5633eaa508bd
+               |          0x5633eaa51f92
+               |          0x5633eaa4cb10
+               |          0x72fae1c2a601
+               |          0x72fae1c2a718
+               |          0x5633eaa4e8c5
+               |          
+                --0.81%--0x5633eaa5e544
+                          0x5633eaa508bd
+                          0x5633eaa51f92
+                          0x5633eaa4cb10
+                          0x72fae1c2a601
+                          0x72fae1c2a718
+                          0x5633eaa4e8c5
+
+     2.33%  [vdso]                [.] 0x0000000000000ad5  -      -            
+            |
+            ---0x72fae2344ad5
+               0x72fae1cf5a0d
+               0x72fae20e90b7
+               |          
+               |--1.04%--0x5633eaa51e95
+               |          0x5633eaa4cb10
+               |          0x72fae1c2a601
+               |          0x72fae1c2a718
+               |          0x5633eaa4e8c5
+               |          
+                --1.03%--0x5633eaa50926
+                          0x5633eaa51f92
+                          0x5633eaa4cb10
+                          0x72fae1c2a601
+                          0x72fae1c2a718
+                          0x5633eaa4e8c5
+
+     2.09%  hpts                  [.] 0x000000000001f447  -      -            
+            |
+            ---0x5633eaa63447
+               |          
+               |--1.29%--0x5633eaa677b6
+               |          0x5633eaa61925
+               |          0x5633eaa51eae
+               |          0x5633eaa4cb10
+               |          0x72fae1c2a601
+               |          0x72fae1c2a718
+               |          0x5633eaa4e8c5
+               |          
+                --0.80%--0x5633eaa693db
+                          0x5633eaa61925
+                          0x5633eaa51eae
+                          0x5633eaa4cb10
+                          0x72fae1c2a601
+                          0x72fae1c2a718
+                          0x5633eaa4e8c5
+
+     1.55%  hpts                  [.] 0x0000000000028136  -      -            
+            |
+            ---0x5633eaa6c136
+               0x5633eaa51688
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     1.37%  hpts                  [.] 0x000000000001fb7a  -      -            
+            |
+            ---0x5633eaa63b7a
+               |          
+                --1.10%--0x5633eaa68e6e
+                          0x5633eaa61925
+                          0x5633eaa51eae
+                          0x5633eaa4cb10
+                          0x72fae1c2a601
+                          0x72fae1c2a718
+                          0x5633eaa4e8c5
+
+     1.32%  hpts                  [.] 0x000000000000c8ee  -      -            
+            |
+            ---0x5633eaa508ee
+               0x5633eaa51f92
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     1.18%  libc.so.6             [.] 0x00000000000b537e  -      -            
+            |
+            ---0x72fae1cb537e
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     1.15%  hpts                  [.] 0x000000000001b5c7  -      -            
+            |
+            ---0x5633eaa5f5c7
+               0x5633eaa604c8
+               0x5633eaa524e2
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     1.10%  hpts                  [.] 0x000000000000c8f1  -      -            
+            |
+            ---0x5633eaa508f1
+               0x5633eaa51f92
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     1.06%  hpts                  [.] 0x00000000000236ac  -      -            
+            |
+            ---0x5633eaa676ac
+               0x5633eaa61925
+               0x5633eaa51eae
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     1.05%  hpts                  [.] 0x000000000001f45a  -      -            
+            |
+            ---0x5633eaa6345a
+               0x5633eaa677b6
+               0x5633eaa61925
+               0x5633eaa51eae
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     1.02%  hpts                  [.] 0x000000000000c8e7  -      -            
+            |
+            ---0x5633eaa508e7
+               0x5633eaa51f92
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     1.01%  hpts                  [.] 0x00000000000154ec  -      -            
+            |
+            ---0x5633eaa594ec
+               0x5633eaa61925
+               0x5633eaa51eae
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     1.01%  libstdc++.so.6.0.35   [.] 0x00000000000dd447  -      -            
+            |
+            ---0x72fae20dd447
+               |          
+                --0.77%--0x5633eaa5d1a0
+                          0x5633eaa52193
+                          0x5633eaa4cb10
+                          0x72fae1c2a601
+                          0x72fae1c2a718
+                          0x5633eaa4e8c5
+
+     0.90%  libstdc++.so.6.0.35   [.] 0x00000000001435d3  -      -            
+            |
+            ---0x72fae21435d3
+               0x5633eaa6ac5d
+               0x5633eaa5166a
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.83%  libstdc++.so.6.0.35   [.] 0x00000000001435af  -      -            
+            |
+            ---0x72fae21435af
+               0x5633eaa6ac5d
+               0x5633eaa5166a
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.78%  hpts                  [.] 0x000000000002145e  -      -            
+            |
+            ---0x5633eaa6545e
+               0x5633eaa67f1e
+               0x5633eaa61925
+               0x5633eaa51eae
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.76%  libstdc++.so.6.0.35   [.] 0x0000000000143603  -      -            
+            |
+            ---0x72fae2143603
+               0x5633eaa6ac5d
+               0x5633eaa5166a
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.76%  hpts                  [.] 0x0000000000026c74  -      -            
+            |
+            ---0x5633eaa6ac74
+               0x5633eaa5166a
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.74%  hpts                  [.] 0x0000000000022258  -      -            
+            |
+            ---0x5633eaa66258
+               0x5633eaa66f8a
+               0x5633eaa6721a
+               0x5633eaa6845c
+               0x5633eaa61925
+               0x5633eaa51eae
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.73%  libstdc++.so.6.0.35   [.] 0x00000000000f1253  -      -            
+            |
+            ---0x72fae20f1253
+               0x5633eaa51688
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.67%  libstdc++.so.6.0.35   [.] 0x000000000014360c  -      -            
+            |
+            ---0x72fae214360c
+               0x5633eaa6ac5d
+               0x5633eaa5166a
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.66%  libstdc++.so.6.0.35   [.] 0x0000000000142ce2  -      -            
+            |
+            ---0x72fae2142ce2
+               |          
+                --0.56%--0x72fae20df119
+                          0x5633eaa6bbf0
+                          0x5633eaa51688
+                          0x5633eaa4cb10
+                          0x72fae1c2a601
+                          0x72fae1c2a718
+                          0x5633eaa4e8c5
+
+     0.57%  libstdc++.so.6.0.35   [.] 0x0000000000142cda  -      -            
+            |
+            ---0x72fae2142cda
+               0x72fae21435ab
+               0x5633eaa6ac5d
+               0x5633eaa5166a
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.54%  libstdc++.so.6.0.35   [.] 0x00000000000dd6b4  -      -            
+            |
+            ---0x72fae20dd6b4
+               0x5633eaa61925
+               0x5633eaa51eae
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.54%  hpts                  [.] 0x000000000001a1d9  -      -            
+            |
+            ---0x5633eaa5e1d9
+               0x5633eaa5e583
+               0x5633eaa508bd
+               0x5633eaa51f92
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.54%  hpts                  [.] 0x000000000001a0fc  -      -            
+            |
+            ---0x5633eaa5e0fc
+               0x5633eaa5e2cb
+               0x5633eaa508bd
+               0x5633eaa51f92
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.54%  hpts                  [.] 0x00000000000236b4  -      -            
+            |
+            ---0x5633eaa676b4
+               0x5633eaa61925
+               0x5633eaa51eae
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.54%  libstdc++.so.6.0.35   [.] 0x00000000000dd6e4  -      -            
+            |
+            ---0x72fae20dd6e4
+               0x5633eaa61925
+               0x5633eaa51eae
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.54%  hpts                  [.] 0x00000000000245c1  -      -            
+            |
+            ---0x5633eaa685c1
+               0x5633eaa61925
+               0x5633eaa51eae
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.53%  hpts                  [.] 0x0000000000019eb4  -      -            
+            |
+            ---0x5633eaa5deb4
+               0x5633eaa5e583
+               0x5633eaa508bd
+               0x5633eaa51f92
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.53%  hpts                  [.] 0x0000000000015822  -      -            
+            |
+            ---0x5633eaa59822
+               0x5633eaa61925
+               0x5633eaa51eae
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.53%  hpts                  [.] 0x0000000000015f43  -      -            
+            |
+            ---0x5633eaa59f43
+
+     0.53%  hpts                  [.] 0x0000000000019c1c  -      -            
+            |
+            ---0x5633eaa5dc1c
+
+     0.53%  hpts                  [.] 0x000000000000ae28  -      -            
+            |
+            ---0x5633eaa4ee28
+               0x5633eaa4ee5b
+               0x5633eaa4ee5b
+               0x5633eaa4ee5b
+
+     0.53%  libstdc++.so.6.0.35   [.] 0x00000000001526e8  -      -            
+            |
+            ---0x72fae21526e8
+               0x72fae216374e
+
+     0.53%  hpts                  [.] 0x0000000000023668  -      -            
+            |
+            ---0x5633eaa67668
+               0x5633eaa61925
+               0x5633eaa51eae
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.52%  hpts                  [.] 0x000000000001f44b  -      -            
+            |
+            ---0x5633eaa6344b
+
+     0.52%  libstdc++.so.6.0.35   [.] 0x00000000000dd458  -      -            
+            |
+            ---0x72fae20dd458
+               0x5633eaa5d1a0
+               0x5633eaa52193
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.52%  hpts                  [.] 0x000000000001a0dd  -      -            
+            |
+            ---0x5633eaa5e0dd
+
+     0.51%  hpts                  [.] 0x000000000000ae18  -      -            
+            |
+            ---0x5633eaa4ee18
+               0x5633eaa4ee5b
+               0x5633eaa4ee5b
+               0x5633eaa4ee5b
+               0x5633eaa4ee5b
+
+     0.51%  hpts                  [.] 0x0000000000020dbe  -      -            
+            |
+            ---0x5633eaa64dbe
+               0x5633eaa697d7
+               0x5633eaa61925
+               0x5633eaa51eae
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.50%  hpts                  [.] 0x00000000000243fa  -      -            
+            |
+            ---0x5633eaa683fa
+               0x5633eaa61925
+               0x5633eaa51eae
+               0x5633eaa4cb10
+               0x72fae1c2a601
+               0x72fae1c2a718
+               0x5633eaa4e8c5
+
+     0.50%  libstdc++.so.6.0.35   [.] 0x00000000000dd443  -      -            
+            |
+            ---0x72fae20dd443
+
+     0.50%  hpts                  [.] 0x000000000000add4  -      -            
+            |
+            ---0x5633eaa4edd4
+               0x5633eaa4ee5b
+               0x5633eaa4ee5b
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

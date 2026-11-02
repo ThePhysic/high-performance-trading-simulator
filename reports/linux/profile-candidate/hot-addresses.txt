@@ -1,0 +1,48 @@
+0x000000000001a2ca
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:209
+0x000000000001a543
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:224
+0x000000000001a3f8
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:218
+0x000000000001a79c
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:238
+0x000000000001a582
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:226
+0x000000000001a364
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:213
+0x000000000001a71e
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:234
+0x000000000001a9cf
+hpts::to_string[abi:cxx11](hpts::Side)
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:180
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:232
+0x000000000001a75d
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:236
+0x000000000001a246
+std::vector<hpts::Event, std::allocator<hpts::Event> >::size() const
+/usr/include/c++/15/bits/stl_vector.h:1119
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:205
+0x000000000001a5c5
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:228
+0x000000000001a5d1
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const
+/usr/include/c++/15/bits/basic_string.h:280 (discriminator 2)
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::capacity() const
+/usr/include/c++/15/bits/basic_string.h:1279 (discriminator 2)
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::push_back(char)
+/usr/include/c++/15/bits/basic_string.h:1727 (discriminator 2)
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator+=(char)
+/usr/include/c++/15/bits/basic_string.h:1499 (discriminator 2)
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:229 (discriminator 2)

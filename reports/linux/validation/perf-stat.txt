@@ -1,0 +1,22 @@
+# started on Sun Nov  1 20:09:28 2026
+
+
+ Performance counter stats for 'build/linux-release/hpts bench --config reports/linux/benchmarks/burst/accounts.cfg --input reports/linux/benchmarks/burst/commands.txt --mode queued --output reports/linux/perf-bench.json':
+
+         215785953      task-clock:u                     #    1.558 CPUs utilized             
+                 0      context-switches:u               #    0.000 /sec                      
+                 0      cpu-migrations:u                 #    0.000 /sec                      
+              2074      page-faults:u                    #    9.611 K/sec                     
+         354962946      instructions:u                   #    1.92  insn per cycle            
+                                                  #    0.12  stalled cycles per insn   
+         184856498      cycles:u                         #    0.857 GHz                       
+          43930108      stalled-cycles-frontend:u        #   23.76% frontend cycles idle      
+          73512438      branches:u                       #  340.673 M/sec                     
+            752129      branch-misses:u                  #    1.02% of all branches           
+
+       0.138508157 seconds time elapsed
+
+       0.049754000 seconds user
+       0.133955000 seconds sys
+
+

@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "collected_at_utc": "2026-11-02T04:16:13.612468+00:00",
+  "source_commit": "98ea79593f8abdc98cf5409ba94627a0749c2996",
+  "source_tree_clean": true,
+  "scope": "Final native Windows Release compatibility validation; no benchmark measurements or new native sanitizer claim.",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "machine": "AMD64",
+  "logical_cpus": 16,
+  "processor_identifier": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+  "python": "3.13.0",
+  "build_generator": "Visual Studio 18 2026",
+  "build_configuration": "Release",
+  "cxx_standard": 20,
+  "compiler": {
+    "CMAKE_CXX_COMPILER": "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe",
+    "CMAKE_CXX_COMPILER_ID": "MSVC",
+    "CMAKE_CXX_COMPILER_VERSION": "19.51.36260.0"
+  },
+  "flags_from_cache": {
+    "CMAKE_CXX_FLAGS": "/DWIN32 /D_WINDOWS /EHsc",
+    "CMAKE_CXX_FLAGS_DEBUG": "/Zi /Ob0 /Od /RTC1",
+    "CMAKE_CXX_FLAGS_MINSIZEREL": "/O1 /Ob1 /DNDEBUG",
+    "CMAKE_CXX_FLAGS_RELEASE": "/O2 /Ob2 /DNDEBUG",
+    "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "/Zi /O2 /Ob1 /DNDEBUG",
+    "CMAKE_EXE_LINKER_FLAGS": "/machine:x64",
+    "CMAKE_EXE_LINKER_FLAGS_DEBUG": "/debug /INCREMENTAL",
+    "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL": "/INCREMENTAL:NO",
+    "CMAKE_EXE_LINKER_FLAGS_RELEASE": "/INCREMENTAL:NO",
+    "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO": "/debug /INCREMENTAL",
+    "HPTS_SANITIZERS": ""
+  },
+  "target_compile_options": [
+    "/W4",
+    "/permissive-"
+  ],
+  "build_command": "cmake --build build-native --config Release -- /m:1 /nodeReuse:false /verbosity:minimal",
+  "test_command": "ctest --test-dir build-native -C Release --output-on-failure --timeout 300 --parallel 1",
+  "test_results": {
+    "ctest_suites_passed": 3,
+    "ctest_suites_total": 3,
+    "engine_groups_passed": 11,
+    "engine_groups_total": 11,
+    "cli_registered": 16,
+    "cli_passed": 14,
+    "cli_skipped": 2,
+    "cli_skip_reason": "Linux /dev/full cases",
+    "engine_seconds": 11.34,
+    "queue_seconds": 0.1,
+    "cli_seconds": 4.89,
+    "ctest_total_seconds": 16.45
+  },
+  "binary_sha256": {
+    "hpts.exe": "5a5e005abd424dcc5ddb6efe0494752578b7375d55afa642a952c31abe7e5cb1",
+    "hpts_engine_tests.exe": "7daf6c9f325147f1757a9f3f8e6acc4de14bc2139f92accd9dcfa2880d442f04",
+    "hpts_queue_tests.exe": "440dcdc7bf5833b161b63656611e8d6ad2819af361c97ba1f75aec9816e92ea3"
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "2ab4f40c9121f0ede684ccb39b4dc3c645eb92ae253fd7105d3e814cc6f7fa73",
+    "include/hpts/engine.hpp": "a0f82bd9bba3433c1bbfd6b33295d3612606e6532b03997a9d3a0fe69aaaaf80",
+    "include/hpts/io.hpp": "595b489384ccd03ecee1b97c98039a92b40e7716a3d57e75a9acd70a6de9224d",
+    "include/hpts/queue.hpp": "e312bc9445092c9f215d3dafc36e5220b40d53697fe9c376c79047d15edb6484",
+    "reports/linux/profile-baseline/symbolize.py": "ba52119e6d4661fd3f7b5d6008a3a5ce83952a7a850191638b8109f831644e0d",
+    "src/engine.cpp": "5acb780a61983706b085f1dd1f3ac3f825fac35b8b6803b0c7c7f6f382a25975",
+    "src/io.cpp": "bcc6dd6457619dd3e9998025acaac2e332b28d2c3aa47848e41467769c4fe100",
+    "src/main.cpp": "323ec0f9421ec237b00714143026699a9fb958ac9b2eb06fed013ac46b91ad1a",
+    "tests/reference_model.hpp": "5205517f13ebd5cf20cad6598a4b0f17478ed1d38517ee5b811e867e5898b477",
+    "tests/test_cli.py": "a4048aefa41840a362257fd14a9aec55ca8a7c51af206ddbac0bec47b7d4f781",
+    "tests/test_engine.cpp": "02bd5c748a548957e2c7baf6ced63ad55e6f4764372f9ae256d140de91a85db9",
+    "tests/test_queue.cpp": "69e91dd17fcbc1ec19029dac2e0bb53904399a4a5f0d00b60b877389f518058c",
+    "tools/benchmark_suite.py": "1b4d23b70e1d9e18596092574a6808004b25fa2a16c338cda9667c484cc4e9c6",
+    "tools/compare_binaries.py": "94adca4b2d38ad0dd32057f7ab871f3750a00bc4a6af4bb267a1d62e43678fc0",
+    "tools/generate_workload.py": "5b3e5891fd664c55f4a5d4e038a042d3453cf6a414a4dca930c76c54fd088b7d",
+    "tools/validate_linux.sh": "d6d5c66fbd33ceebfdef8c982f7f8723428883a17326cb2f95a98234162fc6e5"
+  },
+  "notes": [
+    "MSB8029 temporary-directory warning only; no source compiler warnings.",
+    "Local source clone only; no network, source, permission, service, or tool-install changes."
+  ]
+}

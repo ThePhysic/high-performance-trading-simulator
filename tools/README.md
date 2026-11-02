@@ -20,3 +20,13 @@ The environment record includes the binary fingerprint, OS/kernel, available CPU
 Use `--help` for generator and suite options. A failed subprocess, replay mismatch, missing report field, command count mismatch, or inconsistent benchmark digest stops the suite with a nonzero exit status. Completed workload results are retained if a later workload fails; `suite.json` has `complete: true` only after every requested workload finishes. The scripts report measured results only and do not assert a throughput target.
 
 On an actual Linux runtime, `sh tools/validate_linux.sh` builds and tests Debug, ASan/UBSan, and Release configurations before collecting the suite. `--tsan` adds a separate thread-sanitized build; `--perf` records real `perf stat`, sample, and report artifacts, failing explicitly if access is unavailable. Environment variables listed in `--help` control workload size and repetitions. The helper's presence is not evidence that Linux checks have run.
+
+## Compare two implementations
+
+```sh
+python3 tools/compare_binaries.py --baseline build/baseline/hpts --candidate build/candidate/hpts --output-dir reports/comparison --count 100000 --repetitions 5
+```
+
+The comparator uses all eight profiles by default. Before measuring, it runs and replays each binary and requires exact event, state, and complete-journal byte equality. It also replays the original journal through the candidate. Warmup and measured benchmark fingerprints must match the independently fingerprinted original output files.
+
+Measured invocations alternate baseline/candidate order on odd repetitions and candidate/baseline on even repetitions. Both binaries process the same generated input; the report retains binary/environment fingerprints, invocation order, raw reports, variability, and the candidate/baseline mean throughput ratio. This does not assume the candidate is faster. Inspect CPU, memory, and both latency distributions for regressions. The default mode is `direct`; `--mode queued` is available separately. A failed or interrupted comparison remains `complete: false`.

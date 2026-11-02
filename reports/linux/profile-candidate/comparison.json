@@ -1,0 +1,47 @@
+{
+  "baseline_source_commit": "fec21af8afde76139782a3c6fd890462f81b0c97",
+  "candidate_source_commit": "98ea79593f8abdc98cf5409ba94627a0749c2996",
+  "whole_process_single_run_counters": {
+    "cycles:u": {
+      "baseline": 3416129488,
+      "candidate": 2179407319,
+      "candidate_over_baseline": 0.6379756173340932
+    },
+    "instructions:u": {
+      "baseline": 8430470514,
+      "candidate": 5418165723,
+      "candidate_over_baseline": 0.6426884138912962
+    },
+    "branches:u": {
+      "baseline": 1674366195,
+      "candidate": 1107201548,
+      "candidate_over_baseline": 0.6612660667100962
+    },
+    "branch-misses:u": {
+      "baseline": 7214968,
+      "candidate": 5033895,
+      "candidate_over_baseline": 0.6977016391479491
+    }
+  },
+  "inclusive_sampled_cycle_percent": {
+    "Outcome::canonical": {
+      "baseline": 37.368168592667175,
+      "candidate": 12.963338538066207
+    },
+    "Engine::process_or_Impl::process": {
+      "baseline": 22.389548046229475,
+      "candidate": 33.41548949324006
+    },
+    "Snapshot::canonical": {
+      "baseline": 2.4880186530175274,
+      "candidate": 3.3058611761723027
+    }
+  },
+  "sample_counts": {
+    "baseline": 727,
+    "candidate": 517
+  },
+  "logical_results_match": true,
+  "same_input_sha256": true,
+  "interpretation": "Separate short whole-process observations at different times; not a repeated speedup estimate. Interleaved A/B is the performance comparison. Matching/risk code did not change. Inclusive shares are not additive and unchanged work can occupy a larger fraction after another cost shrinks."
+}

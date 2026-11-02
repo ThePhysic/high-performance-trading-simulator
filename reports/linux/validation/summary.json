@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "source_commit": "98ea79593f8abdc98cf5409ba94627a0749c2996",
+  "collected_at_utc": "2026-11-02T04:11:08.941034+00:00",
+  "source_clone": "/home/ridle/.cache/hpts-validation-project",
+  "helper_invocation": "HPTS_JOBS=4 HPTS_COUNT=20000 HPTS_REPETITIONS=3 timeout 1200s sh tools/validate_linux.sh --tsan --perf",
+  "helper_exit_code": 0,
+  "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "python": "3.14.4",
+  "configurations": {
+    "debug": {
+      "ctest_passed": 3,
+      "ctest_failed": 0,
+      "test_seconds": {
+        "engine_contract": 4.78,
+        "queue_contract": 0.23,
+        "cli_contract": 0.91
+      },
+      "engine_test_groups_passed": 11,
+      "differential_seeds": 16,
+      "differential_commands_per_seed": 1200,
+      "cli_registered": 16,
+      "cli_skipped": 1,
+      "cli_passed": 15,
+      "sanitizer_findings": [],
+      "cache_flags": {
+        "CMAKE_CXX_FLAGS": "",
+        "CMAKE_CXX_FLAGS_DEBUG": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG"
+      },
+      "binary_sha256": "bc47da3169927e113026a212072dd5e6dfac956329c8a23f285a6804699ada92"
+    },
+    "asan": {
+      "ctest_passed": 3,
+      "ctest_failed": 0,
+      "test_seconds": {
+        "engine_contract": 20.09,
+        "queue_contract": 0.37,
+        "cli_contract": 5.07
+      },
+      "engine_test_groups_passed": 11,
+      "differential_seeds": 16,
+      "differential_commands_per_seed": 1200,
+      "cli_registered": 16,
+      "cli_skipped": 1,
+      "cli_passed": 15,
+      "sanitizer_findings": [],
+      "cache_flags": {
+        "CMAKE_CXX_FLAGS": "",
+        "CMAKE_CXX_FLAGS_DEBUG": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG"
+      },
+      "binary_sha256": "44c00ac3015165fbecd7c189988afeacd6ac12abbefac26d5d08dde524cf82e9"
+    },
+    "tsan": {
+      "ctest_passed": 3,
+      "ctest_failed": 0,
+      "test_seconds": {
+        "engine_contract": 22.7,
+        "queue_contract": 0.47,
+        "cli_contract": 6.33
+      },
+      "engine_test_groups_passed": 11,
+      "differential_seeds": 16,
+      "differential_commands_per_seed": 1200,
+      "cli_registered": 16,
+      "cli_skipped": 1,
+      "cli_passed": 15,
+      "sanitizer_findings": [],
+      "cache_flags": {
+        "CMAKE_CXX_FLAGS": "",
+        "CMAKE_CXX_FLAGS_DEBUG": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG"
+      },
+      "binary_sha256": "9258875688253cc5f9f9beb37254237e40f5caaf3cf311ccf6ebb5bda3454ec0"
+    },
+    "release": {
+      "ctest_passed": 3,
+      "ctest_failed": 0,
+      "test_seconds": {
+        "engine_contract": 1.76,
+        "queue_contract": 0.2,
+        "cli_contract": 0.83
+      },
+      "engine_test_groups_passed": 11,
+      "differential_seeds": 16,
+      "differential_commands_per_seed": 1200,
+      "cli_registered": 16,
+      "cli_skipped": 1,
+      "cli_passed": 15,
+      "sanitizer_findings": [],
+      "cache_flags": {
+        "CMAKE_CXX_FLAGS": "",
+        "CMAKE_CXX_FLAGS_DEBUG": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG"
+      },
+      "binary_sha256": "e7deb363dfd398eea1973642feb515c370a6ffff5c716e178fa63d03bbe9e65e"
+    }
+  },
+  "benchmark": {
+    "complete": true,
+    "profiles": [
+      "resting",
+      "crossing",
+      "cancel",
+      "replace",
+      "dense",
+      "sparse",
+      "burst"
+    ],
+    "commands_per_run": 20000,
+    "repetitions_per_mode": 3,
+    "modes": [
+      "direct",
+      "queued"
+    ],
+    "measured_reports": 42,
+    "measured_commands": 840000,
+    "warmup_invocations": 14,
+    "all_digests_match_verified_run_files": true
+  },
+  "perf": {
+    "stat_record_report_succeeded": true,
+    "recorded_samples": 1826,
+    "lost_samples_reported": 0,
+    "scope": "Whole queued-burst benchmark process; not exclusively the timed engine loop.",
+    "symbolization_note": "The installed perf lacks libelf/DWARF support; this helper report can contain addresses. The separate baseline profile includes explicit symbol analysis."
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "2ab4f40c9121f0ede684ccb39b4dc3c645eb92ae253fd7105d3e814cc6f7fa73",
+    "src/engine.cpp": "5acb780a61983706b085f1dd1f3ac3f825fac35b8b6803b0c7c7f6f382a25975",
+    "src/io.cpp": "bcc6dd6457619dd3e9998025acaac2e332b28d2c3aa47848e41467769c4fe100",
+    "src/main.cpp": "323ec0f9421ec237b00714143026699a9fb958ac9b2eb06fed013ac46b91ad1a",
+    "include/hpts/engine.hpp": "a0f82bd9bba3433c1bbfd6b33295d3612606e6532b03997a9d3a0fe69aaaaf80",
+    "include/hpts/io.hpp": "595b489384ccd03ecee1b97c98039a92b40e7716a3d57e75a9acd70a6de9224d",
+    "include/hpts/queue.hpp": "e312bc9445092c9f215d3dafc36e5220b40d53697fe9c376c79047d15edb6484",
+    "tests/test_engine.cpp": "02bd5c748a548957e2c7baf6ced63ad55e6f4764372f9ae256d140de91a85db9",
+    "tests/test_queue.cpp": "69e91dd17fcbc1ec19029dac2e0bb53904399a4a5f0d00b60b877389f518058c",
+    "tests/reference_model.hpp": "5205517f13ebd5cf20cad6598a4b0f17478ed1d38517ee5b811e867e5898b477",
+    "tests/test_cli.py": "a4048aefa41840a362257fd14a9aec55ca8a7c51af206ddbac0bec47b7d4f781",
+    "tools/validate_linux.sh": "d6d5c66fbd33ceebfdef8c982f7f8723428883a17326cb2f95a98234162fc6e5"
+  }
+}

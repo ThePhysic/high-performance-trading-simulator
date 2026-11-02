@@ -1,0 +1,21 @@
+{
+  "schema_version":1,
+  "mode":"queued",
+  "commands":20000,
+  "accepted_orders":10016,
+  "accepted_commands":20000,
+  "rejected_commands":0,
+  "executions":0,
+  "elapsed_seconds":0.110114924,
+  "commands_per_second":181628.423046,
+  "accepted_orders_per_second":90959.5142617,
+  "executions_per_second":0,
+  "core_latency_ns":{"p50":575,"p95":3885,"p99":12308},
+  "end_to_end_latency_ns":{"p50":1423353,"p95":2185835,"p99":2872244},
+  "trace_digest":"af7cfd31c73dfcb3",
+  "state_digest":"0a5b9149e160fa77",
+  "resources":{"process_cpu_seconds":0.157441,"peak_rss_bytes":9822208,"allocations_per_command":null},
+  "queue":{"capacity":256,"input_high_water":256,"input_full_waits":874,"output_high_water":254,"output_full_waits":0,"dropped_commands":0},
+  "environment":{"compiler":"15.2.0","hardware_threads":16,"platform":"POSIX","assertions":false,"warmup_commands":0},
+  "latency_boundaries":{"core":"process call","end_to_end":"before queue admission through canonical serialization and trace digest; in-process"}
+}

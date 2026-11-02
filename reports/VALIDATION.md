@@ -1,51 +1,50 @@
-# Executed validation and remaining acceptance work
+# Executed validation
 
-This record distinguishes actual native verification from required checks that the current session could not execute. The project goal is not complete: Linux validation/profiling, a final clean Astra review, and verified private GitHub publication remain pending.
+This record links actual execution evidence to the project requirements. Current implementation verification uses source commit `98ea79593f8abdc98cf5409ba94627a0749c2996`; later release documentation commits do not change the tested C++/build/test/tool sources. All performance claims retain their specific workload, binary, compiler, timing boundary, and limitations.
 
-## Native Windows verification
+## Linux correctness and sanitizers
 
-Environment: AMD Ryzen 9 7940HS, Windows x64, MSVC 19.51.36260.0, C++20, Visual Studio CMake 4.3.1-msvc1. Release compiler configuration and binary/source fingerprints are retained in [native-build.json](native-build.json). No CPU affinity or scheduling isolation was applied.
+The actual helper ran successfully on a clean native Linux clone:
 
-- Release CMake build succeeded. CTest passed all three suites: engine/reference (10.96 s), bounded queue (0.09 s), and CLI (2.27 s), total 13.44 s. This initial CLI run preceded the expanded failure corpus; the subsequent expanded native CLI run passed all 14 registered cases, with one expected Linux-only `/dev/full` skip, in 3.410 s.
-- The engine/reference suite covers 16 deterministic seeds x 1,200 commands (19,200 commands), stepwise invariants, independent vector-scan results, and exact replay comparisons. Hand fixtures exercise priority, partial fills, replacements, ownership, duplicates, risk, kill controls, self-cross rejection, capacity, and integer boundaries.
-- Queue checks include blocking backpressure, close/drain and wakeups, move-only ownership, and 8,000 items across four producers with per-producer FIFO and no loss/duplication.
-- A separate full MSVC AddressSanitizer Release CMake build passed all three CTest suites: engine 90.63 s, queue 0.13 s, CLI 8.45 s, total 99.30 s, with no runtime sanitizer findings. CLI ran 14 registered cases with one Linux-only skip. The final benchmark-baseline assertion strengthening was also rerun successfully on the native non-sanitized CLI.
-- CLI checks include exact self-contained replay, truncation/footer/trailing-data detection, changed trace/state detection, 100 seeded malformed command cases, size/integer/resource bounds, file aliases, locale environments, interactive inspection, all eight generated profiles, and direct/queued equivalence to actual run output.
-- The 22-command demonstration executed and replayed successfully: trace `2fd7789a4a51cdad`, state `994dfc9066d8a373`.
+```sh
+HPTS_JOBS=4 HPTS_COUNT=20000 HPTS_REPETITIONS=3 sh tools/validate_linux.sh --tsan --perf
+```
 
-Retained raw logs: [Release CTest](native-release-ctest.log), [AddressSanitizer CTest](native-asan-ctest.log). Native builds emitted MSB8029 about the temporary build directory; the sanitizer link also emitted LNK4302 recommending linker debug information. Neither was a source compiler warning or a runtime finding. Windows ASan is not evidence of Linux ASan/UBSan/TSan coverage.
+Environment: Ubuntu 26.04.1, WSL2 kernel `6.18.54.1-microsoft-standard-WSL2`, GNU C++ 15.2, CMake 4.2.3, Python 3.14.4, AMD Ryzen 9 7940HS. Source commit, compiler/cache flags, binary hashes, full helper log, four CTest logs, and exact results are retained in [Linux validation](linux/validation/README.md) and [summary.json](linux/validation/summary.json).
 
-## Adversarial-review output failure fix
+| Configuration | CTest suites passed | Engine fixture groups | CLI passed / skipped |
+|---|---:|---:|---:|
+| Debug | 3/3 | 11/11 | 15 / 1 |
+| ASan/UBSan | 3/3 | 11/11 | 15 / 1 |
+| TSan | 3/3 | 11/11 | 15 / 1 |
+| Release | 3/3 | 11/11 | 15 / 1 |
 
-Astra medium review reproduced a buffered stdout error: version, benchmark stdout, run summary, and replay summary could lose all output on a closed pipe while exiting zero. Commit `bb48c7b` adds one checked stdout flush on every successful top-level exit and ignores POSIX SIGPIPE so EPIPE can become the documented error exit. Regression tests first reproduced all four failures against the old native binary; the corrected native binary passes exact exit-code-2 assertions.
+The one Linux skip is the Windows-only case-insensitive path check. Linux broken-pipe, `/dev/full` file-output and stdout failures, journal truncation/tamper, parse/overflow/resource errors, interactive operations, and benchmark equivalence checks executed. ASan/UBSan and TSan produced no runtime findings.
 
-The corrected build passed 16 registered native CLI cases (14 passed, two expected Linux-only skips) in 3.392 seconds. An affected-target AddressSanitizer rebuild then passed the same CLI suite in 8.76 seconds, with no runtime findings; [retained fix validation](native-asan-cli-stdout.log). The unchanged engine and queue retain their full prior sanitizer evidence. Linux closed-pipe and `/dev/full` stdout cases remain to execute on Linux. The benchmark artifact below was regenerated with the corrected binary, and its hash matches the refreshed build record.
+Each engine suite checks 16 seeds x 1,200 stateful commands against an independent vector-scan model, verifies invariants after each step, and checks exact replay. Hand fixtures cover matching/FIFO, resting prices, partial fills, cancel/replace priority and atomicity, ownership, duplicates, reservations/accounting, kill controls, self-cross rejection, capacity, and integer/config extremes. Independent canonical fixtures cover numeric limits, booleans, empty/escaped/NUL/high-byte fields, enum spelling/defaults, and event ordinals through 10.
 
-Astra found no additional concrete matching/risk/replay/concurrency defect in its first review. Its second review of commit `814aa56675c649f586fd0d968cb73bdbea93194f` independently verified the corrected stdout paths and evidence consistency and reported **no further code complaints**. It explicitly withheld unconditional completion approval because actual Linux validation/profiling and private publication are still missing. These requirements remain open and must be included in the eventual final completion review.
+Queue checks include blocking backpressure, close/drain, all waiter wakeups, move-only values, and 8,000 items from four producers with per-producer FIFO and no loss/duplication. The CLI corpus includes 100 seeded malformed commands and all eight generated profiles.
 
-## Measured native topology comparison
+The 22-command demonstration runs and replays exactly: trace `2fd7789a4a51cdad`, state `994dfc9066d8a373`. Replay compares actual canonical bytes and requires a complete self-contained journal.
 
-The [full benchmark artifact](native-suite.json) contains all raw samples, variability summaries, input manifests/fingerprints, replay verification, and fixed file-run digest baselines. Eight profiles each used 20,000 commands, seed 42, queue capacity 256, three measured repetitions per mode, and one discarded fresh-process invocation per mode. All warmup and measured samples matched the file-run trace/state fingerprints after exact replay. Synthetic workloads, preloaded input, and in-process timing boundaries apply; see [methodology](../docs/PERFORMANCE.md).
+## Actual Linux performance evidence
 
-Values below are means across three runs. p99 columns are mean per-run p99 core latency in microseconds, not a pooled percentile. Throughput includes serialization and trace digest work.
+The helper completed seven default profiles x 20,000 commands x three repetitions x two modes: 42 measured reports, plus discarded warmup invocations. All measured digests match independently fingerprinted run outputs after exact replay. Its full [benchmark suite](linux/validation/benchmark-suite.json), actual perf counter/sample reports, environment, and method are retained. The capture reported 1,826 samples and zero lost samples.
 
-| Workload | Direct commands/s | Queued commands/s | Direct core p99 us | Queued core p99 us |
-|---|---:|---:|---:|---:|
-| resting | 123,837 | 148,734 | 5.13 | 8.13 |
-| crossing | 112,267 | 115,126 | 3.97 | 7.47 |
-| cancel | 140,215 | 140,071 | 2.93 | 6.37 |
-| replace | 127,308 | 143,388 | 3.37 | 6.43 |
-| dense | 128,975 | 139,569 | 5.20 | 8.57 |
-| sparse | 112,094 | 144,290 | 8.20 | 10.40 |
-| burst | 139,648 | 130,384 | 3.37 | 6.80 |
-| mixed | 125,427 | 127,504 | 3.37 | 6.37 |
+A separate [profile-backed serializer experiment](linux/SERIALIZATION_EXPERIMENT.md) covers all eight profiles with 100,000 commands, five interleaved repetitions per binary, exact event/state/journal equality, and cross-version replay. The original `fec21af` binary and candidate `98ea795` binary share GNU 15.2 RelWithDebInfo flags and direct execution. Mean measured throughput ratios range from 1.460 to 1.910; raw CPU, memory, both latency distributions, variability, input and binary fingerprints, and invocation order are in [serialization-comparison.json](linux/serialization-comparison.json).
 
-This comparison documents a concurrency tradeoff on this specific native host. It does not establish Linux performance, a specific cache/allocation bottleneck, or a profiling-backed optimization gain. No call-stack/hardware-counter profile was collected here. Durations are short and the host was not isolated, so these results should not support broad low-latency claims.
+The [baseline profile](linux/profile-baseline/README.md) has 727 user-cycle samples with zero loss and identifies outcome formatting as material. The [candidate profile](linux/profile-candidate/README.md) has 517 samples with zero loss; visible serializer sampled-cycle share falls from 37.37% to 12.96%, and a separate full-process counter observation records fewer instructions. These are short separate whole-process captures, not a repeated speedup estimate or evidence of changed matching logic. The interleaved experiment is the source for throughput claims.
 
-## Required external completion steps
+Benchmarks are synthetic and in-process, and the host was not isolated or pinned. No network latency, durable-output cost, allocation-count improvement, production exchange rate, or worst-case guarantee is claimed. See [methodology](../docs/PERFORMANCE.md) for boundaries and tradeoffs. The installed perf lacks ELF/DWARF support; retained raw sample/mmap records, symbols, address-to-source mappings, and reproducible symbolizers make the stated interpretation inspectable.
 
-1. Execute the Linux build, Debug/Release tests, relevant ASan/UBSan and concurrency checks, actual CPU profiling, and reproducible Linux benchmarks. Use `tools/validate_linux.sh`; record actual results and investigate failures. Current WSL enumeration returns `E_ACCESSDENIED`; the Docker Linux daemon pipe is absent.
-2. Complete independent Astra medium adversarial review and fix/review every valid complaint until the reviewer has no remaining complaints. Native verification does not waive missing required Linux evidence.
-3. Create the private GitHub repository, push the reviewed commit without force, and verify visibility plus remote/local commit equality. The configured GitHub account is `ThePhysic`, but this session's CLI API traffic is blocked through the restricted `127.0.0.1:9` proxy. Authentication validity is unverified while connectivity is blocked. No remote repository or push is claimed.
+## Final native Windows portability check
 
-The working repository was created under the session's writable temporary workspace because creating the home-directory project folder was denied. No permissions, proxies, services, or credentials were changed to bypass those restrictions.
+The same implementation commit was rebuilt independently with MSVC 19.51, C++20, Release optimization, and serial VS18 CMake. All three CTest suites passed: engine 11.34 s (11/11 groups), queue 0.10 s, CLI 4.89 s (14 passed, two Linux-only skips), total 16.45 s. No source compiler warnings; MSBuild emitted its existing temporary-directory warning.
+
+Retained [build identity and source/binary hashes](native-final/build.json), [full build/test log](native-final/build-and-test.log), and [CTest details](native-final/ctest-details.log) prove this final portability check. Earlier `native-*` artifacts at this directory's top level document the historical native implementation at commit `814aa56`; their source hashes and measured performance refer to that earlier version, not the optimized final binary. Historical Windows ASan results are retained, while final memory/race/UB claims use the Linux sanitizer runs above.
+
+## Review and release gates
+
+Astra medium adversarial review previously identified buffered stdout false success. Checked successful exits fixed the native case; actual Linux testing then exposed recursive flushing through tied stderr, which was fixed in `fec21af`. The exercised stdout failures now return the documented error exit 2 on Linux and Windows. The subsequent serializer experiment preserves the output contract and has independent byte fixtures and baseline comparisons.
+
+Independent final Astra medium review and verified private GitHub publication remain mandatory release gates, separate from these local verification results. Publication must verify private visibility and exact remote/local commit equality after pushing the reviewed source. A benchmark result or helper script alone does not establish those gates.

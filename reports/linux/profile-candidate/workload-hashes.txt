@@ -1,0 +1,2 @@
+72e78684e91be23d59b2c3743d63a866c1382d5936b0cad7024af49a4bbae043  /mnt/c/Users/ridle/high-performance-trading-simulator/reports/generated/linux-profile/accounts.cfg
+2043d1f329d8512cffbd211681cd4fee9e507050cf3a501032f95d5c1de78a7b  /mnt/c/Users/ridle/high-performance-trading-simulator/reports/generated/linux-profile/commands.txt

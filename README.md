@@ -21,7 +21,7 @@ mkdir -p build/demo
 
 The example demonstrates FIFO and partial fills, replacement and cancellation, aggregate risk rejection, kill-switch behavior, execution at the resting price, and explicit unknown-order/self-trade rejection. Replay compares exact canonical event and state bytes as well as completion fingerprints. The journal includes configuration, normalized commands, and a required completion footer.
 
-These are reproducible instructions, not a claim that Linux validation has already run. Read the [validation record](reports/VALIDATION.md) for actual executed checks, environment, and remaining limitations.
+Linux Debug, Release, ASan/UBSan, and TSan validation passed on the implemented source, as did a separate native MSVC Release check. Read the [validation record](reports/VALIDATION.md) for actual logs, source/binary identity, skipped platform-specific cases, environment, and measurement limits.
 
 ## What is implemented
 
@@ -32,6 +32,7 @@ These are reproducible instructions, not a claim that Linux validation has alrea
 - Interactive state inspection, file execution, self-contained replay verification, and direct/queued benchmarks.
 - An independent vector-scan reference model, deterministic fixtures, seeded differential/invariant tests, queue tests, and CLI failure/replay checks.
 - Eight seeded synthetic workload profiles, repeated benchmark collection, and an actual-Linux validation/sanitizer/`perf` helper.
+- A profile-driven canonical-formatting optimization, checked against the original binary with exact output equality and interleaved performance trials; see the [experiment](reports/linux/SERIALIZATION_EXPERIMENT.md).
 
 No fixed throughput or latency target is promised. Benchmark results must retain their workload, build, platform, and timing boundaries; the presence of a helper script is not evidence that its checks passed.
 

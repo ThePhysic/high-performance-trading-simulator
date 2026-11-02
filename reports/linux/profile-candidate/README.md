@@ -1,0 +1,13 @@
+# Actual Linux candidate profile
+
+Candidate source commit: `98ea79593f8abdc98cf5409ba94627a0749c2996`. Binary SHA-256: `879e654668b1ea61309dfdd6bf633b38ccde7ee46519cf0451e4742cd4e89b66`. Exact source hashes, compiler/build settings, commands, environment, and input hashes are retained. The same 300,000-command mixed workload (seed 42, queue capacity 256) and direct mode were used. Input SHA-256s, all logical counts, trace `eeadadf0210d56d0`, and state `90b17c3466701e9f` match the baseline.
+
+The valid capture has 517 user-cycle samples, 0 lost, and 2,188,633,616 total sampled-cycle weight. `summary.json` reports canonical outcome serialization in call chains carrying 12.96% of cycle weight, versus 37.37% in the earlier baseline. Engine processing occupies 33.42% versus 22.39%. Inclusive shares are not additive; a larger relative share does not establish a regression in unchanged matching code.
+
+`comparison.json` retains full-process hardware counters from separate stat invocations and the sampled shares. These are single short observations at different times, without affinity/isolation, not repeated speedup estimates. Use the independent interleaved A/B experiment for performance gains and variability. The serializer occupies a smaller visible share; that is consistent with removing stream-based numeric formatting, not evidence that risk/matching logic changed or a universal gain.
+
+Both binary builds use GNU 15.2 RelWithDebInfo (`-O2 -g -DNDEBUG`) with `-fno-omit-frame-pointer`; sampling is 499 Hz. The entire CLI process is sampled, including parsing/preload, execution/output/digest, final invariants/snapshot, sorting, and report generation. It is not a core-only or precisely timed-window profile. Short captures and incomplete system-library frame-pointer chains limit precision.
+
+Installed perf has libelf/DWARF unwinding disabled. As in the baseline, `symbolize.py` maps retained MMAP2 ranges and GNU nm text symbols, adjusts caller return addresses, and uses sampled-cycle periods. It reconciles raw sample/loss counts and cycle weights with perf headers. Shared-library frames are grouped by DSO; nearest-symbol lookup can attribute PLT/gaps to preceding symbols, so small incidental shares should not be overinterpreted. `hot-addresses.txt` retains GNU addr2line mappings for hot serializer frames. Text/raw records and debug-symbol mappings make the interpretation reviewable.
+
+Capture data was written on persistent Linux-native cache storage and copied afterward. Raw `perf.data` remains locally present and ignored by Git; textual records are retained. No kernel settings, sysctls, services, or permissions were changed.

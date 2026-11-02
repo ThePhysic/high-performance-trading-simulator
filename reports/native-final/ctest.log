@@ -1,0 +1,11 @@
+Test project C:/Users/ridle/AppData/Local/Temp/hpts-final-native-98ea795-verified/build-native
+    Start 1: engine_contract
+1/3 Test #1: engine_contract ..................   Passed   11.34 sec
+    Start 2: queue_contract
+2/3 Test #2: queue_contract ...................   Passed    0.10 sec
+    Start 3: cli_contract
+3/3 Test #3: cli_contract .....................   Passed    4.89 sec
+
+100% tests passed, 0 tests failed out of 3
+
+Total Test time (real) =  16.45 sec
