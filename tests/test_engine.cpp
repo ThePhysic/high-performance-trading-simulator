@@ -417,6 +417,70 @@ void test_integer_extremes_and_config_validation() {
     must_throw(invalid, "zero command capacity");
 }
 
+void test_canonical_schema_fixtures() {
+    // These expectations are hand-written schema bytes. Neither the oracle nor
+    // another production serializer computes the expected representation.
+    const Outcome empty;
+    check(empty.canonical() == "OUTCOME 0 0 0 ~\n", "empty/zero canonical outcome fixture");
+
+    Outcome boundary;
+    boundary.sequence = (std::numeric_limits<std::uint64_t>::max)();
+    boundary.command_id = (std::numeric_limits<std::uint64_t>::max)();
+    boundary.accepted = true;
+    boundary.reason = "ok weird%~\n";
+    Event trade;
+    trade.type = EventType::Trade;
+    trade.order_id = (std::numeric_limits<std::uint64_t>::max)();
+    trade.maker_order_id = (std::numeric_limits<std::uint64_t>::max)();
+    trade.account_id = "A.z_9-";
+    trade.maker_account_id = std::string(" \t\n\r%~", 6);
+    trade.maker_account_id += '\0';
+    trade.maker_account_id += static_cast<char>(0xFF);
+    trade.side = Side::Sell;
+    trade.price = (std::numeric_limits<std::int64_t>::min)();
+    trade.quantity = (std::numeric_limits<std::int64_t>::max)();
+    trade.best_bid = -1;
+    trade.best_ask = (std::numeric_limits<std::int64_t>::max)();
+    trade.enabled = true;
+    boundary.events.push_back(trade);
+    const std::string expected_boundary =
+        "OUTCOME 18446744073709551615 18446744073709551615 1 ok%20weird%25%7E%0A\n"
+        "EVENT 18446744073709551615 0 TRADE 18446744073709551615 18446744073709551615 "
+        "A.z_9- %20%09%0A%0D%25%7E%00%FF SELL -9223372036854775808 "
+        "9223372036854775807 -1 9223372036854775807 1 ~\n";
+    check(boundary.canonical() == expected_boundary,
+          "canonical integer extrema, true flags, and byte-escaping fixture");
+
+    Outcome ordered;
+    ordered.sequence = 9;
+    ordered.command_id = 42;
+    ordered.reason = "FAILED";
+    for (const auto type : {EventType::Accepted, EventType::Rejected, EventType::Cancelled,
+                            EventType::Replaced, EventType::Trade, EventType::KillSwitch,
+                            EventType::BookUpdate, static_cast<EventType>(99),
+                            EventType::Accepted, EventType::Rejected, EventType::BookUpdate}) {
+        Event event;
+        event.type = type;
+        if (type == static_cast<EventType>(99)) event.side = static_cast<Side>(99);
+        ordered.events.push_back(event);
+    }
+    const std::string expected_ordered =
+        "OUTCOME 9 42 0 FAILED\n"
+        "EVENT 9 0 ACCEPTED 0 0 ~ ~ BUY 0 0 0 0 0 ~\n"
+        "EVENT 9 1 REJECTED 0 0 ~ ~ BUY 0 0 0 0 0 ~\n"
+        "EVENT 9 2 CANCELLED 0 0 ~ ~ BUY 0 0 0 0 0 ~\n"
+        "EVENT 9 3 REPLACED 0 0 ~ ~ BUY 0 0 0 0 0 ~\n"
+        "EVENT 9 4 TRADE 0 0 ~ ~ BUY 0 0 0 0 0 ~\n"
+        "EVENT 9 5 KILL_SWITCH 0 0 ~ ~ BUY 0 0 0 0 0 ~\n"
+        "EVENT 9 6 BOOK_UPDATE 0 0 ~ ~ BUY 0 0 0 0 0 ~\n"
+        "EVENT 9 7 INVALID 0 0 ~ ~ INVALID 0 0 0 0 0 ~\n"
+        "EVENT 9 8 ACCEPTED 0 0 ~ ~ BUY 0 0 0 0 0 ~\n"
+        "EVENT 9 9 REJECTED 0 0 ~ ~ BUY 0 0 0 0 0 ~\n"
+        "EVENT 9 10 BOOK_UPDATE 0 0 ~ ~ BUY 0 0 0 0 0 ~\n";
+    check(ordered.canonical() == expected_ordered,
+          "canonical enum spellings, defaults, false flags, and multi-digit event ordinals fixture");
+}
+
 void test_seeded_differential_and_replay() {
     constexpr std::uint64_t seed_count = 16;
     constexpr std::uint64_t steps = 1200;
@@ -481,6 +545,7 @@ int main() {
         {"Atomic self-trade preflight", test_self_trade_preflight},
         {"Resource bounds and admission", test_resource_bounds_and_admission},
         {"Integer extremes and configuration", test_integer_extremes_and_config_validation},
+        {"Independent canonical schema fixtures", test_canonical_schema_fixtures},
         {"Seeded differential model and exact replay", test_seeded_differential_and_replay},
     };
     std::size_t failed = 0;

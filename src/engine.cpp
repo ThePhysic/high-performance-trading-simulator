@@ -1,6 +1,7 @@
 #include "hpts/engine.hpp"
 
 #include <algorithm>
+#include <charconv>
 #include <functional>
 #include <iomanip>
 #include <iterator>
@@ -63,6 +64,34 @@ std::string encode(const std::string& value) {
         }
     }
     return result;
+}
+
+// Append directly to the final buffer instead of creating a temporary string
+// for each encoded field. Snapshot/config serialization retain their baseline.
+void append_encoded(std::string& output, const std::string& value) {
+    if (value.empty()) {
+        output += '~';
+        return;
+    }
+    constexpr char hex[] = "0123456789ABCDEF";
+    for (const unsigned char c : value) {
+        if (identifier_character(c)) output += static_cast<char>(c);
+        else {
+            output += '%';
+            output += hex[c >> 4];
+            output += hex[c & 15];
+        }
+    }
+}
+
+template <typename Number>
+void append_number(std::string& output, Number value) {
+    // digits10 excludes the last possible decimal digit; leave room for that
+    // digit and a negative sign. to_chars writes no terminating null byte.
+    char digits[std::numeric_limits<Number>::digits10 + 3];
+    const auto converted = std::to_chars(digits, digits + sizeof(digits), value);
+    if (converted.ec != std::errc{}) throw std::logic_error("canonical integer conversion failed");
+    output.append(digits, static_cast<std::size_t>(converted.ptr - digits));
 }
 
 std::string fingerprint(const std::string& value) {
@@ -168,18 +197,52 @@ std::string to_string(EventType type) {
 }
 
 std::string Outcome::canonical() const {
-    std::ostringstream output;
-    output.imbue(std::locale::classic());
-    output << "OUTCOME " << sequence << ' ' << command_id << ' ' << accepted << ' ' << encode(reason) << '\n';
+    std::string output;
+    // This is a capacity hint, not a schema/resource limit. Guard its arithmetic
+    // so even an externally constructed Outcome cannot wrap the estimate.
+    constexpr std::size_t header_hint = 96;
+    constexpr std::size_t event_hint = 128;
+    if (events.size() <= (output.max_size() - header_hint) / event_hint) {
+        output.reserve(header_hint + events.size() * event_hint);
+    }
+    output += "OUTCOME ";
+    append_number(output, sequence);
+    output += ' ';
+    append_number(output, command_id);
+    output += accepted ? " 1 " : " 0 ";
+    append_encoded(output, reason);
+    output += '\n';
     std::size_t ordinal = 0;
     for (const auto& event : events) {
-        output << "EVENT " << sequence << ' ' << ordinal++ << ' ' << to_string(event.type) << ' '
-               << event.order_id << ' ' << event.maker_order_id << ' ' << encode(event.account_id) << ' '
-               << encode(event.maker_account_id) << ' ' << to_string(event.side) << ' ' << event.price << ' '
-               << event.quantity << ' ' << event.best_bid << ' ' << event.best_ask << ' ' << event.enabled << ' '
-               << encode(event.reason) << '\n';
+        output += "EVENT ";
+        append_number(output, sequence);
+        output += ' ';
+        append_number(output, ordinal++);
+        output += ' ';
+        output += to_string(event.type);
+        output += ' ';
+        append_number(output, event.order_id);
+        output += ' ';
+        append_number(output, event.maker_order_id);
+        output += ' ';
+        append_encoded(output, event.account_id);
+        output += ' ';
+        append_encoded(output, event.maker_account_id);
+        output += ' ';
+        output += to_string(event.side);
+        output += ' ';
+        append_number(output, event.price);
+        output += ' ';
+        append_number(output, event.quantity);
+        output += ' ';
+        append_number(output, event.best_bid);
+        output += ' ';
+        append_number(output, event.best_ask);
+        output += event.enabled ? " 1 " : " 0 ";
+        append_encoded(output, event.reason);
+        output += '\n';
     }
-    return output.str();
+    return output;
 }
 
 std::string Snapshot::canonical() const {
