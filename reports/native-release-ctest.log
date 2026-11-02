@@ -1,0 +1,74 @@
+Start testing: Nov 01 19:36 Pacific Standard Time
+----------------------------------------------------------
+1/3 Testing: engine_contract
+1/3 Test: engine_contract
+Command: "C:/Users/ridle/AppData/Local/Temp/high-performance-trading-simulator/build-native/Release/hpts_engine_tests.exe"
+Directory: C:/Users/ridle/AppData/Local/Temp/high-performance-trading-simulator/build-native
+"engine_contract" start time: Nov 01 19:36 Pacific Standard Time
+Output:
+----------------------------------------------------------
+PASS FIFO and partial fills
+PASS Best and resting prices
+PASS Replace priority and crossing
+PASS Cancel identity and validation
+PASS Risk reservations and accounting
+PASS Kill-switch transitions
+PASS Atomic self-trade preflight
+PASS Resource bounds and admission
+PASS Integer extremes and configuration
+PASS Seeded differential model and exact replay
+10/10 test groups passed; differential suite covers 16 seeds x 1200 commands.
+<end of output>
+Test time =  10.96 sec
+----------------------------------------------------------
+Test Passed.
+"engine_contract" end time: Nov 01 19:36 Pacific Standard Time
+"engine_contract" time elapsed: 00:00:10
+----------------------------------------------------------
+
+2/3 Testing: queue_contract
+2/3 Test: queue_contract
+Command: "C:/Users/ridle/AppData/Local/Temp/high-performance-trading-simulator/build-native/Release/hpts_queue_tests.exe"
+Directory: C:/Users/ridle/AppData/Local/Temp/high-performance-trading-simulator/build-native
+"queue_contract" start time: Nov 01 19:36 Pacific Standard Time
+Output:
+----------------------------------------------------------
+PASS bounded queue: drain, move-only values, backpressure, wakeups, 8000 concurrent items with per-producer FIFO and no duplicates.
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"queue_contract" end time: Nov 01 19:36 Pacific Standard Time
+"queue_contract" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/3 Testing: cli_contract
+3/3 Test: cli_contract
+Command: "C:/Users/ridle/AppData/Local/Programs/Python/Python313/python.exe" "C:/Users/ridle/AppData/Local/Temp/high-performance-trading-simulator/tests/test_cli.py" "C:/Users/ridle/AppData/Local/Temp/high-performance-trading-simulator/build-native/Release/hpts.exe" "C:/Users/ridle/AppData/Local/Temp/high-performance-trading-simulator"
+Directory: C:/Users/ridle/AppData/Local/Temp/high-performance-trading-simulator/build-native
+"cli_contract" start time: Nov 01 19:36 Pacific Standard Time
+Output:
+----------------------------------------------------------
+test_all_generated_profiles_run_and_replay (__main__.CliContract.test_all_generated_profiles_run_and_replay) ... ok
+test_benchmark_suite_collects_real_reports (__main__.CliContract.test_benchmark_suite_collects_real_reports) ... ok
+test_business_rejections_are_recorded_without_process_failure (__main__.CliContract.test_business_rejections_are_recorded_without_process_failure) ... ok
+test_direct_and_queued_benchmarks_agree (__main__.CliContract.test_direct_and_queued_benchmarks_agree) ... ok
+test_help_version_and_argument_errors (__main__.CliContract.test_help_version_and_argument_errors) ... ok
+test_interactive_inspection_and_controls (__main__.CliContract.test_interactive_inspection_and_controls) ... ok
+test_malformed_input_and_config_are_errors (__main__.CliContract.test_malformed_input_and_config_are_errors) ... ok
+test_output_aliases_and_open_failures (__main__.CliContract.test_output_aliases_and_open_failures) ... ok
+test_self_contained_replay_and_tamper_detection (__main__.CliContract.test_self_contained_replay_and_tamper_detection) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 2.106s
+
+OK
+<end of output>
+Test time =   2.27 sec
+----------------------------------------------------------
+Test Passed.
+"cli_contract" end time: Nov 01 19:36 Pacific Standard Time
+"cli_contract" time elapsed: 00:00:02
+----------------------------------------------------------
+
+End testing: Nov 01 19:36 Pacific Standard Time

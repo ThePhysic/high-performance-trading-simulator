@@ -1,0 +1,5588 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "system": "Windows",
+    "kernel": "11",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD",
+    "logical_cpus": 16,
+    "python": "3.13.0 (tags/v3.13.0:60403a5, Oct  7 2024, 09:38:07) [MSC v.1941 64 bit (AMD64)]",
+    "binary": "C:\\Users\\ridle\\AppData\\Local\\Temp\\high-performance-trading-simulator\\build-native\\Release\\hpts.exe",
+    "binary_sha256": "002844c2519d780cc5faee6407644b9dd9172bf909d921a28db747bb96e0fcf4",
+    "binary_version": {
+      "command": [
+        "C:\\Users\\ridle\\AppData\\Local\\Temp\\high-performance-trading-simulator\\build-native\\Release\\hpts.exe",
+        "--version"
+      ],
+      "returncode": 0,
+      "output": "hpts 0.1.0 rules=1 canonical=1\n"
+    },
+    "cmake": {
+      "command": [
+        "cmake",
+        "--version"
+      ],
+      "unavailable": "[WinError 2] The system cannot find the file specified"
+    },
+    "host_cxx": {
+      "command": [
+        "c++",
+        "--version"
+      ],
+      "unavailable": "[WinError 2] The system cannot find the file specified"
+    },
+    "host_cxx_note": "Host c++ discovery alone does not establish this binary's compiler or build flags; use CLI report/build record."
+  },
+  "method": {
+    "repetitions": 3,
+    "count": 20000,
+    "seed": 42,
+    "warmup_runs_per_mode": 1,
+    "modes": [
+      "direct",
+      "queued"
+    ],
+    "timing": "CLI-defined in-process boundaries; no network measurement",
+    "comparison": "direct/queued topology comparison; neither is assumed faster"
+  },
+  "workloads": {
+    "resting": {
+      "manifest": {
+        "generator_version": 1,
+        "profile": "resting",
+        "seed": 42,
+        "command_count": 20000,
+        "queue_capacity": 256,
+        "synthetic": true,
+        "arrival_model": "unpaced file; burst profile changes command ordering only",
+        "python_version": "3.13.0",
+        "config_sha256": "9065acae1f5f69e821503a3ef837ba6929c0053330d265928d5dd1ad77452d30",
+        "commands_sha256": "82375a897a0d72349885b4944807e27fa9541ed64b942ae130a488846b4537c1"
+      },
+      "replay_verified": true,
+      "modes": {
+        "direct": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1644745,
+              "commands_per_second": 121599.396867,
+              "accepted_orders_per_second": 121599.396867,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1300,
+                "p95": 2600,
+                "p99": 5200
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6600,
+                "p95": 11800,
+                "p99": 21600
+              },
+              "trace_digest": "5d88be7ad3d2b1c2",
+              "state_digest": "1717de40dfc5f6c2",
+              "resources": {
+                "process_cpu_seconds": 0.171875,
+                "peak_rss_bytes": 16527360,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1577689,
+              "commands_per_second": 126767.696295,
+              "accepted_orders_per_second": 126767.696295,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1300,
+                "p95": 2700,
+                "p99": 4700
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6600,
+                "p95": 11700,
+                "p99": 18300
+              },
+              "trace_digest": "5d88be7ad3d2b1c2",
+              "state_digest": "1717de40dfc5f6c2",
+              "resources": {
+                "process_cpu_seconds": 0.15625,
+                "peak_rss_bytes": 16478208,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1632928,
+              "commands_per_second": 122479.374473,
+              "accepted_orders_per_second": 122479.374473,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1400,
+                "p95": 2600,
+                "p99": 5700
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6700,
+                "p95": 12000,
+                "p99": 23800
+              },
+              "trace_digest": "5d88be7ad3d2b1c2",
+              "state_digest": "1717de40dfc5f6c2",
+              "resources": {
+                "process_cpu_seconds": 0.15625,
+                "peak_rss_bytes": 16461824,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 123615.48921166667,
+              "min": 121599.396867,
+              "max": 126767.696295,
+              "population_stdev": 2257.7123036277226
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 123615.48921166667,
+              "min": 121599.396867,
+              "max": 126767.696295,
+              "population_stdev": 2257.7123036277226
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 1333.3333333333333,
+              "min": 1300.0,
+              "max": 1400.0,
+              "population_stdev": 47.14045207910317
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 2633.3333333333335,
+              "min": 2600.0,
+              "max": 2700.0,
+              "population_stdev": 47.14045207910317
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 5200.0,
+              "min": 4700.0,
+              "max": 5700.0,
+              "population_stdev": 408.24829046386304
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.1618454,
+              "min": 0.1577689,
+              "max": 0.1644745,
+              "population_stdev": 0.002922612177487805
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 6633.333333333333,
+              "min": 6600.0,
+              "max": 6700.0,
+              "population_stdev": 47.14045207910317
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 11833.333333333334,
+              "min": 11700.0,
+              "max": 12000.0,
+              "population_stdev": 124.72191289246472
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 21233.333333333332,
+              "min": 18300.0,
+              "max": 23800.0,
+              "population_stdev": 2260.285134421958
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 16489130.666666666,
+              "min": 16461824.0,
+              "max": 16527360.0,
+              "population_stdev": 27847.445236901396
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.16145833333333334,
+              "min": 0.15625,
+              "max": 0.171875,
+              "population_stdev": 0.00736569563735987
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        },
+        "queued": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.142724,
+              "commands_per_second": 140130.601721,
+              "accepted_orders_per_second": 140130.601721,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1900,
+                "p95": 4500,
+                "p99": 9600
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3491900,
+                "p95": 4766500,
+                "p99": 5668100
+              },
+              "trace_digest": "5d88be7ad3d2b1c2",
+              "state_digest": "1717de40dfc5f6c2",
+              "resources": {
+                "process_cpu_seconds": 0.25,
+                "peak_rss_bytes": 17031168,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 13641,
+                "output_high_water": 256,
+                "output_full_waits": 11416,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1336026,
+              "commands_per_second": 149697.685524,
+              "accepted_orders_per_second": 149697.685524,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1900,
+                "p95": 4000,
+                "p99": 8500
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3306500,
+                "p95": 4129900,
+                "p99": 4523000
+              },
+              "trace_digest": "5d88be7ad3d2b1c2",
+              "state_digest": "1717de40dfc5f6c2",
+              "resources": {
+                "process_cpu_seconds": 0.34375,
+                "peak_rss_bytes": 16990208,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 13445,
+                "output_high_water": 256,
+                "output_full_waits": 11914,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1416921,
+              "commands_per_second": 141151.129809,
+              "accepted_orders_per_second": 141151.129809,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1900,
+                "p95": 4400,
+                "p99": 8600
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3511900,
+                "p95": 4594100,
+                "p99": 5089600
+              },
+              "trace_digest": "5d88be7ad3d2b1c2",
+              "state_digest": "1717de40dfc5f6c2",
+              "resources": {
+                "process_cpu_seconds": 0.296875,
+                "peak_rss_bytes": 17027072,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 13539,
+                "output_high_water": 256,
+                "output_full_waits": 11631,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 143659.80568466667,
+              "min": 140130.601721,
+              "max": 149697.685524,
+              "population_stdev": 4289.7058259877695
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 143659.80568466667,
+              "min": 140130.601721,
+              "max": 149697.685524,
+              "population_stdev": 4289.7058259877695
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 1900.0,
+              "min": 1900.0,
+              "max": 1900.0,
+              "population_stdev": 0.0
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 4300.0,
+              "min": 4000.0,
+              "max": 4500.0,
+              "population_stdev": 216.02468994692867
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 8900.0,
+              "min": 8500.0,
+              "max": 9600.0,
+              "population_stdev": 496.655480858378
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.13933956666666666,
+              "min": 0.1336026,
+              "max": 0.142724,
+              "population_stdev": 0.0040784632974796885
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 3436766.6666666665,
+              "min": 3306500.0,
+              "max": 3511900.0,
+              "population_stdev": 92473.61185164603
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 4496833.333333333,
+              "min": 4129900.0,
+              "max": 4766500.0,
+              "population_stdev": 268837.6131091448
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 5093566.666666667,
+              "min": 4523000.0,
+              "max": 5668100.0,
+              "population_stdev": 467493.53174372605
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 13541.666666666666,
+              "min": 13445.0,
+              "max": 13641.0,
+              "population_stdev": 80.0388794413204
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 11653.666666666666,
+              "min": 11416.0,
+              "max": 11914.0,
+              "population_stdev": 203.9384438718921
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 17016149.333333332,
+              "min": 16990208.0,
+              "max": 17031168.0,
+              "population_stdev": 18419.353686332815
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.296875,
+              "min": 0.25,
+              "max": 0.34375,
+              "population_stdev": 0.038273277230987154
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        }
+      },
+      "verified_run_digests": {
+        "state_digest": "1717de40dfc5f6c2",
+        "trace_digest": "5d88be7ad3d2b1c2"
+      },
+      "queued_to_direct_throughput_ratio": 1.1621505249934994
+    },
+    "crossing": {
+      "manifest": {
+        "generator_version": 1,
+        "profile": "crossing",
+        "seed": 42,
+        "command_count": 20000,
+        "queue_capacity": 256,
+        "synthetic": true,
+        "arrival_model": "unpaced file; burst profile changes command ordering only",
+        "python_version": "3.13.0",
+        "config_sha256": "9065acae1f5f69e821503a3ef837ba6929c0053330d265928d5dd1ad77452d30",
+        "commands_sha256": "d5c2e0a78081a61e4cd49d8b1e26f29ce12e15a711e4906dffb044f272fe0239"
+      },
+      "replay_verified": true,
+      "modes": {
+        "direct": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 10000,
+              "elapsed_seconds": 0.1654128,
+              "commands_per_second": 120909.627308,
+              "accepted_orders_per_second": 120909.627308,
+              "executions_per_second": 60454.8136541,
+              "core_latency_ns": {
+                "p50": 1100,
+                "p95": 1800,
+                "p99": 3100
+              },
+              "end_to_end_latency_ns": {
+                "p50": 8200,
+                "p95": 12500,
+                "p99": 19900
+              },
+              "trace_digest": "4b9c33816389ea03",
+              "state_digest": "5d9362081d3bb714",
+              "resources": {
+                "process_cpu_seconds": 0.171875,
+                "peak_rss_bytes": 10452992,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 10000,
+              "elapsed_seconds": 0.1995921,
+              "commands_per_second": 100204.366806,
+              "accepted_orders_per_second": 100204.366806,
+              "executions_per_second": 50102.1834031,
+              "core_latency_ns": {
+                "p50": 1200,
+                "p95": 2500,
+                "p99": 5000
+              },
+              "end_to_end_latency_ns": {
+                "p50": 8400,
+                "p95": 15100,
+                "p99": 35100
+              },
+              "trace_digest": "4b9c33816389ea03",
+              "state_digest": "5d9362081d3bb714",
+              "resources": {
+                "process_cpu_seconds": 0.203125,
+                "peak_rss_bytes": 10477568,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 10000,
+              "elapsed_seconds": 0.1995646,
+              "commands_per_second": 100218.174967,
+              "accepted_orders_per_second": 100218.174967,
+              "executions_per_second": 50109.0874835,
+              "core_latency_ns": {
+                "p50": 1100,
+                "p95": 2700,
+                "p99": 5700
+              },
+              "end_to_end_latency_ns": {
+                "p50": 8400,
+                "p95": 15700,
+                "p99": 40600
+              },
+              "trace_digest": "4b9c33816389ea03",
+              "state_digest": "5d9362081d3bb714",
+              "resources": {
+                "process_cpu_seconds": 0.1875,
+                "peak_rss_bytes": 10457088,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 107110.723027,
+              "min": 100204.366806,
+              "max": 120909.627308,
+              "population_stdev": 9757.300418438068
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 107110.723027,
+              "min": 100204.366806,
+              "max": 120909.627308,
+              "population_stdev": 9757.300418438068
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 1133.3333333333333,
+              "min": 1100.0,
+              "max": 1200.0,
+              "population_stdev": 47.14045207910317
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 2333.3333333333335,
+              "min": 1800.0,
+              "max": 2700.0,
+              "population_stdev": 385.8612300930075
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 4600.0,
+              "min": 3100.0,
+              "max": 5700.0,
+              "population_stdev": 1098.483803552272
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.18818983333333333,
+              "min": 0.1654128,
+              "max": 0.1995921,
+              "population_stdev": 0.016105798638240687
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 8333.333333333334,
+              "min": 8200.0,
+              "max": 8400.0,
+              "population_stdev": 94.28090415820634
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 14433.333333333334,
+              "min": 12500.0,
+              "max": 15700.0,
+              "population_stdev": 1388.8444437333105
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 31866.666666666668,
+              "min": 19900.0,
+              "max": 40600.0,
+              "population_stdev": 8754.554370281918
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 10000.0,
+              "min": 10000.0,
+              "max": 10000.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 53555.36151356667,
+              "min": 50102.1834031,
+              "max": 60454.8136541,
+              "population_stdev": 4878.650209242581
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 10462549.333333334,
+              "min": 10452992.0,
+              "max": 10477568.0,
+              "population_stdev": 10750.645417317459
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.1875,
+              "min": 0.171875,
+              "max": 0.203125,
+              "population_stdev": 0.01275775907699572
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        },
+        "queued": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 10000,
+              "elapsed_seconds": 0.1642657,
+              "commands_per_second": 121753.963244,
+              "accepted_orders_per_second": 121753.963244,
+              "executions_per_second": 60876.9816218,
+              "core_latency_ns": {
+                "p50": 1600,
+                "p95": 4000,
+                "p99": 7700
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3926400,
+                "p95": 5432900,
+                "p99": 6947100
+              },
+              "trace_digest": "4b9c33816389ea03",
+              "state_digest": "5d9362081d3bb714",
+              "resources": {
+                "process_cpu_seconds": 0.34375,
+                "peak_rss_bytes": 11264000,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 13226,
+                "output_high_water": 256,
+                "output_full_waits": 11644,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 10000,
+              "elapsed_seconds": 0.1787764,
+              "commands_per_second": 111871.589315,
+              "accepted_orders_per_second": 111871.589315,
+              "executions_per_second": 55935.7946575,
+              "core_latency_ns": {
+                "p50": 1600,
+                "p95": 4200,
+                "p99": 7600
+              },
+              "end_to_end_latency_ns": {
+                "p50": 4384500,
+                "p95": 6168100,
+                "p99": 7560800
+              },
+              "trace_digest": "4b9c33816389ea03",
+              "state_digest": "5d9362081d3bb714",
+              "resources": {
+                "process_cpu_seconds": 0.34375,
+                "peak_rss_bytes": 10936320,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 12906,
+                "output_high_water": 256,
+                "output_full_waits": 11789,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 10000,
+              "elapsed_seconds": 0.1708123,
+              "commands_per_second": 117087.586784,
+              "accepted_orders_per_second": 117087.586784,
+              "executions_per_second": 58543.7933919,
+              "core_latency_ns": {
+                "p50": 1600,
+                "p95": 3900,
+                "p99": 7000
+              },
+              "end_to_end_latency_ns": {
+                "p50": 4219100,
+                "p95": 5530900,
+                "p99": 6030800
+              },
+              "trace_digest": "4b9c33816389ea03",
+              "state_digest": "5d9362081d3bb714",
+              "resources": {
+                "process_cpu_seconds": 0.34375,
+                "peak_rss_bytes": 10960896,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 13197,
+                "output_high_water": 256,
+                "output_full_waits": 12427,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 116904.379781,
+              "min": 111871.589315,
+              "max": 121753.963244,
+              "population_stdev": 4036.5416074164177
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 116904.379781,
+              "min": 111871.589315,
+              "max": 121753.963244,
+              "population_stdev": 4036.5416074164177
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 1600.0,
+              "min": 1600.0,
+              "max": 1600.0,
+              "population_stdev": 0.0
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 4033.3333333333335,
+              "min": 3900.0,
+              "max": 4200.0,
+              "population_stdev": 124.72191289246472
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 7433.333333333333,
+              "min": 7000.0,
+              "max": 7700.0,
+              "population_stdev": 309.12061651652346
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.1712848,
+              "min": 0.1642657,
+              "max": 0.1787764,
+              "population_stdev": 0.005933382723202682
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 4176666.6666666665,
+              "min": 3926400.0,
+              "max": 4384500.0,
+              "population_stdev": 189410.21326446178
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 5710633.333333333,
+              "min": 5432900.0,
+              "max": 6168100.0,
+              "population_stdev": 325942.5443574714
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 6846233.333333333,
+              "min": 6030800.0,
+              "max": 7560800.0,
+              "population_stdev": 628678.8068817194
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 10000.0,
+              "min": 10000.0,
+              "max": 10000.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 58452.1898904,
+              "min": 55935.7946575,
+              "max": 60876.9816218,
+              "population_stdev": 2018.2708036266006
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 13109.666666666666,
+              "min": 12906.0,
+              "max": 13226.0,
+              "population_stdev": 144.4999038830899
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 11953.333333333334,
+              "min": 11644.0,
+              "max": 12427.0,
+              "population_stdev": 340.1238336580108
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 11053738.666666666,
+              "min": 10936320.0,
+              "max": 11264000.0,
+              "population_stdev": 149015.3597571591
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.34375,
+              "min": 0.34375,
+              "max": 0.34375,
+              "population_stdev": 0.0
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        }
+      },
+      "verified_run_digests": {
+        "state_digest": "5d9362081d3bb714",
+        "trace_digest": "4b9c33816389ea03"
+      },
+      "queued_to_direct_throughput_ratio": 1.0914348860434007
+    },
+    "cancel": {
+      "manifest": {
+        "generator_version": 1,
+        "profile": "cancel",
+        "seed": 42,
+        "command_count": 20000,
+        "queue_capacity": 256,
+        "synthetic": true,
+        "arrival_model": "unpaced file; burst profile changes command ordering only",
+        "python_version": "3.13.0",
+        "config_sha256": "9065acae1f5f69e821503a3ef837ba6929c0053330d265928d5dd1ad77452d30",
+        "commands_sha256": "9f32fc4cbb6c762ddff1274f40a6e71c15f06e2a1d2b5a3d5ce871546fdfbcd1"
+      },
+      "replay_verified": true,
+      "modes": {
+        "direct": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 10000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1712156,
+              "commands_per_second": 116811.785842,
+              "accepted_orders_per_second": 58405.892921,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 900,
+                "p95": 2000,
+                "p99": 3500
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6300,
+                "p95": 11300,
+                "p99": 32900
+              },
+              "trace_digest": "013054cb75f87907",
+              "state_digest": "37be8841f12f3c56",
+              "resources": {
+                "process_cpu_seconds": 0.109375,
+                "peak_rss_bytes": 10018816,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 10000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1532406,
+              "commands_per_second": 130513.715034,
+              "accepted_orders_per_second": 65256.8575169,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 900,
+                "p95": 2000,
+                "p99": 3300
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6300,
+                "p95": 11500,
+                "p99": 16700
+              },
+              "trace_digest": "013054cb75f87907",
+              "state_digest": "37be8841f12f3c56",
+              "resources": {
+                "process_cpu_seconds": 0.140625,
+                "peak_rss_bytes": 10055680,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 10000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1452812,
+              "commands_per_second": 137664.061145,
+              "accepted_orders_per_second": 68832.0305724,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 800,
+                "p95": 1700,
+                "p99": 2800
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6200,
+                "p95": 11000,
+                "p99": 17500
+              },
+              "trace_digest": "013054cb75f87907",
+              "state_digest": "37be8841f12f3c56",
+              "resources": {
+                "process_cpu_seconds": 0.15625,
+                "peak_rss_bytes": 10080256,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 10000.0,
+              "min": 10000.0,
+              "max": 10000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 64164.92700343334,
+              "min": 58405.892921,
+              "max": 68832.0305724,
+              "population_stdev": 4325.915761713729
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 128329.854007,
+              "min": 116811.785842,
+              "max": 137664.061145,
+              "population_stdev": 8651.831523516208
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 866.6666666666666,
+              "min": 800.0,
+              "max": 900.0,
+              "population_stdev": 47.14045207910317
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 1900.0,
+              "min": 1700.0,
+              "max": 2000.0,
+              "population_stdev": 141.4213562373095
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 3200.0,
+              "min": 2800.0,
+              "max": 3500.0,
+              "population_stdev": 294.3920288775949
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.15657913333333334,
+              "min": 0.1452812,
+              "max": 0.1712156,
+              "population_stdev": 0.010847661175059297
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 6266.666666666667,
+              "min": 6200.0,
+              "max": 6300.0,
+              "population_stdev": 47.14045207910317
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 11266.666666666666,
+              "min": 11000.0,
+              "max": 11500.0,
+              "population_stdev": 205.48046676563254
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 22366.666666666668,
+              "min": 16700.0,
+              "max": 32900.0,
+              "population_stdev": 7455.348564770276
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 10051584.0,
+              "min": 10018816.0,
+              "max": 10080256.0,
+              "population_stdev": 25249.439756160926
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.13541666666666666,
+              "min": 0.109375,
+              "max": 0.15625,
+              "population_stdev": 0.01948779888944761
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        },
+        "queued": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 10000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1516346,
+              "commands_per_second": 131896.018455,
+              "accepted_orders_per_second": 65948.0092274,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1100,
+                "p95": 3400,
+                "p99": 6200
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3711900,
+                "p95": 5145500,
+                "p99": 5884700
+              },
+              "trace_digest": "013054cb75f87907",
+              "state_digest": "37be8841f12f3c56",
+              "resources": {
+                "process_cpu_seconds": 0.203125,
+                "peak_rss_bytes": 10170368,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 12294,
+                "output_high_water": 256,
+                "output_full_waits": 12722,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 10000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1381438,
+              "commands_per_second": 144776.67474,
+              "accepted_orders_per_second": 72388.3373702,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1000,
+                "p95": 3200,
+                "p99": 5800
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3401500,
+                "p95": 4276600,
+                "p99": 4710200
+              },
+              "trace_digest": "013054cb75f87907",
+              "state_digest": "37be8841f12f3c56",
+              "resources": {
+                "process_cpu_seconds": 0.296875,
+                "peak_rss_bytes": 10141696,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 11845,
+                "output_high_water": 256,
+                "output_full_waits": 12090,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 10000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.176641,
+              "commands_per_second": 113223.996694,
+              "accepted_orders_per_second": 56611.9983469,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1300,
+                "p95": 4700,
+                "p99": 7000
+              },
+              "end_to_end_latency_ns": {
+                "p50": 4304200,
+                "p95": 6051100,
+                "p99": 6420600
+              },
+              "trace_digest": "013054cb75f87907",
+              "state_digest": "37be8841f12f3c56",
+              "resources": {
+                "process_cpu_seconds": 0.296875,
+                "peak_rss_bytes": 10694656,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 12141,
+                "output_high_water": 256,
+                "output_full_waits": 12071,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 10000.0,
+              "min": 10000.0,
+              "max": 10000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 64982.78164816667,
+              "min": 56611.9983469,
+              "max": 72388.3373702,
+              "population_stdev": 6476.725842291461
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 129965.56329633333,
+              "min": 113223.996694,
+              "max": 144776.67474,
+              "population_stdev": 12953.451684354239
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 1133.3333333333333,
+              "min": 1000.0,
+              "max": 1300.0,
+              "population_stdev": 124.72191289246472
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 3766.6666666666665,
+              "min": 3200.0,
+              "max": 4700.0,
+              "population_stdev": 664.9979114420001
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 6333.333333333333,
+              "min": 5800.0,
+              "max": 7000.0,
+              "population_stdev": 498.88765156985886
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.15547313333333335,
+              "min": 0.1381438,
+              "max": 0.176641,
+              "population_stdev": 0.015949072189803244
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 3805866.6666666665,
+              "min": 3401500.0,
+              "max": 4304200.0,
+              "population_stdev": 374467.73188383295
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 5157733.333333333,
+              "min": 4276600.0,
+              "max": 6051100.0,
+              "population_stdev": 724488.2347024154
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 5671833.333333333,
+              "min": 4710200.0,
+              "max": 6420600.0,
+              "population_stdev": 714306.7517219444
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 12093.333333333334,
+              "min": 11845.0,
+              "max": 12294.0,
+              "population_stdev": 186.3765602811207
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 12294.333333333334,
+              "min": 12071.0,
+              "max": 12722.0,
+              "population_stdev": 302.5054636788492
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 10335573.333333334,
+              "min": 10141696.0,
+              "max": 10694656.0,
+              "population_stdev": 254179.4536953939
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.265625,
+              "min": 0.203125,
+              "max": 0.296875,
+              "population_stdev": 0.04419417382415922
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        }
+      },
+      "verified_run_digests": {
+        "state_digest": "37be8841f12f3c56",
+        "trace_digest": "013054cb75f87907"
+      },
+      "queued_to_direct_throughput_ratio": 1.012746132238599
+    },
+    "replace": {
+      "manifest": {
+        "generator_version": 1,
+        "profile": "replace",
+        "seed": 42,
+        "command_count": 20000,
+        "queue_capacity": 256,
+        "synthetic": true,
+        "arrival_model": "unpaced file; burst profile changes command ordering only",
+        "python_version": "3.13.0",
+        "config_sha256": "9065acae1f5f69e821503a3ef837ba6929c0053330d265928d5dd1ad77452d30",
+        "commands_sha256": "8bb96cb865c96786fb032b87acf3e0f7fb285d0fa5171f8f1f7556fd8e1fa992"
+      },
+      "replay_verified": true,
+      "modes": {
+        "direct": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 6667,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1646192,
+              "commands_per_second": 121492.511202,
+              "accepted_orders_per_second": 40499.5286091,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 900,
+                "p95": 2200,
+                "p99": 3900
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6300,
+                "p95": 12000,
+                "p99": 24200
+              },
+              "trace_digest": "637aa5d704eec41b",
+              "state_digest": "69c1ed46e23055b7",
+              "resources": {
+                "process_cpu_seconds": 0.15625,
+                "peak_rss_bytes": 9682944,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 6667,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1564679,
+              "commands_per_second": 127821.744907,
+              "accepted_orders_per_second": 42609.3786649,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 900,
+                "p95": 2000,
+                "p99": 3600
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6200,
+                "p95": 11600,
+                "p99": 20200
+              },
+              "trace_digest": "637aa5d704eec41b",
+              "state_digest": "69c1ed46e23055b7",
+              "resources": {
+                "process_cpu_seconds": 0.140625,
+                "peak_rss_bytes": 9670656,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 6667,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1860425,
+              "commands_per_second": 107502.318019,
+              "accepted_orders_per_second": 35835.8977115,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1000,
+                "p95": 2400,
+                "p99": 5600
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6400,
+                "p95": 13400,
+                "p99": 41100
+              },
+              "trace_digest": "637aa5d704eec41b",
+              "state_digest": "69c1ed46e23055b7",
+              "resources": {
+                "process_cpu_seconds": 0.171875,
+                "peak_rss_bytes": 9261056,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 6667.0,
+              "min": 6667.0,
+              "max": 6667.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 39648.2683285,
+              "min": 35835.8977115,
+              "max": 42609.3786649,
+              "population_stdev": 2830.01697350782
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 118938.85804266666,
+              "min": 107502.318019,
+              "max": 127821.744907,
+              "population_stdev": 8489.62643888898
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 933.3333333333334,
+              "min": 900.0,
+              "max": 1000.0,
+              "population_stdev": 47.14045207910317
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 2200.0,
+              "min": 2000.0,
+              "max": 2400.0,
+              "population_stdev": 163.2993161855452
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 4366.666666666667,
+              "min": 3600.0,
+              "max": 5600.0,
+              "population_stdev": 880.6563209081937
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.1690432,
+              "min": 0.1564679,
+              "max": 0.1860425,
+              "population_stdev": 0.0124724515978215
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 6300.0,
+              "min": 6200.0,
+              "max": 6400.0,
+              "population_stdev": 81.6496580927726
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 12333.333333333334,
+              "min": 11600.0,
+              "max": 13400.0,
+              "population_stdev": 771.722460186015
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 28500.0,
+              "min": 20200.0,
+              "max": 41100.0,
+              "population_stdev": 9057.961507241387
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 9538218.666666666,
+              "min": 9261056.0,
+              "max": 9682944.0,
+              "population_stdev": 196047.79448106242
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.15625,
+              "min": 0.140625,
+              "max": 0.171875,
+              "population_stdev": 0.01275775907699572
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        },
+        "queued": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 6667,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1680312,
+              "commands_per_second": 119025.514309,
+              "accepted_orders_per_second": 39677.155195,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1400,
+                "p95": 5000,
+                "p99": 7300
+              },
+              "end_to_end_latency_ns": {
+                "p50": 4020600,
+                "p95": 5975900,
+                "p99": 6897400
+              },
+              "trace_digest": "637aa5d704eec41b",
+              "state_digest": "69c1ed46e23055b7",
+              "resources": {
+                "process_cpu_seconds": 0.296875,
+                "peak_rss_bytes": 9854976,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 12485,
+                "output_high_water": 256,
+                "output_full_waits": 10908,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 6667,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1686742,
+              "commands_per_second": 118571.779205,
+              "accepted_orders_per_second": 39525.902598,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1400,
+                "p95": 4800,
+                "p99": 7100
+              },
+              "end_to_end_latency_ns": {
+                "p50": 4202100,
+                "p95": 5737900,
+                "p99": 6510200
+              },
+              "trace_digest": "637aa5d704eec41b",
+              "state_digest": "69c1ed46e23055b7",
+              "resources": {
+                "process_cpu_seconds": 0.359375,
+                "peak_rss_bytes": 10420224,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 12797,
+                "output_high_water": 256,
+                "output_full_waits": 11559,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 6667,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1454456,
+              "commands_per_second": 137508.45677,
+              "accepted_orders_per_second": 45838.4440643,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1300,
+                "p95": 3700,
+                "p99": 6700
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3558300,
+                "p95": 4712800,
+                "p99": 5395200
+              },
+              "trace_digest": "637aa5d704eec41b",
+              "state_digest": "69c1ed46e23055b7",
+              "resources": {
+                "process_cpu_seconds": 0.265625,
+                "peak_rss_bytes": 9797632,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 12691,
+                "output_high_water": 256,
+                "output_full_waits": 11809,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 6667.0,
+              "min": 6667.0,
+              "max": 6667.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 41680.5006191,
+              "min": 39525.902598,
+              "max": 45838.4440643,
+              "population_stdev": 2940.7583610508855
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 125035.25009466667,
+              "min": 118571.779205,
+              "max": 137508.45677,
+              "population_stdev": 8821.833991498417
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 1366.6666666666667,
+              "min": 1300.0,
+              "max": 1400.0,
+              "population_stdev": 47.14045207910317
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 4500.0,
+              "min": 3700.0,
+              "max": 5000.0,
+              "population_stdev": 571.5476066494082
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 7033.333333333333,
+              "min": 6700.0,
+              "max": 7300.0,
+              "population_stdev": 249.44382578492943
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.160717,
+              "min": 0.1454456,
+              "max": 0.1686742,
+              "population_stdev": 0.01080170065992696
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 3927000.0,
+              "min": 3558300.0,
+              "max": 4202100.0,
+              "population_stdev": 271035.4589348043
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 5475533.333333333,
+              "min": 4712800.0,
+              "max": 5975900.0,
+              "population_stdev": 548016.1818373209
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 6267600.0,
+              "min": 5395200.0,
+              "max": 6897400.0,
+              "population_stdev": 636810.9504921116
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 12657.666666666666,
+              "min": 12485.0,
+              "max": 12797.0,
+              "population_stdev": 129.5359238032275
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 11425.333333333334,
+              "min": 10908.0,
+              "max": 11809.0,
+              "population_stdev": 379.7809310056991
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 10024277.333333334,
+              "min": 9797632.0,
+              "max": 10420224.0,
+              "population_stdev": 280953.62098554434
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.3072916666666667,
+              "min": 0.265625,
+              "max": 0.359375,
+              "population_stdev": 0.03897559777889522
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        }
+      },
+      "verified_run_digests": {
+        "state_digest": "69c1ed46e23055b7",
+        "trace_digest": "637aa5d704eec41b"
+      },
+      "queued_to_direct_throughput_ratio": 1.0512565208067919
+    },
+    "dense": {
+      "manifest": {
+        "generator_version": 1,
+        "profile": "dense",
+        "seed": 42,
+        "command_count": 20000,
+        "queue_capacity": 256,
+        "synthetic": true,
+        "arrival_model": "unpaced file; burst profile changes command ordering only",
+        "python_version": "3.13.0",
+        "config_sha256": "9065acae1f5f69e821503a3ef837ba6929c0053330d265928d5dd1ad77452d30",
+        "commands_sha256": "6a7731f76e6a97aba095623565e7c63e714cab29ad340a3c9015fcee91052819"
+      },
+      "replay_verified": true,
+      "modes": {
+        "direct": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.158046,
+              "commands_per_second": 126545.436139,
+              "accepted_orders_per_second": 126545.436139,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1200,
+                "p95": 2400,
+                "p99": 4800
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6500,
+                "p95": 11500,
+                "p99": 18000
+              },
+              "trace_digest": "053a851315c15789",
+              "state_digest": "b6ff6a3c746f45c1",
+              "resources": {
+                "process_cpu_seconds": 0.15625,
+                "peak_rss_bytes": 16510976,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1724411,
+              "commands_per_second": 115981.630829,
+              "accepted_orders_per_second": 115981.630829,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1300,
+                "p95": 2900,
+                "p99": 6500
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6600,
+                "p95": 13200,
+                "p99": 29800
+              },
+              "trace_digest": "053a851315c15789",
+              "state_digest": "b6ff6a3c746f45c1",
+              "resources": {
+                "process_cpu_seconds": 0.15625,
+                "peak_rss_bytes": 16449536,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1744146,
+              "commands_per_second": 114669.299474,
+              "accepted_orders_per_second": 114669.299474,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1200,
+                "p95": 2700,
+                "p99": 5800
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6500,
+                "p95": 12600,
+                "p99": 36000
+              },
+              "trace_digest": "053a851315c15789",
+              "state_digest": "b6ff6a3c746f45c1",
+              "resources": {
+                "process_cpu_seconds": 0.140625,
+                "peak_rss_bytes": 16535552,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 119065.45548066667,
+              "min": 114669.299474,
+              "max": 126545.436139,
+              "population_stdev": 5316.210202961604
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 119065.45548066667,
+              "min": 114669.299474,
+              "max": 126545.436139,
+              "population_stdev": 5316.210202961604
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 1233.3333333333333,
+              "min": 1200.0,
+              "max": 1300.0,
+              "population_stdev": 47.14045207910317
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 2666.6666666666665,
+              "min": 2400.0,
+              "max": 2900.0,
+              "population_stdev": 205.48046676563254
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 5700.0,
+              "min": 4800.0,
+              "max": 6500.0,
+              "population_stdev": 697.614984548545
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.16830056666666668,
+              "min": 0.158046,
+              "max": 0.1744146,
+              "population_stdev": 0.007295696389120255
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 6533.333333333333,
+              "min": 6500.0,
+              "max": 6600.0,
+              "population_stdev": 47.14045207910317
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 12433.333333333334,
+              "min": 11500.0,
+              "max": 13200.0,
+              "population_stdev": 703.9570693980959
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 27933.333333333332,
+              "min": 18000.0,
+              "max": 36000.0,
+              "population_stdev": 7466.071404843528
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 16498688.0,
+              "min": 16449536.0,
+              "max": 16535552.0,
+              "population_stdev": 36174.892508478864
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.15104166666666666,
+              "min": 0.140625,
+              "max": 0.15625,
+              "population_stdev": 0.00736569563735987
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        },
+        "queued": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1360562,
+              "commands_per_second": 146998.078735,
+              "accepted_orders_per_second": 146998.078735,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1900,
+                "p95": 4100,
+                "p99": 8200
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3319900,
+                "p95": 4256900,
+                "p99": 5046500
+              },
+              "trace_digest": "053a851315c15789",
+              "state_digest": "b6ff6a3c746f45c1",
+              "resources": {
+                "process_cpu_seconds": 0.3125,
+                "peak_rss_bytes": 16928768,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 13981,
+                "output_high_water": 256,
+                "output_full_waits": 11450,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1491592,
+              "commands_per_second": 134084.924027,
+              "accepted_orders_per_second": 134084.924027,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1900,
+                "p95": 5300,
+                "p99": 9000
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3593500,
+                "p95": 4875300,
+                "p99": 5225700
+              },
+              "trace_digest": "053a851315c15789",
+              "state_digest": "b6ff6a3c746f45c1",
+              "resources": {
+                "process_cpu_seconds": 0.390625,
+                "peak_rss_bytes": 17002496,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 13858,
+                "output_high_water": 256,
+                "output_full_waits": 11144,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1529566,
+              "commands_per_second": 130756.044525,
+              "accepted_orders_per_second": 130756.044525,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1900,
+                "p95": 4900,
+                "p99": 8600
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3701500,
+                "p95": 5504500,
+                "p99": 5907600
+              },
+              "trace_digest": "053a851315c15789",
+              "state_digest": "b6ff6a3c746f45c1",
+              "resources": {
+                "process_cpu_seconds": 0.328125,
+                "peak_rss_bytes": 16936960,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 13593,
+                "output_high_water": 256,
+                "output_full_waits": 11738,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 137279.682429,
+              "min": 130756.044525,
+              "max": 146998.078735,
+              "population_stdev": 7005.0353201614735
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 137279.682429,
+              "min": 130756.044525,
+              "max": 146998.078735,
+              "population_stdev": 7005.0353201614735
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 1900.0,
+              "min": 1900.0,
+              "max": 1900.0,
+              "population_stdev": 0.0
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 4766.666666666667,
+              "min": 4100.0,
+              "max": 5300.0,
+              "population_stdev": 498.88765156985886
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 8600.0,
+              "min": 8200.0,
+              "max": 9000.0,
+              "population_stdev": 326.5986323710904
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.14605733333333332,
+              "min": 0.1360562,
+              "max": 0.1529566,
+              "population_stdev": 0.00723980030356885
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 3538300.0,
+              "min": 3319900.0,
+              "max": 3701500.0,
+              "population_stdev": 160602.86423348743
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 4878900.0,
+              "min": 4256900.0,
+              "max": 5504500.0,
+              "population_stdev": 509336.9284340835
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 5393266.666666667,
+              "min": 5046500.0,
+              "max": 5907600.0,
+              "population_stdev": 370973.7127554398
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 13810.666666666666,
+              "min": 13593.0,
+              "max": 13981.0,
+              "population_stdev": 161.8977729583977
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 11444.0,
+              "min": 11144.0,
+              "max": 11738.0,
+              "population_stdev": 242.53659517689283
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 16956074.666666668,
+              "min": 16928768.0,
+              "max": 17002496.0,
+              "population_stdev": 32994.77087189558
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.34375,
+              "min": 0.3125,
+              "max": 0.390625,
+              "population_stdev": 0.03375385780420761
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        }
+      },
+      "verified_run_digests": {
+        "state_digest": "b6ff6a3c746f45c1",
+        "trace_digest": "053a851315c15789"
+      },
+      "queued_to_direct_throughput_ratio": 1.1529765864902006
+    },
+    "sparse": {
+      "manifest": {
+        "generator_version": 1,
+        "profile": "sparse",
+        "seed": 42,
+        "command_count": 20000,
+        "queue_capacity": 256,
+        "synthetic": true,
+        "arrival_model": "unpaced file; burst profile changes command ordering only",
+        "python_version": "3.13.0",
+        "config_sha256": "9065acae1f5f69e821503a3ef837ba6929c0053330d265928d5dd1ad77452d30",
+        "commands_sha256": "dddde5669325220a1bd4a8e11ef450428a958e7fb710e6e70fadf47d89bbc03b"
+      },
+      "replay_verified": true,
+      "modes": {
+        "direct": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1838072,
+              "commands_per_second": 108809.66578,
+              "accepted_orders_per_second": 108809.66578,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1800,
+                "p95": 4000,
+                "p99": 8600
+              },
+              "end_to_end_latency_ns": {
+                "p50": 7200,
+                "p95": 13200,
+                "p99": 29400
+              },
+              "trace_digest": "295e72d34a73234a",
+              "state_digest": "bf3e0ec22083157d",
+              "resources": {
+                "process_cpu_seconds": 0.15625,
+                "peak_rss_bytes": 19652608,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1752995,
+              "commands_per_second": 114090.456619,
+              "accepted_orders_per_second": 114090.456619,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1900,
+                "p95": 3700,
+                "p99": 7700
+              },
+              "end_to_end_latency_ns": {
+                "p50": 7200,
+                "p95": 12900,
+                "p99": 24400
+              },
+              "trace_digest": "295e72d34a73234a",
+              "state_digest": "bf3e0ec22083157d",
+              "resources": {
+                "process_cpu_seconds": 0.1875,
+                "peak_rss_bytes": 19644416,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.2164378,
+              "commands_per_second": 92405.3007377,
+              "accepted_orders_per_second": 92405.3007377,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 2000,
+                "p95": 4800,
+                "p99": 16400
+              },
+              "end_to_end_latency_ns": {
+                "p50": 7300,
+                "p95": 16300,
+                "p99": 55300
+              },
+              "trace_digest": "295e72d34a73234a",
+              "state_digest": "bf3e0ec22083157d",
+              "resources": {
+                "process_cpu_seconds": 0.171875,
+                "peak_rss_bytes": 19595264,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 105101.80771223333,
+              "min": 92405.3007377,
+              "max": 114090.456619,
+              "population_stdev": 9233.00799620928
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 105101.80771223333,
+              "min": 92405.3007377,
+              "max": 114090.456619,
+              "population_stdev": 9233.00799620928
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 1900.0,
+              "min": 1800.0,
+              "max": 2000.0,
+              "population_stdev": 81.6496580927726
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 4166.666666666667,
+              "min": 3700.0,
+              "max": 4800.0,
+              "population_stdev": 464.27960923947063
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 10900.0,
+              "min": 7700.0,
+              "max": 16400.0,
+              "population_stdev": 3906.404996924922
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.19184816666666668,
+              "min": 0.1752995,
+              "max": 0.2164378,
+              "population_stdev": 0.017731004679625153
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 7233.333333333333,
+              "min": 7200.0,
+              "max": 7300.0,
+              "population_stdev": 47.14045207910317
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 14133.333333333334,
+              "min": 12900.0,
+              "max": 16300.0,
+              "population_stdev": 1536.9522511198004
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 36366.666666666664,
+              "min": 24400.0,
+              "max": 55300.0,
+              "population_stdev": 13542.607659613499
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 19630762.666666668,
+              "min": 19595264.0,
+              "max": 19652608.0,
+              "population_stdev": 25323.1609050336
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.171875,
+              "min": 0.15625,
+              "max": 0.1875,
+              "population_stdev": 0.01275775907699572
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        },
+        "queued": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1582753,
+              "commands_per_second": 126362.10451,
+              "accepted_orders_per_second": 126362.10451,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 2500,
+                "p95": 6100,
+                "p99": 11400
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3917100,
+                "p95": 5381500,
+                "p99": 6233700
+              },
+              "trace_digest": "295e72d34a73234a",
+              "state_digest": "bf3e0ec22083157d",
+              "resources": {
+                "process_cpu_seconds": 0.328125,
+                "peak_rss_bytes": 20307968,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 14272,
+                "output_high_water": 256,
+                "output_full_waits": 10462,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1232005,
+              "commands_per_second": 162337.003502,
+              "accepted_orders_per_second": 162337.003502,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 2000,
+                "p95": 3700,
+                "p99": 8800
+              },
+              "end_to_end_latency_ns": {
+                "p50": 2984800,
+                "p95": 3675400,
+                "p99": 5028900
+              },
+              "trace_digest": "295e72d34a73234a",
+              "state_digest": "bf3e0ec22083157d",
+              "resources": {
+                "process_cpu_seconds": 0.296875,
+                "peak_rss_bytes": 20271104,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 15425,
+                "output_high_water": 256,
+                "output_full_waits": 13024,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 20000,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1332773,
+              "commands_per_second": 150063.064003,
+              "accepted_orders_per_second": 150063.064003,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 2100,
+                "p95": 4700,
+                "p99": 9600
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3313000,
+                "p95": 4076100,
+                "p99": 4465000
+              },
+              "trace_digest": "295e72d34a73234a",
+              "state_digest": "bf3e0ec22083157d",
+              "resources": {
+                "process_cpu_seconds": 0.3125,
+                "peak_rss_bytes": 20283392,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 14894,
+                "output_high_water": 256,
+                "output_full_waits": 11925,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 146254.05733833334,
+              "min": 126362.10451,
+              "max": 162337.003502,
+              "population_stdev": 14931.616081316784
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 146254.05733833334,
+              "min": 126362.10451,
+              "max": 162337.003502,
+              "population_stdev": 14931.616081316784
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 2200.0,
+              "min": 2000.0,
+              "max": 2500.0,
+              "population_stdev": 216.02468994692867
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 4833.333333333333,
+              "min": 3700.0,
+              "max": 6100.0,
+              "population_stdev": 984.3215373488933
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 9933.333333333334,
+              "min": 8800.0,
+              "max": 11400.0,
+              "population_stdev": 1087.3004286866726
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.13825103333333333,
+              "min": 0.1232005,
+              "max": 0.1582753,
+              "population_stdev": 0.014744805101307906
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 3404966.6666666665,
+              "min": 2984800.0,
+              "max": 3917100.0,
+              "population_stdev": 386125.38838511455
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 4377666.666666667,
+              "min": 3675400.0,
+              "max": 5381500.0,
+              "population_stdev": 728423.4772590888
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 5242533.333333333,
+              "min": 4465000.0,
+              "max": 6233700.0,
+              "population_stdev": 737701.0791792447
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 14863.666666666666,
+              "min": 14272.0,
+              "max": 15425.0,
+              "population_stdev": 471.19870778921097
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 11803.666666666666,
+              "min": 10462.0,
+              "max": 13024.0,
+              "population_stdev": 1049.4450385269772
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 20287488.0,
+              "min": 20271104.0,
+              "max": 20307968.0,
+              "population_stdev": 15325.828656226064
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.3125,
+              "min": 0.296875,
+              "max": 0.328125,
+              "population_stdev": 0.01275775907699572
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        }
+      },
+      "verified_run_digests": {
+        "state_digest": "bf3e0ec22083157d",
+        "trace_digest": "295e72d34a73234a"
+      },
+      "queued_to_direct_throughput_ratio": 1.391546544458817
+    },
+    "burst": {
+      "manifest": {
+        "generator_version": 1,
+        "profile": "burst",
+        "seed": 42,
+        "command_count": 20000,
+        "queue_capacity": 256,
+        "synthetic": true,
+        "arrival_model": "unpaced file; burst profile changes command ordering only",
+        "python_version": "3.13.0",
+        "config_sha256": "9065acae1f5f69e821503a3ef837ba6929c0053330d265928d5dd1ad77452d30",
+        "commands_sha256": "c3b5a64d4b87c77003a772657df52c05f52d7aa5a5d365cf125af8dbb759a2e3"
+      },
+      "replay_verified": true,
+      "modes": {
+        "direct": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 10016,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1299539,
+              "commands_per_second": 153900.729413,
+              "accepted_orders_per_second": 77073.4852898,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 900,
+                "p95": 1600,
+                "p99": 2800
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6100,
+                "p95": 8500,
+                "p99": 12400
+              },
+              "trace_digest": "af7cfd31c73dfcb3",
+              "state_digest": "0a5b9149e160fa77",
+              "resources": {
+                "process_cpu_seconds": 0.125,
+                "peak_rss_bytes": 9670656,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 10016,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1526152,
+              "commands_per_second": 131048.545623,
+              "accepted_orders_per_second": 65629.1116481,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 900,
+                "p95": 2100,
+                "p99": 3600
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6200,
+                "p95": 11700,
+                "p99": 20900
+              },
+              "trace_digest": "af7cfd31c73dfcb3",
+              "state_digest": "0a5b9149e160fa77",
+              "resources": {
+                "process_cpu_seconds": 0.140625,
+                "peak_rss_bytes": 9609216,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 10016,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1571534,
+              "commands_per_second": 127264.189003,
+              "accepted_orders_per_second": 63733.9058525,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 900,
+                "p95": 2200,
+                "p99": 4200
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6300,
+                "p95": 11800,
+                "p99": 22100
+              },
+              "trace_digest": "af7cfd31c73dfcb3",
+              "state_digest": "0a5b9149e160fa77",
+              "resources": {
+                "process_cpu_seconds": 0.140625,
+                "peak_rss_bytes": 9625600,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 10016.0,
+              "min": 10016.0,
+              "max": 10016.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 68812.1675968,
+              "min": 63733.9058525,
+              "max": 77073.4852898,
+              "population_stdev": 5892.649589130797
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 137404.488013,
+              "min": 127264.189003,
+              "max": 153900.729413,
+              "population_stdev": 11766.472821882231
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 900.0,
+              "min": 900.0,
+              "max": 900.0,
+              "population_stdev": 0.0
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 1966.6666666666667,
+              "min": 1600.0,
+              "max": 2200.0,
+              "population_stdev": 262.46692913372704
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 3533.3333333333335,
+              "min": 2800.0,
+              "max": 4200.0,
+              "population_stdev": 573.4883511361751
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.14657416666666667,
+              "min": 0.1299539,
+              "max": 0.1571534,
+              "population_stdev": 0.011897444063420602
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 6200.0,
+              "min": 6100.0,
+              "max": 6300.0,
+              "population_stdev": 81.6496580927726
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 10666.666666666666,
+              "min": 8500.0,
+              "max": 11800.0,
+              "population_stdev": 1532.6085243430198
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 18466.666666666668,
+              "min": 12400.0,
+              "max": 22100.0,
+              "population_stdev": 4317.663977456123
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 9635157.333333334,
+              "min": 9609216.0,
+              "max": 9670656.0,
+              "population_stdev": 25977.238310148026
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.13541666666666666,
+              "min": 0.125,
+              "max": 0.140625,
+              "population_stdev": 0.00736569563735987
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        },
+        "queued": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 10016,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1452992,
+              "commands_per_second": 137647.007003,
+              "accepted_orders_per_second": 68933.6211073,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1100,
+                "p95": 3200,
+                "p99": 6100
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3434800,
+                "p95": 5194000,
+                "p99": 5575700
+              },
+              "trace_digest": "af7cfd31c73dfcb3",
+              "state_digest": "0a5b9149e160fa77",
+              "resources": {
+                "process_cpu_seconds": 0.265625,
+                "peak_rss_bytes": 10088448,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 12354,
+                "output_high_water": 256,
+                "output_full_waits": 12718,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 10016,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.1246598,
+              "commands_per_second": 160436.644371,
+              "accepted_orders_per_second": 80346.6715012,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1000,
+                "p95": 2900,
+                "p99": 5700
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3112200,
+                "p95": 3419200,
+                "p99": 3740500
+              },
+              "trace_digest": "af7cfd31c73dfcb3",
+              "state_digest": "0a5b9149e160fa77",
+              "resources": {
+                "process_cpu_seconds": 0.234375,
+                "peak_rss_bytes": 10113024,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 11936,
+                "output_high_water": 256,
+                "output_full_waits": 11685,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 10016,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 0,
+              "elapsed_seconds": 0.150691,
+              "commands_per_second": 132721.927653,
+              "accepted_orders_per_second": 66467.1413688,
+              "executions_per_second": 0,
+              "core_latency_ns": {
+                "p50": 1100,
+                "p95": 3200,
+                "p99": 6400
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3573300,
+                "p95": 5583100,
+                "p99": 6632800
+              },
+              "trace_digest": "af7cfd31c73dfcb3",
+              "state_digest": "0a5b9149e160fa77",
+              "resources": {
+                "process_cpu_seconds": 0.34375,
+                "peak_rss_bytes": 10137600,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 12368,
+                "output_high_water": 256,
+                "output_full_waits": 12858,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 10016.0,
+              "min": 10016.0,
+              "max": 10016.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 71915.81132576667,
+              "min": 66467.1413688,
+              "max": 80346.6715012,
+              "population_stdev": 6045.9591490729645
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 143601.85967566667,
+              "min": 132721.927653,
+              "max": 160436.644371,
+              "population_stdev": 12072.602134713165
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 1066.6666666666667,
+              "min": 1000.0,
+              "max": 1100.0,
+              "population_stdev": 47.14045207910317
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 3100.0,
+              "min": 2900.0,
+              "max": 3200.0,
+              "population_stdev": 141.4213562373095
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 6066.666666666667,
+              "min": 5700.0,
+              "max": 6400.0,
+              "population_stdev": 286.74417556808754
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.14021666666666666,
+              "min": 0.1246598,
+              "max": 0.150691,
+              "population_stdev": 0.011218435784408128
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 3373433.3333333335,
+              "min": 3112200.0,
+              "max": 3573300.0,
+              "population_stdev": 193179.88738191378
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 4732100.0,
+              "min": 3419200.0,
+              "max": 5583100.0,
+              "population_stdev": 941852.6105500796
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 5316333.333333333,
+              "min": 3740500.0,
+              "max": 6632800.0,
+              "population_stdev": 1194934.6211776144
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 12219.333333333334,
+              "min": 11936.0,
+              "max": 12368.0,
+              "population_stdev": 200.42843000820906
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 12420.333333333334,
+              "min": 11685.0,
+              "max": 12858.0,
+              "population_stdev": 523.0910267078018
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 10113024.0,
+              "min": 10088448.0,
+              "max": 10137600.0,
+              "population_stdev": 20066.219972879793
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.28125,
+              "min": 0.234375,
+              "max": 0.34375,
+              "population_stdev": 0.0459987545121242
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        }
+      },
+      "verified_run_digests": {
+        "state_digest": "0a5b9149e160fa77",
+        "trace_digest": "af7cfd31c73dfcb3"
+      },
+      "queued_to_direct_throughput_ratio": 1.0451031240120798
+    },
+    "mixed": {
+      "manifest": {
+        "generator_version": 1,
+        "profile": "mixed",
+        "seed": 42,
+        "command_count": 20000,
+        "queue_capacity": 256,
+        "synthetic": true,
+        "arrival_model": "unpaced file; burst profile changes command ordering only",
+        "python_version": "3.13.0",
+        "config_sha256": "9065acae1f5f69e821503a3ef837ba6929c0053330d265928d5dd1ad77452d30",
+        "commands_sha256": "b93216100051f251e1d1befa92f76205a18574fb349a98516f8c2fe36f276c7c"
+      },
+      "replay_verified": true,
+      "modes": {
+        "direct": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 10922,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 3649,
+              "elapsed_seconds": 0.1821619,
+              "commands_per_second": 109792.442876,
+              "accepted_orders_per_second": 59957.6530548,
+              "executions_per_second": 20031.6312028,
+              "core_latency_ns": {
+                "p50": 1000,
+                "p95": 2600,
+                "p99": 4500
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6500,
+                "p95": 15000,
+                "p99": 32700
+              },
+              "trace_digest": "54b22fcb29f27611",
+              "state_digest": "2d68534daa3c66e7",
+              "resources": {
+                "process_cpu_seconds": 0.171875,
+                "peak_rss_bytes": 10125312,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 10922,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 3649,
+              "elapsed_seconds": 0.1708587,
+              "commands_per_second": 117055.789374,
+              "accepted_orders_per_second": 63924.1665774,
+              "executions_per_second": 21356.8287714,
+              "core_latency_ns": {
+                "p50": 1000,
+                "p95": 2300,
+                "p99": 4600
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6400,
+                "p95": 13700,
+                "p99": 25000
+              },
+              "trace_digest": "54b22fcb29f27611",
+              "state_digest": "2d68534daa3c66e7",
+              "resources": {
+                "process_cpu_seconds": 0.140625,
+                "peak_rss_bytes": 10076160,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "direct",
+              "commands": 20000,
+              "accepted_orders": 10922,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 3649,
+              "elapsed_seconds": 0.1767344,
+              "commands_per_second": 113164.160458,
+              "accepted_orders_per_second": 61798.948026,
+              "executions_per_second": 20646.8010755,
+              "core_latency_ns": {
+                "p50": 1000,
+                "p95": 2600,
+                "p99": 4800
+              },
+              "end_to_end_latency_ns": {
+                "p50": 6700,
+                "p95": 14800,
+                "p99": 25800
+              },
+              "trace_digest": "54b22fcb29f27611",
+              "state_digest": "2d68534daa3c66e7",
+              "resources": {
+                "process_cpu_seconds": 0.171875,
+                "peak_rss_bytes": 10063872,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 0,
+                "input_full_waits": 0,
+                "output_high_water": 0,
+                "output_full_waits": 0,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 10922.0,
+              "min": 10922.0,
+              "max": 10922.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 61893.5892194,
+              "min": 59957.6530548,
+              "max": 63924.1665774,
+              "population_stdev": 1620.70459941724
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 113337.464236,
+              "min": 109792.442876,
+              "max": 117055.789374,
+              "population_stdev": 2967.779892681174
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 1000.0,
+              "min": 1000.0,
+              "max": 1000.0,
+              "population_stdev": 0.0
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 2500.0,
+              "min": 2300.0,
+              "max": 2600.0,
+              "population_stdev": 141.4213562373095
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 4633.333333333333,
+              "min": 4500.0,
+              "max": 4800.0,
+              "population_stdev": 124.72191289246472
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.176585,
+              "min": 0.1708587,
+              "max": 0.1821619,
+              "population_stdev": 0.004615721166477305
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 6533.333333333333,
+              "min": 6400.0,
+              "max": 6700.0,
+              "population_stdev": 124.72191289246472
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 14500.0,
+              "min": 13700.0,
+              "max": 15000.0,
+              "population_stdev": 571.5476066494082
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 27833.333333333332,
+              "min": 25000.0,
+              "max": 32700.0,
+              "population_stdev": 3456.716489515576
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 3649.0,
+              "min": 3649.0,
+              "max": 3649.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 20678.4203499,
+              "min": 20031.6312028,
+              "max": 21356.8287714,
+              "population_stdev": 541.4714414389892
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 10088448.0,
+              "min": 10063872.0,
+              "max": 10125312.0,
+              "population_stdev": 26545.113900678596
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.16145833333333334,
+              "min": 0.140625,
+              "max": 0.171875,
+              "population_stdev": 0.01473139127471974
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        },
+        "queued": {
+          "reports": [
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 10922,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 3649,
+              "elapsed_seconds": 0.1552284,
+              "commands_per_second": 128842.40255,
+              "accepted_orders_per_second": 70360.8360326,
+              "executions_per_second": 23507.2963453,
+              "core_latency_ns": {
+                "p50": 1400,
+                "p95": 3900,
+                "p99": 7000
+              },
+              "end_to_end_latency_ns": {
+                "p50": 3714900,
+                "p95": 5358900,
+                "p99": 5960400
+              },
+              "trace_digest": "54b22fcb29f27611",
+              "state_digest": "2d68534daa3c66e7",
+              "resources": {
+                "process_cpu_seconds": 0.296875,
+                "peak_rss_bytes": 10158080,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 12737,
+                "output_high_water": 256,
+                "output_full_waits": 11673,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 10922,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 3649,
+              "elapsed_seconds": 0.183384,
+              "commands_per_second": 109060.76866,
+              "accepted_orders_per_second": 59558.0857654,
+              "executions_per_second": 19898.1372421,
+              "core_latency_ns": {
+                "p50": 1600,
+                "p95": 4700,
+                "p99": 7900
+              },
+              "end_to_end_latency_ns": {
+                "p50": 4607900,
+                "p95": 5847200,
+                "p99": 6078500
+              },
+              "trace_digest": "54b22fcb29f27611",
+              "state_digest": "2d68534daa3c66e7",
+              "resources": {
+                "process_cpu_seconds": 0.4375,
+                "peak_rss_bytes": 10235904,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 12932,
+                "output_high_water": 256,
+                "output_full_waits": 11441,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            },
+            {
+              "schema_version": 1,
+              "mode": "queued",
+              "commands": 20000,
+              "accepted_orders": 10922,
+              "accepted_commands": 20000,
+              "rejected_commands": 0,
+              "executions": 3649,
+              "elapsed_seconds": 0.1768854,
+              "commands_per_second": 113067.556734,
+              "accepted_orders_per_second": 61746.1927327,
+              "executions_per_second": 20629.1757262,
+              "core_latency_ns": {
+                "p50": 1500,
+                "p95": 4600,
+                "p99": 7400
+              },
+              "end_to_end_latency_ns": {
+                "p50": 4478900,
+                "p95": 5856400,
+                "p99": 6244100
+              },
+              "trace_digest": "54b22fcb29f27611",
+              "state_digest": "2d68534daa3c66e7",
+              "resources": {
+                "process_cpu_seconds": 0.296875,
+                "peak_rss_bytes": 10190848,
+                "allocations_per_command": null
+              },
+              "queue": {
+                "capacity": 256,
+                "input_high_water": 256,
+                "input_full_waits": 13150,
+                "output_high_water": 256,
+                "output_full_waits": 11760,
+                "dropped_commands": 0
+              },
+              "environment": {
+                "compiler": "MSVC 195136260",
+                "hardware_threads": 16,
+                "platform": "Windows",
+                "assertions": false,
+                "warmup_commands": 0
+              },
+              "latency_boundaries": {
+                "core": "process call",
+                "end_to_end": "before queue admission through canonical serialization and trace digest; in-process"
+              }
+            }
+          ],
+          "summary": {
+            "accepted_commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders": {
+              "samples": 3,
+              "mean": 10922.0,
+              "min": 10922.0,
+              "max": 10922.0,
+              "population_stdev": 0.0
+            },
+            "accepted_orders_per_second": {
+              "samples": 3,
+              "mean": 63888.37151023333,
+              "min": 59558.0857654,
+              "max": 70360.8360326,
+              "population_stdev": 4663.085585750995
+            },
+            "commands": {
+              "samples": 3,
+              "mean": 20000.0,
+              "min": 20000.0,
+              "max": 20000.0,
+              "population_stdev": 0.0
+            },
+            "commands_per_second": {
+              "samples": 3,
+              "mean": 116990.242648,
+              "min": 109060.76866,
+              "max": 128842.40255,
+              "population_stdev": 8538.885892371816
+            },
+            "core_latency_ns.p50": {
+              "samples": 3,
+              "mean": 1500.0,
+              "min": 1400.0,
+              "max": 1600.0,
+              "population_stdev": 81.6496580927726
+            },
+            "core_latency_ns.p95": {
+              "samples": 3,
+              "mean": 4400.0,
+              "min": 3900.0,
+              "max": 4700.0,
+              "population_stdev": 355.9026084010437
+            },
+            "core_latency_ns.p99": {
+              "samples": 3,
+              "mean": 7433.333333333333,
+              "min": 7000.0,
+              "max": 7900.0,
+              "population_stdev": 368.17870057290867
+            },
+            "elapsed_seconds": {
+              "samples": 3,
+              "mean": 0.1718326,
+              "min": 0.1552284,
+              "max": 0.183384,
+              "population_stdev": 0.012036958190506439
+            },
+            "end_to_end_latency_ns.p50": {
+              "samples": 3,
+              "mean": 4267233.333333333,
+              "min": 3714900.0,
+              "max": 4607900.0,
+              "population_stdev": 394093.3335588862
+            },
+            "end_to_end_latency_ns.p95": {
+              "samples": 3,
+              "mean": 5687500.0,
+              "min": 5358900.0,
+              "max": 5856400.0,
+              "population_stdev": 232385.6421267602
+            },
+            "end_to_end_latency_ns.p99": {
+              "samples": 3,
+              "mean": 6094333.333333333,
+              "min": 5960400.0,
+              "max": 6244100.0,
+              "population_stdev": 116359.91100412929
+            },
+            "environment.hardware_threads": {
+              "samples": 3,
+              "mean": 16.0,
+              "min": 16.0,
+              "max": 16.0,
+              "population_stdev": 0.0
+            },
+            "environment.warmup_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "executions": {
+              "samples": 3,
+              "mean": 3649.0,
+              "min": 3649.0,
+              "max": 3649.0,
+              "population_stdev": 0.0
+            },
+            "executions_per_second": {
+              "samples": 3,
+              "mean": 21344.8697712,
+              "min": 19898.1372421,
+              "max": 23507.2963453,
+              "population_stdev": 1557.9197310493255
+            },
+            "queue.capacity": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.dropped_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "queue.input_full_waits": {
+              "samples": 3,
+              "mean": 12939.666666666666,
+              "min": 12737.0,
+              "max": 13150.0,
+              "population_stdev": 168.6936737271305
+            },
+            "queue.input_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "queue.output_full_waits": {
+              "samples": 3,
+              "mean": 11624.666666666666,
+              "min": 11441.0,
+              "max": 11760.0,
+              "population_stdev": 134.6410866794465
+            },
+            "queue.output_high_water": {
+              "samples": 3,
+              "mean": 256.0,
+              "min": 256.0,
+              "max": 256.0,
+              "population_stdev": 0.0
+            },
+            "rejected_commands": {
+              "samples": 3,
+              "mean": 0.0,
+              "min": 0.0,
+              "max": 0.0,
+              "population_stdev": 0.0
+            },
+            "resources.peak_rss_bytes": {
+              "samples": 3,
+              "mean": 10194944.0,
+              "min": 10158080.0,
+              "max": 10235904.0,
+              "population_stdev": 31903.256427309527
+            },
+            "resources.process_cpu_seconds": {
+              "samples": 3,
+              "mean": 0.34375,
+              "min": 0.296875,
+              "max": 0.4375,
+              "population_stdev": 0.06629126073623882
+            },
+            "schema_version": {
+              "samples": 3,
+              "mean": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "population_stdev": 0.0
+            }
+          }
+        }
+      },
+      "verified_run_digests": {
+        "state_digest": "2d68534daa3c66e7",
+        "trace_digest": "54b22fcb29f27611"
+      },
+      "queued_to_direct_throughput_ratio": 1.032229223025441
+    }
+  }
+}

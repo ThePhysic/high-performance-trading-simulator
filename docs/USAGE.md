@@ -16,7 +16,7 @@ cmake --build build/release --parallel
 ctest --test-dir build/release --output-on-failure
 ```
 
-CMake can build the C++ components without Python, but then omits `cli_contract`. A complete test run includes `engine_contract`, `queue_contract`, and `cli_contract`; use `ctest --test-dir build/debug -N` to inspect the configured tests. The workload/benchmark tooling also requires Python 3.10+ and uses only its standard library.
+The default build requires Python 3.10+ for the complete test suite. A C++-only application build is available with `-DBUILD_TESTING=OFF`; it omits all test targets and is not full validation. A complete test run includes `engine_contract`, `queue_contract`, and `cli_contract`; use `ctest --test-dir build/debug -N` to inspect the configured tests. The workload/benchmark tooling also requires Python 3.10+ and uses only its standard library.
 
 For multi-configuration generators, select the configuration with `cmake --build BUILD_DIR --config Debug` and `ctest --test-dir BUILD_DIR -C Debug`; the executable may be in a `Debug` subdirectory. Native MSVC is supported, but native Windows results do not establish Linux behavior or performance.
 
