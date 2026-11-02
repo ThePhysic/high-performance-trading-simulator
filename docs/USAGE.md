@@ -33,7 +33,13 @@ hpts replay --journal FILE --expect FILE --expect-state FILE
 hpts bench --config FILE --input FILE [--mode direct|queued] [--output FILE]
 ```
 
-Options are explicit name/value pairs. Unknown, repeated, or missing options are errors. File arguments must name distinct files, including resolved aliases where the platform can detect them. Output files are created or truncated; create parent directories before running. The program does not publish anything, open network ports, or contact a brokerage.
+Options are explicit name/value pairs. Unknown, repeated, missing, or empty options are errors. All required options are checked before files are opened. Create output parent directories before running.
+
+File arguments must name distinct underlying files. The application opens every destination without truncation and compares the identities of the retained input/configuration and output handles. This detects hardlinks, symlinks, and case aliases according to the actual filesystem, including Windows-mounted directories accessed through WSL; distinct-case files on case-sensitive filesystems remain valid. Reads and writes use those same handles, not reopened paths.
+
+Option, destination-open, and identity-check failures preserve existing file contents. Newly created empty destinations may remain after failed setup. Once all destinations pass admission, regular outputs are truncated; later processing or I/O errors may leave partial outputs. This is not an atomic transaction across files. Regular files are supported; POSIX character devices are also accepted for checked I/O, while directories, FIFOs, sockets, and other unsupported file types fail explicitly. Interactive mode continues to accept standard input, and normal shell stdout redirection is supported.
+
+The program does not publish anything, open network ports, or contact a brokerage.
 
 ## Configuration
 
@@ -134,7 +140,7 @@ kill ...
 END COMMAND_COUNT TRACE_DIGEST STATE_DIGEST
 ```
 
-The header contains the initial configuration; the commands are normalized copies in actual processing order, including commands that produce business rejections. A completion footer is written only after all input is processed, invariants pass, and event/state streams are flushed. A successful stream flush is not a durable storage commit.
+The header contains the initial configuration; the commands are normalized copies in actual processing order, including commands that produce business rejections. A completion footer is written only after all input is processed, invariants pass, and event/state outputs are successfully flushed and closed. Journal flush/close errors are also reported. Successful flush/close is not a durable storage commit.
 
 Replay requires **all three** of `--journal`, `--expect`, and `--expect-state`. It reconstructs the initial configuration, processes commands in the recorded order, compares the exact canonical event and state bytes, verifies both completion fingerprints/count, rejects extra expected bytes or journal commands after completion, and prints a success summary only when all checks agree. FNV-1a fingerprints are reproducibility checks, not cryptographic authentication.
 

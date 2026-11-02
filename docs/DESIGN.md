@@ -94,6 +94,14 @@ The sequence and command ledger are updated before domain preflight. An allocati
 
 The system does not use `fsync`, checksummed persistent commit records, distributed consensus, or crash-consistent snapshots. Logical replay of a complete valid journal is supported; recovery from interrupted writes is not claimed. A truncated or failed run must not be presented as an equivalent complete replay.
 
+### File admission and output ownership
+
+The CLI validates required/nonempty options before opening files. `InputFile` retains the actual handle that reads each input or configuration. `OutputFile` first opens/creates a destination without truncation. After every destination is open, the application compares all retained identities: device/inode on POSIX, volume/128-bit file ID on Windows. It then truncates admitted regular outputs and writes through those same handles. Filesystem case behavior is not inferred from the operating-system name, and verified paths are never reopened for writing.
+
+The stream wrappers are nonmovable, own their handles through RAII, and buffer file I/O separately from the matching core. Partial writes and POSIX interrupted I/O are handled. Successful output completion requires explicit checked flush and close; event/state outputs finish before the journal completion footer is emitted. Destructors close without throwing during error unwinding.
+
+Admission/open/identity errors preserve existing destination bytes; newly created empty files may remain. Failures after truncation starts may leave partial artifacts. Held handles avoid a path-reopen race, but do not make files immutable against other processes writing them or provide a multi-file transaction. Unsupported stream/file types are rejected explicitly; POSIX character-device failures such as `/dev/full` remain checked output errors. None of these I/O changes alter canonical data or book/account behavior.
+
 ## Canonical schema, version 1
 
 Canonical output explicitly uses the classic C++ locale and decimal integers, except for hexadecimal fingerprints. Records terminate with `\n`. Empty string fields are `~`; safe ASCII identifier characters are literal, and other bytes are percent-encoded with uppercase hexadecimal digits. Empty and encoded literal strings are distinguishable. Wall-clock times, pointers, thread IDs, and hash-container iteration are absent.

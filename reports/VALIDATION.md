@@ -2,6 +2,8 @@
 
 This record links actual execution evidence to the project requirements. The retained implementation tests and performance measurements use source commit `98ea79593f8abdc98cf5409ba94627a0749c2996`; the initial published revision `ab5cf7858bcab85266da2908d7c315ef3ac02ff9` added documentation and reports without changing those implementation sources. Subsequent polish preserves the C++/CMake sources, tests, Python workload tools, canonical schema, and original measurement artifacts. The shell validation helper now directs generated output to ignored `build/linux-reports/`; historical logs keep their original paths and source identity. New hosted CI results identify their own tested revisions and are separate from the measurements below.
 
+The later output-admission fixes replace path-based file reopening with retained-handle identity checks and validate all required options before output setup. They add preservation, filesystem-case, link-alias, large replay, and FIFO regressions without changing matching, risk, canonical data, or the historical measurements below. The [current CI](https://github.com/ThePhysic/high-performance-trading-simulator/actions/workflows/ci.yml) tests those newer sources; historical case/skip counts in this record still refer to their original tested commit. See [file admission](../docs/DESIGN.md#file-admission-and-output-ownership) for the exact setup/error guarantees.
+
 ## Linux correctness and sanitizers
 
 The actual helper ran successfully on a clean native Linux clone:

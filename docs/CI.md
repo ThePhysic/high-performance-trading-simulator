@@ -14,7 +14,7 @@ The workflow runs on pushes, pull requests, and manual dispatch. Every job build
 | TSan | Ubuntu 26.04 | GCC 15 / Debug, `thread` |
 | Windows Release | Windows 2025 | MSVC / Release |
 
-Sanitizers use separate builds/jobs. Linux runs skip the Windows-only path-case check; Windows skips Linux `/dev/full` checks. The remaining contracts, including reference-model sequences, bounded queues, malformed inputs, broken pipes, replay, and generated workloads, still run. No failing job is converted into success with `continue-on-error`.
+Sanitizers use separate builds/jobs. Filename-case tests probe the actual scratch filesystem: a case-insensitive mount exercises alias rejection, while a case-sensitive filesystem exercises valid distinct-case names. Unsupported character-device, FIFO, hardlink, or symlink scenarios report explicit platform/filesystem/privilege skips. The remaining contracts, including reference-model sequences, bounded queues, malformed inputs, broken pipes, replay, and generated workloads, still run. No failing job is converted into success with `continue-on-error`.
 
 Workflow permissions are limited to `contents: read`. Official checkout/Python actions are pinned to exact commits, checkout credentials are not persisted, and no broker credentials, repository secrets, cloud deployment, or `perf` permissions are needed. The small workload runs inside the CLI contract are correctness checks, with no timing threshold. Hosted CI is not a repeat of the [recorded optimization experiment](../reports/linux/SERIALIZATION_EXPERIMENT.md).
 

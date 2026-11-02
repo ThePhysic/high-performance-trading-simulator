@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import errno
 import json
 import os
 from pathlib import Path
@@ -172,22 +173,200 @@ class CliContract(unittest.TestCase):
                 self.assertEqual(commands.read_bytes(), command_text)
                 self.assertEqual(config.read_bytes(), config_text)
 
-    @unittest.skipUnless(os.name == "nt", "case-insensitive path contract is Windows-specific")
-    def test_windows_output_case_aliases(self) -> None:
+    def test_missing_run_options_preserve_existing_files(self) -> None:
+        for missing in ("--config", "--input", "--output", "--state"):
+            with self.subTest(missing=missing):
+                directory = self.directory("missing-" + missing.removeprefix("--"))
+                paths = {"--config": directory / "accounts.cfg", "--input": directory / "commands.txt",
+                         "--output": directory / "events.txt", "--state": directory / "state.txt",
+                         "--journal": directory / "journal.txt"}
+                contents = {paths["--config"]: self.config.read_bytes(), paths["--input"]: self.demo.read_bytes(),
+                            paths["--output"]: b"existing events\n", paths["--state"]: b"existing state\n",
+                            paths["--journal"]: b"existing journal\n"}
+                for path, content in contents.items():
+                    path.write_bytes(content)
+                arguments = ["run"]
+                for option, path in paths.items():
+                    if option != missing:
+                        arguments.extend((option, path))
+                result = self.invoke(arguments, success=False)
+                self.assertEqual(result.returncode, 2, result.stderr)
+                for path, content in contents.items():
+                    self.assertEqual(path.read_bytes(), content, str(path))
+
+    def test_unusable_run_destinations_preserve_existing_files(self) -> None:
+        for option in ("--output", "--state", "--journal"):
+            for failure in ("empty", "directory", "missing-parent", "file-parent"):
+                with self.subTest(option=option, failure=failure):
+                    directory = self.directory(option.removeprefix("--") + "-" + failure)
+                    paths = {"--config": directory / "accounts.cfg", "--input": directory / "commands.txt",
+                             "--output": directory / "events.txt", "--state": directory / "state.txt",
+                             "--journal": directory / "journal.txt"}
+                    contents = {paths["--config"]: self.config.read_bytes(), paths["--input"]: self.demo.read_bytes(),
+                                paths["--output"]: b"existing events\n", paths["--state"]: b"existing state\n",
+                                paths["--journal"]: b"existing journal\n"}
+                    blocker = directory / "regular-file"
+                    contents[blocker] = b"existing parent blocker\n"
+                    for path, content in contents.items():
+                        path.write_bytes(content)
+                    invalid = {"empty": "", "directory": directory,
+                               "missing-parent": directory / "missing" / "result.txt",
+                               "file-parent": blocker / "result.txt"}[failure]
+                    paths[option] = invalid
+                    arguments = ["run"]
+                    for key, path in paths.items():
+                        arguments.extend((key, path))
+                    result = self.invoke(arguments, success=False)
+                    self.assertEqual(result.returncode, 2, result.stderr)
+                    for path, content in contents.items():
+                        self.assertEqual(path.read_bytes(), content, str(path))
+
+    def filesystem_ignores_case(self, directory: Path) -> bool:
+        # Probe the actual output filesystem: Linux can use an insensitive
+        # mount (for example WSL /mnt/c), and Windows directories can be sensitive.
+        probe = directory / "case-probe.txt"
+        alternate = directory / "CASE-PROBE.TXT"
+        probe.write_bytes(b"filesystem case probe\n")
+        if not alternate.exists():
+            return False
+        self.assertTrue(probe.samefile(alternate))
+        self.assertEqual(alternate.read_bytes(), b"filesystem case probe\n")
+        return True
+
+    def test_case_insensitive_output_aliases(self) -> None:
         directory = self.directory("case-aliases")
+        if not self.filesystem_ignores_case(directory):
+            self.skipTest("scratch filesystem distinguishes filename case")
         commands = directory / "Commands.txt"
-        original = self.demo.read_bytes()
-        commands.write_bytes(original)
-        self.invoke(["run", "--config", self.config, "--input", commands,
-                     "--output", directory / "COMMANDS.TXT", "--state", directory / "state"], success=False)
-        self.assertEqual(commands.read_bytes(), original)
-        first, second = directory / "fresh-report.txt", directory / "FRESH-REPORT.TXT"
-        self.assertFalse(first.exists())
-        self.assertFalse(second.exists())
-        self.invoke(["run", "--config", self.config, "--input", commands,
-                     "--output", first, "--state", second], success=False)
-        self.assertFalse(first.exists())
-        self.assertFalse(second.exists())
+        config = directory / "Accounts.cfg"
+        original_commands, original_config = self.demo.read_bytes(), self.config.read_bytes()
+        commands.write_bytes(original_commands)
+        config.write_bytes(original_config)
+        for source in (commands, config):
+            with self.subTest(existing_source=source.name):
+                result = self.invoke(["run", "--config", config, "--input", commands,
+                                      "--output", source.with_name(source.name.upper()),
+                                      "--state", directory / "state"], success=False)
+                self.assertEqual(result.returncode, 2, result.stderr)
+                self.assertEqual(commands.read_bytes(), original_commands)
+                self.assertEqual(config.read_bytes(), original_config)
+        for first_option, second_option in (("--output", "--state"), ("--output", "--journal"),
+                                             ("--state", "--journal")):
+            with self.subTest(first=first_option, second=second_option):
+                pair = self.directory("case-aliases/" + first_option[2:] + "-" + second_option[2:])
+                paths = {"--output": pair / "events.txt", "--state": pair / "state.txt",
+                         "--journal": pair / "journal.txt"}
+                paths[first_option], paths[second_option] = pair / "fresh-report.txt", pair / "FRESH-REPORT.TXT"
+                self.assertTrue(all(not path.exists() for path in paths.values()))
+                arguments = ["run", "--config", config, "--input", commands]
+                for option, path in paths.items():
+                    arguments.extend((option, path))
+                result = self.invoke(arguments, success=False)
+                self.assertEqual(result.returncode, 2, result.stderr)
+                self.assertEqual(commands.read_bytes(), original_commands)
+                self.assertEqual(config.read_bytes(), original_config)
+                # Opening the complete output set may create empty placeholders
+                # before discovering that two fresh spellings name one file.
+                for path in paths.values():
+                    if path.exists():
+                        self.assertEqual(path.read_bytes(), b"", str(path))
+
+    def test_case_sensitive_output_names_are_distinct(self) -> None:
+        directory = self.directory("distinct-case")
+        if self.filesystem_ignores_case(directory):
+            self.skipTest("scratch filesystem ignores filename case")
+        events, state, journal = directory / "report.txt", directory / "REPORT.TXT", directory / "Report.txt"
+        for path in (events, state, journal):
+            path.write_bytes(b"previous " + path.name.encode("ascii") + b"\n")
+        self.assertFalse(events.samefile(state))
+        self.assertFalse(events.samefile(journal))
+        self.assertFalse(state.samefile(journal))
+        self.invoke(["run", "--config", self.config, "--input", self.demo,
+                     "--output", events, "--state", state, "--journal", journal])
+        self.assertTrue(events.read_bytes().startswith(b"HPTS-EVENTS 1\n"))
+        self.assertTrue(state.stat().st_size)
+        self.assertTrue(journal.read_bytes().startswith(b"HPTS-JOURNAL 1\n"))
+        self.invoke(["replay", "--journal", journal, "--expect", events, "--expect-state", state])
+
+    def assert_link_aliases_rejected(self, kind: str) -> None:
+        directory = self.directory(kind + "-aliases")
+
+        def make_alias(target: Path, alias: Path) -> None:
+            if kind == "hardlink":
+                os.link(target, alias)
+            else:
+                alias.symlink_to(target)
+
+        probe, probe_alias = directory / "probe", directory / "probe-alias"
+        probe.write_bytes(b"link support probe\n")
+        try:
+            make_alias(probe, probe_alias)
+        except NotImplementedError as error:
+            self.skipTest(f"{kind} creation is unsupported: {error}")
+        except OSError as error:
+            unsupported = {errno.EPERM, errno.EACCES, errno.ENOSYS, errno.ENOTSUP, errno.EOPNOTSUPP}
+            if error.errno in unsupported or getattr(error, "winerror", None) in (1, 50, 1314):
+                self.skipTest(f"{kind} creation is unavailable on scratch filesystem: {error}")
+            raise
+        self.assertTrue(probe.samefile(probe_alias))
+        pairs = [(source, output) for source in ("--config", "--input")
+                 for output in ("--output", "--state", "--journal")]
+        pairs += [("--output", "--state"), ("--output", "--journal"), ("--state", "--journal")]
+        for source, destination in pairs:
+            with self.subTest(kind=kind, source=source, destination=destination):
+                case = self.directory(kind + "-aliases/" + source[2:] + "-" + destination[2:])
+                paths = {"--config": case / "accounts.cfg", "--input": case / "commands.txt",
+                         "--output": case / "events.txt", "--state": case / "state.txt",
+                         "--journal": case / "journal.txt"}
+                contents = {paths["--config"]: self.config.read_bytes(), paths["--input"]: self.demo.read_bytes(),
+                            paths["--output"]: b"existing events\n", paths["--state"]: b"existing state\n",
+                            paths["--journal"]: b"existing journal\n"}
+                for path, content in contents.items():
+                    path.write_bytes(content)
+                alias = case / "linked-destination.txt"
+                make_alias(paths[source], alias)
+                self.assertTrue(paths[source].samefile(alias))
+                contents[alias] = contents[paths[source]]
+                paths[destination] = alias
+                arguments = ["run"]
+                for option, path in paths.items():
+                    arguments.extend((option, path))
+                result = self.invoke(arguments, success=False)
+                self.assertEqual(result.returncode, 2, result.stderr)
+                for path, content in contents.items():
+                    self.assertEqual(path.read_bytes(), content, str(path))
+
+    def test_hardlink_output_aliases(self) -> None:
+        self.assert_link_aliases_rejected("hardlink")
+
+    def test_symlink_output_aliases(self) -> None:
+        self.assert_link_aliases_rejected("symlink")
+
+    @unittest.skipUnless(os.name != "nt" and hasattr(os, "mkfifo"), "requires POSIX FIFO support")
+    def test_fifo_destination_fails_promptly_without_truncating_events(self) -> None:
+        directory = self.directory("fifo-output")
+        fifo = directory / "state.fifo"
+        try:
+            os.mkfifo(fifo)
+        except OSError as error:
+            if error.errno in (errno.EPERM, errno.EACCES, errno.ENOSYS, errno.ENOTSUP, errno.EOPNOTSUPP):
+                self.skipTest(f"FIFO creation is unavailable on scratch filesystem: {error}")
+            raise
+        events, journal = directory / "events.txt", directory / "journal.txt"
+        contents = {events: b"existing events\n", journal: b"existing journal\n"}
+        for path, content in contents.items():
+            path.write_bytes(content)
+        # No FIFO reader exists. Opening a destination must reject this special
+        # file without waiting for a peer or modifying earlier destinations.
+        try:
+            result = subprocess.run([str(BINARY), "run", "--config", str(self.config), "--input", str(self.demo),
+                                     "--output", str(events), "--state", str(fifo), "--journal", str(journal)],
+                                    text=True, capture_output=True, cwd=self.workspace, timeout=3, check=False)
+        except subprocess.TimeoutExpired:
+            self.fail("FIFO destination with no reader did not fail within 3 seconds")
+        self.assertEqual(result.returncode, 2, result.stderr)
+        for path, content in contents.items():
+            self.assertEqual(path.read_bytes(), content, str(path))
 
     @unittest.skipUnless(os.name != "nt" and Path("/dev/full").exists(), "requires Linux /dev/full")
     def test_midstream_output_failure_never_completes_journal(self) -> None:
@@ -293,6 +472,21 @@ class CliContract(unittest.TestCase):
                 self.assertEqual(manifest["command_count"], 22)
                 events, state, journal = self.run_paths(directory, config=directory / "accounts.cfg", commands=directory / "commands.txt")
                 self.invoke(["replay", "--journal", journal, "--expect", events, "--expect-state", state])
+
+    def test_large_generated_workload_run_and_exact_replay(self) -> None:
+        sys.path.insert(0, str(REPOSITORY / "tools"))
+        from generate_workload import write_workload
+        directory = self.directory("large-generated-mixed")
+        manifest = write_workload(directory, 4097, 42, "mixed", queue_capacity=2)
+        self.assertEqual(manifest["command_count"], 4097)
+        commands = directory / "commands.txt"
+        events, state, journal = self.run_paths(directory, config=directory / "accounts.cfg", commands=commands)
+        # Every input/output stream spans multiple blocks, including the large
+        # state serialization emitted as one write and replayed byte for byte.
+        for path in (commands, events, state, journal):
+            self.assertGreater(path.stat().st_size, 8192, str(path))
+        result = self.invoke(["replay", "--journal", journal, "--expect", events, "--expect-state", state])
+        self.assertIn("commands=4097 ", result.stdout)
 
     def test_benchmark_suite_collects_real_reports(self) -> None:
         directory = self.directory("suite")

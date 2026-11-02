@@ -1,4 +1,5 @@
 #include "hpts/engine.hpp"
+#include "hpts/files.hpp"
 #include "hpts/io.hpp"
 #include "hpts/queue.hpp"
 
@@ -8,11 +9,11 @@
 #include <ctime>
 #include <exception>
 #include <filesystem>
-#include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <locale>
 #include <map>
+#include <memory>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -89,41 +90,15 @@ const std::string& require(const Args& args, const std::string& key) {
     return found->second;
 }
 
-void distinct_paths(const Args& args) {
-    std::vector<std::filesystem::path> paths;
-    for (const auto& [key, value] : args) {
-        if (key == "--mode") continue;
-        const auto path = std::filesystem::weakly_canonical(std::filesystem::absolute(value));
-        for (const auto& existing : paths) {
-            bool same = path == existing;
-#ifdef _WIN32
-            same = CompareStringOrdinal(path.c_str(), -1, existing.c_str(), -1, TRUE) == CSTR_EQUAL;
-#endif
-            if (same || (std::filesystem::exists(path) && std::filesystem::exists(existing) &&
-                                    std::filesystem::equivalent(path, existing)))
-                throw std::runtime_error("file arguments must name distinct files");
-        }
-        paths.push_back(path);
-    }
+hpts::InputFile input_file(const std::string& path) {
+    return hpts::InputFile(path);
 }
 
-std::ifstream input_file(const std::string& path) {
-    std::ifstream stream(path, std::ios::binary);
-    if (!stream) throw std::runtime_error("cannot open input: " + path);
-    return stream;
-}
-
-std::ofstream output_file(const std::string& path) {
-    std::ofstream stream;
-    stream.exceptions(std::ios::badbit | std::ios::failbit);
-    stream.open(path, std::ios::binary | std::ios::trunc);
-    return stream;
-}
-
-hpts::AppConfig load_config(const std::string& path) {
-    auto stream = input_file(path);
-    return hpts::read_config(stream);
-}
+struct ConfigSource {
+    explicit ConfigSource(const std::string& path) : input(path), config(hpts::read_config(input)) {}
+    hpts::InputFile input;
+    hpts::AppConfig config;
+};
 
 std::string trace_header(const hpts::AppConfig& config) {
     return "HPTS-EVENTS 1\nCONFIG " + hpts::fingerprint(hpts::config_text(config)) + "\n";
@@ -149,16 +124,16 @@ void check_engine(const hpts::Engine& engine) {
 }
 
 int run(const Args& args) {
-    const auto config = load_config(require(args, "--config"));
+    const ConfigSource source(require(args, "--config"));
+    const auto& config = source.config;
     auto commands = input_file(require(args, "--input"));
     hpts::Engine engine(config.engine);
-    auto events = output_file(require(args, "--output"));
-    auto state = output_file(require(args, "--state"));
-    std::ofstream journal;
-    if (args.contains("--journal")) {
-        journal = output_file(args.at("--journal"));
-        journal << "HPTS-JOURNAL 1\n" << hpts::config_text(config) << "BEGIN\n";
-    }
+    hpts::OutputFile events(require(args, "--output"));
+    hpts::OutputFile state(require(args, "--state"));
+    std::unique_ptr<hpts::OutputFile> journal;
+    if (args.contains("--journal")) journal = std::make_unique<hpts::OutputFile>(args.at("--journal"));
+    hpts::prepare_outputs({&events, &state, journal.get()}, {source.input.identity(), commands.identity()});
+    if (journal) *journal << "HPTS-JOURNAL 1\n" << hpts::config_text(config) << "BEGIN\n";
     Digest digest;
     const auto header = trace_header(config);
     events << header;
@@ -175,18 +150,18 @@ int run(const Args& args) {
         catch (const std::exception& error) { throw std::runtime_error("command line " + std::to_string(line_number) + ": " + error.what()); }
         const auto outcome = engine.process(command);
         const auto canonical = outcome.canonical();
-        if (journal.is_open()) journal << hpts::command_text(command);
+        if (journal) *journal << hpts::command_text(command);
         events << canonical;
         digest.update(canonical);
     }
     check_engine(engine);
     const auto snapshot = engine.snapshot();
     state << snapshot.canonical();
-    events.flush();
-    state.flush();
-    if (journal.is_open()) {
-        journal << "END " << count << ' ' << digest.text() << ' ' << snapshot.digest() << '\n';
-        journal.flush();
+    events.finish();
+    state.finish();
+    if (journal) {
+        *journal << "END " << count << ' ' << digest.text() << ' ' << snapshot.digest() << '\n';
+        journal->finish();
     }
     std::cout << "processed=" << count << " trace_digest=" << digest.text() << " state_digest=" << snapshot.digest() << '\n';
     return 0;
@@ -196,6 +171,7 @@ int replay(const Args& args) {
     auto journal = input_file(require(args, "--journal"));
     auto events = input_file(require(args, "--expect"));
     auto state = input_file(require(args, "--expect-state"));
+    hpts::require_distinct_files({journal.identity(), events.identity(), state.identity()});
     const auto config = hpts::read_config(journal, true);
     hpts::Engine engine(config.engine);
     Digest digest;
@@ -229,7 +205,8 @@ int replay(const Args& args) {
 }
 
 int interactive(const Args& args) {
-    const auto config = load_config(require(args, "--config"));
+    const ConfigSource source(require(args, "--config"));
+    const auto& config = source.config;
     hpts::Engine engine(config.engine);
     std::cout << "SIM ready. Enter help for commands.\n";
     std::string line;
@@ -351,7 +328,8 @@ struct Request { hpts::Command command; Clock::time_point start; };
 struct Response { hpts::Outcome outcome; Clock::time_point start; std::uint64_t core_ns = 0; bool submit = false; };
 
 int benchmark(const Args& args) {
-    const auto config = load_config(require(args, "--config"));
+    const ConfigSource source(require(args, "--config"));
+    const auto& config = source.config;
     auto input = input_file(require(args, "--input"));
     const std::string mode = args.contains("--mode") ? args.at("--mode") : "direct";
     if (mode != "direct" && mode != "queued") throw std::runtime_error("mode must be direct or queued");
@@ -365,6 +343,9 @@ int benchmark(const Args& args) {
     }
     if (commands.empty()) throw std::runtime_error("benchmark needs at least one command");
     hpts::Engine engine(config.engine);
+    std::unique_ptr<hpts::OutputFile> report_output;
+    if (args.contains("--output")) report_output = std::make_unique<hpts::OutputFile>(args.at("--output"));
+    hpts::prepare_outputs({report_output.get()}, {source.input.identity(), input.identity()});
     Digest digest;
     digest.update(trace_header(config));
     std::vector<std::uint64_t> core, end_to_end;
@@ -464,7 +445,7 @@ int benchmark(const Args& args) {
            << ",\"assertions\":true"
 #endif
            << ",\"warmup_commands\":0},\n  \"latency_boundaries\":{\"core\":\"process call\",\"end_to_end\":\"before queue admission through canonical serialization and trace digest; in-process\"}\n}\n";
-    if (args.contains("--output")) { auto output = output_file(args.at("--output")); output << report.str(); output.flush(); }
+    if (report_output) { *report_output << report.str(); report_output->finish(); }
     else std::cout << report.str();
     return 0;
 }
@@ -496,7 +477,17 @@ int main(int argc, char* argv[]) {
         else if (mode == "bench") args = arguments(argc, argv, {"--config", "--input", "--output", "--mode"});
         else if (mode == "interactive") args = arguments(argc, argv, {"--config"});
         else throw std::runtime_error("unknown mode: " + mode);
-        distinct_paths(args);
+        // Check every required and supplied optional value before any file is
+        // opened. Destination admission then uses actual retained-handle IDs.
+        for (const auto& [key, value] : args) { (void)value; require(args, key); }
+        if (mode == "run") {
+            for (const auto* key : {"--config", "--input", "--output", "--state"}) require(args, key);
+        } else if (mode == "replay") {
+            for (const auto* key : {"--journal", "--expect", "--expect-state"}) require(args, key);
+        } else {
+            require(args, "--config");
+            if (mode == "bench") require(args, "--input");
+        }
         if (mode == "run") return checked_success(run(args));
         if (mode == "replay") return checked_success(replay(args));
         if (mode == "bench") return checked_success(benchmark(args));

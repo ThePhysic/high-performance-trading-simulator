@@ -5,7 +5,7 @@ set(HPTS_SANITIZERS "" CACHE STRING "Sanitizers: address,undefined or thread (co
 set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(Threads REQUIRED)
 
-add_library(hpts_engine src/engine.cpp src/io.cpp)
+add_library(hpts_engine src/engine.cpp src/io.cpp src/files.cpp)
 target_include_directories(hpts_engine PUBLIC include)
 target_compile_features(hpts_engine PUBLIC cxx_std_20)
 target_link_libraries(hpts_engine PUBLIC Threads::Threads)
