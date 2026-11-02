@@ -1,0 +1,331 @@
+{
+  "sample_count": 727,
+  "total_cycle_weight": 3313152733,
+  "lost_samples": 0,
+  "event": "cycles:Pu",
+  "frequency_requested_hz": 499,
+  "workload": {
+    "profile": "mixed",
+    "commands": 300000,
+    "seed": 42,
+    "mode": "direct"
+  },
+  "inclusive_cycle_weight_percent": {
+    "Outcome::canonical": 37.368168592667175,
+    "Engine::process_or_Impl::process": 22.389548046229475,
+    "Snapshot::canonical": 2.4880186530175274
+  },
+  "top_self": [
+    {
+      "symbol_or_dso": "libstdc++.so.6.0.35",
+      "cycle_weight": 1671333783,
+      "percent": 50.44541914270996
+    },
+    {
+      "symbol_or_dso": "libc.so.6",
+      "cycle_weight": 296397059,
+      "percent": 8.94607290656407
+    },
+    {
+      "symbol_or_dso": "hpts::Engine::Impl::process(hpts::Command const&)",
+      "cycle_weight": 232647148,
+      "percent": 7.0219264473612775
+    },
+    {
+      "symbol_or_dso": "(anonymous namespace)::benchmark(std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&)::{lambda((anonymous namespace)::Response&)#1}::operator()((anonymous namespace)::Response&) const",
+      "cycle_weight": 178968108,
+      "percent": 5.401746385472173
+    },
+    {
+      "symbol_or_dso": "std::_Rb_tree<unsigned long, unsigned long, std::_Identity<unsigned long>, std::less<unsigned long>, std::allocator<unsigned long> >::_M_get_insert_unique_pos(unsigned long const&) [clone .isra.0]",
+      "cycle_weight": 101479514,
+      "percent": 3.0629289434571922
+    },
+    {
+      "symbol_or_dso": "[vdso]",
+      "cycle_weight": 70847579,
+      "percent": 2.1383734680969204
+    },
+    {
+      "symbol_or_dso": "void std::__introsort_loop<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long> > >, long, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long> > >, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long> > >, long, __gnu_cxx::__ops::_Iter_less_iter) [clone .isra.0]",
+      "cycle_weight": 65123032,
+      "percent": 1.9655910019286151
+    },
+    {
+      "symbol_or_dso": "hpts::Outcome::canonical[abi:cxx11]() const",
+      "cycle_weight": 61900914,
+      "percent": 1.868338678849551
+    },
+    {
+      "symbol_or_dso": "hpts::(anonymous namespace)::encode(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [clone .isra.0]",
+      "cycle_weight": 60023862,
+      "percent": 1.811684121958648
+    },
+    {
+      "symbol_or_dso": "hpts::bounded_line(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)",
+      "cycle_weight": 56545049,
+      "percent": 1.7066840425674998
+    },
+    {
+      "symbol_or_dso": "hpts::Event& std::vector<hpts::Event, std::allocator<hpts::Event> >::emplace_back<hpts::Event>(hpts::Event&&) [clone .isra.0]",
+      "cycle_weight": 42212511,
+      "percent": 1.274088893625418
+    },
+    {
+      "symbol_or_dso": "hpts::tokens(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)",
+      "cycle_weight": 41997776,
+      "percent": 1.2676076047351965
+    },
+    {
+      "symbol_or_dso": "_init",
+      "cycle_weight": 34793486,
+      "percent": 1.050162452622434
+    },
+    {
+      "symbol_or_dso": "(anonymous namespace)::benchmark(std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&) [clone .isra.0]",
+      "cycle_weight": 34020597,
+      "percent": 1.0268345513065122
+    },
+    {
+      "symbol_or_dso": "hpts::(anonymous namespace)::fingerprint(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [clone .isra.0]",
+      "cycle_weight": 32720706,
+      "percent": 0.9876002900226092
+    },
+    {
+      "symbol_or_dso": "long hpts::(anonymous namespace)::number<long>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)",
+      "cycle_weight": 27393996,
+      "percent": 0.826825631283084
+    },
+    {
+      "symbol_or_dso": "[unknown]",
+      "cycle_weight": 26129699,
+      "percent": 0.7886656941510821
+    },
+    {
+      "symbol_or_dso": "std::_Rb_tree<unsigned long, unsigned long, std::_Identity<unsigned long>, std::less<unsigned long>, std::allocator<unsigned long> >::find(unsigned long const&) const [clone .isra.0]",
+      "cycle_weight": 23961226,
+      "percent": 0.7232152554073034
+    },
+    {
+      "symbol_or_dso": "std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> > >::_M_erase(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> >*) [clone .isra.0]",
+      "cycle_weight": 23945508,
+      "percent": 0.7227408432305436
+    },
+    {
+      "symbol_or_dso": "std::_Rb_tree<unsigned long, unsigned long, std::_Identity<unsigned long>, std::less<unsigned long>, std::allocator<unsigned long> >::_M_erase(std::_Rb_tree_node<unsigned long>*) [clone .isra.0]",
+      "cycle_weight": 23198270,
+      "percent": 0.7001871591652941
+    },
+    {
+      "symbol_or_dso": "std::_Rb_tree_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> > std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> > >::_M_emplace_hint_unique<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, hpts::AccountSnapshot&>(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, hpts::AccountSnapshot&)",
+      "cycle_weight": 17736254,
+      "percent": 0.535328595731237
+    },
+    {
+      "symbol_or_dso": "std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> > >::find(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)",
+      "cycle_weight": 17544855,
+      "percent": 0.5295516510678169
+    },
+    {
+      "symbol_or_dso": "std::_Rb_tree<long, std::pair<long const, std::__cxx11::list<unsigned long, std::allocator<unsigned long> > >, std::_Select1st<std::pair<long const, std::__cxx11::list<unsigned long, std::allocator<unsigned long> > > >, std::less<long>, std::allocator<std::pair<long const, std::__cxx11::list<unsigned long, std::allocator<unsigned long> > > > >::_M_erase(std::_Rb_tree_node<std::pair<long const, std::__cxx11::list<unsigned long, std::allocator<unsigned long> > > >*) [clone .isra.0]",
+      "cycle_weight": 13004167,
+      "percent": 0.3925012834595452
+    },
+    {
+      "symbol_or_dso": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long)",
+      "cycle_weight": 12751155,
+      "percent": 0.38486469014828845
+    },
+    {
+      "symbol_or_dso": "std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> > >::_M_get_insert_unique_pos(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)",
+      "cycle_weight": 11969315,
+      "percent": 0.3612666232009776
+    },
+    {
+      "symbol_or_dso": "hpts::Engine::Impl::erase_order(unsigned long)",
+      "cycle_weight": 11759356,
+      "percent": 0.3549294870373246
+    },
+    {
+      "symbol_or_dso": "hpts::(anonymous namespace)::order_event(hpts::EventType, hpts::OrderSnapshot const&)",
+      "cycle_weight": 11682575,
+      "percent": 0.35261202671515957
+    },
+    {
+      "symbol_or_dso": "hpts::to_string[abi:cxx11](hpts::EventType)",
+      "cycle_weight": 11625421,
+      "percent": 0.3508869628679445
+    },
+    {
+      "symbol_or_dso": "void std::vector<unsigned long, std::allocator<unsigned long> >::_M_assign_aux<std::_Rb_tree_const_iterator<unsigned long> >(std::_Rb_tree_const_iterator<unsigned long>, std::_Rb_tree_const_iterator<unsigned long>, std::forward_iterator_tag) [clone .isra.0]",
+      "cycle_weight": 11614453,
+      "percent": 0.3505559186667293
+    },
+    {
+      "symbol_or_dso": "hpts::Event& std::vector<hpts::Event, std::allocator<hpts::Event> >::emplace_back<>() [clone .isra.0]",
+      "cycle_weight": 11477349,
+      "percent": 0.3464177454206123
+    }
+  ],
+  "top_inclusive": [
+    {
+      "symbol_or_dso": "main",
+      "cycle_weight": 3312310777,
+      "percent": 99.9745874679542
+    },
+    {
+      "symbol_or_dso": "_start",
+      "cycle_weight": 3312310777,
+      "percent": 99.9745874679542
+    },
+    {
+      "symbol_or_dso": "libc.so.6",
+      "cycle_weight": 3312310777,
+      "percent": 99.9745874679542
+    },
+    {
+      "symbol_or_dso": "(anonymous namespace)::benchmark(std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&) [clone .isra.0]",
+      "cycle_weight": 3304113125,
+      "percent": 99.72715993712083
+    },
+    {
+      "symbol_or_dso": "libstdc++.so.6.0.35",
+      "cycle_weight": 1884889130,
+      "percent": 56.891102882940956
+    },
+    {
+      "symbol_or_dso": "(anonymous namespace)::benchmark(std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&)::{lambda((anonymous namespace)::Response&)#1}::operator()((anonymous namespace)::Response&) const",
+      "cycle_weight": 1488576593,
+      "percent": 44.92930791186679
+    },
+    {
+      "symbol_or_dso": "hpts::Outcome::canonical[abi:cxx11]() const",
+      "cycle_weight": 1238064499,
+      "percent": 37.368168592667175
+    },
+    {
+      "symbol_or_dso": "hpts::Engine::process(hpts::Command const&)",
+      "cycle_weight": 741799923,
+      "percent": 22.389548046229475
+    },
+    {
+      "symbol_or_dso": "hpts::Engine::Impl::process(hpts::Command const&)",
+      "cycle_weight": 594168212,
+      "percent": 17.9336197236519
+    },
+    {
+      "symbol_or_dso": "hpts::tokens(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)",
+      "cycle_weight": 320739129,
+      "percent": 9.680783074240482
+    },
+    {
+      "symbol_or_dso": "hpts::bounded_line(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)",
+      "cycle_weight": 242520166,
+      "percent": 7.319921100661193
+    },
+    {
+      "symbol_or_dso": "hpts::Snapshot::digest[abi:cxx11]() const",
+      "cycle_weight": 120197320,
+      "percent": 3.627883459847729
+    },
+    {
+      "symbol_or_dso": "std::_Rb_tree<unsigned long, unsigned long, std::_Identity<unsigned long>, std::less<unsigned long>, std::allocator<unsigned long> >::_M_get_insert_unique_pos(unsigned long const&) [clone .isra.0]",
+      "cycle_weight": 101479514,
+      "percent": 3.0629289434571922
+    },
+    {
+      "symbol_or_dso": "hpts::Snapshot::canonical[abi:cxx11]() const",
+      "cycle_weight": 82431858,
+      "percent": 2.4880186530175274
+    },
+    {
+      "symbol_or_dso": "hpts::Engine::snapshot() const",
+      "cycle_weight": 75268901,
+      "percent": 2.2718210437538557
+    },
+    {
+      "symbol_or_dso": "[vdso]",
+      "cycle_weight": 70847579,
+      "percent": 2.1383734680969204
+    },
+    {
+      "symbol_or_dso": "void std::__introsort_loop<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long> > >, long, __gnu_cxx::__ops::_Iter_less_iter>(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long> > >, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long> > >, long, __gnu_cxx::__ops::_Iter_less_iter) [clone .isra.0]",
+      "cycle_weight": 65123032,
+      "percent": 1.9655910019286151
+    },
+    {
+      "symbol_or_dso": "(anonymous namespace)::percentiles(std::vector<unsigned long, std::allocator<unsigned long> >&)",
+      "cycle_weight": 65123032,
+      "percent": 1.9655910019286151
+    },
+    {
+      "symbol_or_dso": "std::_Rb_tree<unsigned long, unsigned long, std::_Identity<unsigned long>, std::less<unsigned long>, std::allocator<unsigned long> >::_M_erase(std::_Rb_tree_node<unsigned long>*) [clone .isra.0]",
+      "cycle_weight": 62693726,
+      "percent": 1.8922679107290044
+    },
+    {
+      "symbol_or_dso": "hpts::(anonymous namespace)::encode(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [clone .isra.0]",
+      "cycle_weight": 60023862,
+      "percent": 1.811684121958648
+    },
+    {
+      "symbol_or_dso": "hpts::Engine::~Engine()",
+      "cycle_weight": 50566920,
+      "percent": 1.5262477789308724
+    },
+    {
+      "symbol_or_dso": "hpts::parse_command(std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&)",
+      "cycle_weight": 44214192,
+      "percent": 1.3345050941845606
+    },
+    {
+      "symbol_or_dso": "hpts::Event& std::vector<hpts::Event, std::allocator<hpts::Event> >::emplace_back<hpts::Event>(hpts::Event&&) [clone .isra.0]",
+      "cycle_weight": 42212511,
+      "percent": 1.274088893625418
+    },
+    {
+      "symbol_or_dso": "_init",
+      "cycle_weight": 34793486,
+      "percent": 1.050162452622434
+    },
+    {
+      "symbol_or_dso": "hpts::(anonymous namespace)::fingerprint(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [clone .isra.0]",
+      "cycle_weight": 32720706,
+      "percent": 0.9876002900226092
+    },
+    {
+      "symbol_or_dso": "std::pair<std::_Rb_tree_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> >, bool> std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, hpts::AccountSnapshot, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> > >::emplace<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, hpts::AccountSnapshot&>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, hpts::AccountSnapshot&)",
+      "cycle_weight": 29705569,
+      "percent": 0.8965952189322146
+    },
+    {
+      "symbol_or_dso": "std::_Rb_tree_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> > std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> > >::_M_emplace_hint_unique<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, hpts::AccountSnapshot&>(std::_Rb_tree_const_iterator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, hpts::AccountSnapshot> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, hpts::AccountSnapshot&)",
+      "cycle_weight": 29705569,
+      "percent": 0.8965952189322146
+    },
+    {
+      "symbol_or_dso": "long hpts::(anonymous namespace)::number<long>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)",
+      "cycle_weight": 27393996,
+      "percent": 0.826825631283084
+    },
+    {
+      "symbol_or_dso": "[unknown]",
+      "cycle_weight": 26129699,
+      "percent": 0.7886656941510821
+    },
+    {
+      "symbol_or_dso": "std::_Rb_tree<unsigned long, unsigned long, std::_Identity<unsigned long>, std::less<unsigned long>, std::allocator<unsigned long> >::find(unsigned long const&) const [clone .isra.0]",
+      "cycle_weight": 23961226,
+      "percent": 0.7232152554073034
+    }
+  ],
+  "method": "Parse retained perf script samples and executable MMAP2 load ranges. Map executable addresses to nearest preceding text/weak symbol from GNU nm --defined-only; subtract one from caller return addresses. Shared-library frames are grouped by DSO because this perf build has libelf disabled. Weights are sampled cycle periods, not raw sample counts.",
+  "scope": "Entire CLI process: parsing/preload, execution, canonical output/digest, final invariants/state, report. Percentages are not limited to the timed benchmark interval. Frame-pointer callers in system libraries may be incomplete.",
+  "limitations": [
+    "Single short capture; no uncertainty estimate or statistical significance claim.",
+    "Nearest-symbol lookup may attribute PLT/gaps to a preceding symbol; small incidental symbol percentages should not be overinterpreted.",
+    "No CPU affinity/isolation applied.",
+    "No kernel/sysctl/permission changes.",
+    "Initial capture on /mnt/c failed with Bad address; valid capture used Linux home-cache storage and was copied afterward."
+  ]
+}

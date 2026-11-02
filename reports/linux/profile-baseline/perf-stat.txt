@@ -1,0 +1,20 @@
+# started on Sun Nov  1 19:57:33 2026
+
+
+ Performance counter stats for '/home/ridle/.cache/hpts-builds/baseline/hpts bench --config /mnt/c/Users/ridle/high-performance-trading-simulator/reports/generated/linux-profile/accounts.cfg --input /mnt/c/Users/ridle/high-performance-trading-simulator/reports/generated/linux-profile/commands.txt --mode direct --output /mnt/c/Users/ridle/high-performance-trading-simulator/reports/linux/profile-baseline/bench-stat.json':
+
+        3416129488      cycles:u                         #    2.466 GHz                       
+        8430470514      instructions:u                   #    2.47  insn per cycle            
+        1674366195      branches:u                       #    1.209 G/sec                     
+           7214968      branch-misses:u                  #    0.43% of all branches           
+        1385247328      task-clock:u                     #    0.732 CPUs utilized             
+                 0      context-switches:u               #    0.000 /sec                      
+                 0      cpu-migrations:u                 #    0.000 /sec                      
+             29303      page-faults:u                    #   21.154 K/sec                     
+
+       1.893442669 seconds time elapsed
+
+       1.106872000 seconds user
+       0.265795000 seconds sys
+
+

@@ -1,0 +1,9 @@
+# Profiling commands actually executed; build settings are retained in build-cache.txt.
+python3 /mnt/c/Users/ridle/high-performance-trading-simulator/tools/generate_workload.py --output-dir /mnt/c/Users/ridle/high-performance-trading-simulator/reports/generated/linux-profile --count 300000 --seed 42 --profile mixed
+perf stat -e cycles:u,instructions:u,branches:u,branch-misses:u,task-clock,context-switches,cpu-migrations,page-faults -o /mnt/c/Users/ridle/high-performance-trading-simulator/reports/linux/profile-baseline/perf-stat.txt -- /home/ridle/.cache/hpts-builds/baseline/hpts bench --config /mnt/c/Users/ridle/high-performance-trading-simulator/reports/generated/linux-profile/accounts.cfg --input /mnt/c/Users/ridle/high-performance-trading-simulator/reports/generated/linux-profile/commands.txt --mode direct --output /mnt/c/Users/ridle/high-performance-trading-simulator/reports/linux/profile-baseline/bench-stat.json
+perf record -F 499 -g --call-graph fp -o /home/ridle/.cache/hpts-profile-baseline/perf.data -- /home/ridle/.cache/hpts-builds/baseline/hpts bench --config /mnt/c/Users/ridle/high-performance-trading-simulator/reports/generated/linux-profile/accounts.cfg --input /mnt/c/Users/ridle/high-performance-trading-simulator/reports/generated/linux-profile/commands.txt --mode direct --output /mnt/c/Users/ridle/high-performance-trading-simulator/reports/linux/profile-baseline/bench-sampled.json
+perf report --stdio --no-children --sort=dso,symbol --percent-limit 0.5 -i /home/ridle/.cache/hpts-profile-baseline/perf.data
+perf report --stdio -g graph --percent-limit 1 -i /home/ridle/.cache/hpts-profile-baseline/perf.data
+perf script --show-mmap-events -i /home/ridle/.cache/hpts-profile-baseline/perf.data
+nm -n -C --defined-only /home/ridle/.cache/hpts-builds/baseline/hpts
+python3 reports/linux/profile-baseline/symbolize.py

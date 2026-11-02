@@ -1,0 +1,83 @@
+0x000000000000c63c
+(anonymous namespace)::benchmark(std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&)::{lambda((anonymous namespace)::Response&)#1}::operator()((anonymous namespace)::Response&) const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/main.cpp:377
+0x000000000000c671
+(anonymous namespace)::benchmark(std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&)::{lambda((anonymous namespace)::Response&)#1}::operator()((anonymous namespace)::Response&) const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/main.cpp:63 (discriminator 7)
+(anonymous namespace)::benchmark(std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&)::{lambda((anonymous namespace)::Response&)#1}::operator()((anonymous namespace)::Response&) const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/main.cpp:378 (discriminator 7)
+0x000000000000dd11
+(anonymous namespace)::benchmark(std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&) [clone .isra.0]
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/main.cpp:396
+0x000000000001a434
+std::ostream::operator<<(unsigned long)
+/usr/include/c++/15/bits/ostream.h:179
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:173
+0x000000000001a605
+std::ostream::operator<<(long)
+/usr/include/c++/15/bits/ostream.h:175
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:179
+0x000000000001a688
+std::ostream::operator<<(bool)
+/usr/include/c++/15/bits/ostream.h:183
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:179
+0x000000000001a7fd
+std::ostream::operator<<(unsigned long)
+/usr/include/c++/15/bits/ostream.h:179
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:176
+0x000000000001a83c
+std::ostream::operator<<(unsigned long)
+/usr/include/c++/15/bits/ostream.h:179
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:176
+0x000000000001a8de
+std::ostream::operator<<(unsigned long)
+/usr/include/c++/15/bits/ostream.h:179
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:177
+0x000000000001a91e
+std::ostream::operator<<(unsigned long)
+/usr/include/c++/15/bits/ostream.h:179
+hpts::Outcome::canonical[abi:cxx11]() const
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:177
+0x000000000001c534
+hpts::Engine::process(hpts::Command const&)
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:458 (discriminator 1)
+0x000000000000dc2d
+(anonymous namespace)::benchmark(std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&) [clone .isra.0]
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/main.cpp:393
+0x00000000000227cc
+std::_Rb_tree<unsigned long, unsigned long, std::_Identity<unsigned long>, std::less<unsigned long>, std::allocator<unsigned long> >::_S_right(std::_Rb_tree_node_base*)
+/usr/include/c++/15/bits/stl_tree.h:1437
+std::_Rb_tree<unsigned long, unsigned long, std::_Identity<unsigned long>, std::less<unsigned long>, std::allocator<unsigned long> >::_M_lower_bound(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, unsigned long const&) const
+/usr/include/c++/15/bits/stl_tree.h:2607
+std::_Rb_tree<unsigned long, unsigned long, std::_Identity<unsigned long>, std::less<unsigned long>, std::allocator<unsigned long> >::find(unsigned long const&) const
+/usr/include/c++/15/bits/stl_tree.h:3165
+std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> >::contains(unsigned long const&) const
+/usr/include/c++/15/bits/stl_set.h:815
+hpts::Engine::Impl::process(hpts::Command const&)
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/engine.cpp:308
+0x000000000001e467
+std::_Rb_tree<unsigned long, unsigned long, std::_Identity<unsigned long>, std::less<unsigned long>, std::allocator<unsigned long> >::_S_right(std::_Rb_tree_node_base*)
+/usr/include/c++/15/bits/stl_tree.h:1437
+std::_Rb_tree<unsigned long, unsigned long, std::_Identity<unsigned long>, std::less<unsigned long>, std::allocator<unsigned long> >::_M_get_insert_unique_pos(unsigned long const&)
+/usr/include/c++/15/bits/stl_tree.h:2741
+0x0000000000026ff4
+hpts::tokens(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/io.cpp:54 (discriminator 4)
+0x00000000000260dd
+hpts::bounded_line(std::istream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/io.cpp:36 (discriminator 2)
+0x000000000000d408
+(anonymous namespace)::benchmark(std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&) [clone .isra.0]
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/main.cpp:362 (discriminator 1)
+0x000000000000d3ea
+(anonymous namespace)::benchmark(std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&) [clone .isra.0]
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/main.cpp:360 (discriminator 2)
+0x000000000000e262
+(anonymous namespace)::benchmark(std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&) [clone .isra.0]
+/mnt/c/Users/ridle/high-performance-trading-simulator/src/main.cpp:448 (discriminator 8)
