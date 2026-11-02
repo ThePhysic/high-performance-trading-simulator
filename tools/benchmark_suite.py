@@ -110,6 +110,16 @@ def fingerprint(path: Path) -> str:
     return digest.hexdigest()
 
 
+def fnv1a64_file(path: Path) -> str:
+    """Fingerprint canonical bytes using the engine's noncryptographic FNV-1a64."""
+    value = 14695981039346656037
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1 << 20), b""):
+            for byte in block:
+                value = ((value ^ byte) * 1099511628211) & 0xFFFFFFFFFFFFFFFF
+    return f"{value:016x}"
+
+
 def environment(binary: Path) -> dict:
     metadata = {
         "platform": platform.platform(), "system": platform.system(),
@@ -165,12 +175,18 @@ def run_suite(args: argparse.Namespace) -> dict:
                 "--output", str(events), "--state", str(state), "--journal", str(journal)], args.timeout)
         invoke([str(binary), "replay", "--journal", str(journal), "--expect", str(events),
                 "--expect-state", str(state)], args.timeout)
-        workload = {"manifest": manifest, "replay_verified": True, "modes": {}}
-        expected_digests = None
+        expected_digests = (fnv1a64_file(state), fnv1a64_file(events))
+        workload = {"manifest": manifest, "replay_verified": True, "modes": {},
+                    "verified_run_digests": {"state_digest": expected_digests[0],
+                                             "trace_digest": expected_digests[1]}}
         for mode in args.modes:
             warmup = directory / f"{mode}-warmup.json"
             base = [str(binary), "bench", "--config", str(config), "--input", str(commands), "--mode", mode]
             invoke([*base, "--output", str(warmup)], args.timeout)
+            warmup_sample = read_small_json(warmup)
+            validate_report(warmup_sample, warmup, args.count)
+            if (warmup_sample["state_digest"], warmup_sample["trace_digest"]) != expected_digests:
+                raise RuntimeError(f"warmup logical digests differ from verified file run: {warmup}")
             samples = []
             for repetition in range(args.repetitions):
                 report = directory / f"{mode}-{repetition + 1}.json"
@@ -178,10 +194,8 @@ def run_suite(args: argparse.Namespace) -> dict:
                 sample = read_small_json(report)
                 validate_report(sample, report, args.count)
                 digests = (sample["state_digest"], sample["trace_digest"])
-                if expected_digests is None:
-                    expected_digests = digests
-                elif digests != expected_digests:
-                    raise RuntimeError(f"logical digest mismatch between benchmark repetitions/modes: {report}")
+                if digests != expected_digests:
+                    raise RuntimeError(f"benchmark logical digests differ from verified file run: {report}")
                 samples.append(sample)
             workload["modes"][mode] = {"reports": samples, "summary": summarize(samples)}
         if "direct" in args.modes and "queued" in args.modes:

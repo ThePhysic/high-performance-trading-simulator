@@ -20,6 +20,16 @@ REPOSITORY = Path(sys.argv[2]).resolve()
 sys.argv = [sys.argv[0]]
 
 
+def canonical_file_digest(path: Path) -> str:
+    # Independent Python calculation over actual run output; benchmark modes
+    # must match the file execution contract, not merely one another.
+    digest = 14695981039346656037
+    for byte in path.read_bytes():
+        digest ^= byte
+        digest = (digest * 1099511628211) % (1 << 64)
+    return f"{digest:016x}"
+
+
 class CliContract(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -205,6 +215,9 @@ class CliContract(unittest.TestCase):
 
     def test_direct_and_queued_benchmarks_agree(self) -> None:
         directory = self.directory("benchmarks")
+        events, state, _ = self.run_paths(directory)
+        expected_trace = canonical_file_digest(events)
+        expected_state = canonical_file_digest(state)
         reports = []
         for mode in ("direct", "queued"):
             report_path = directory / f"{mode}.json"
@@ -217,6 +230,8 @@ class CliContract(unittest.TestCase):
                 self.assertGreaterEqual(values[0], 0)
             self.assertGreater(report["elapsed_seconds"], 0)
             self.assertGreater(report["commands_per_second"], 0)
+            self.assertEqual(report["trace_digest"], expected_trace)
+            self.assertEqual(report["state_digest"], expected_state)
             reports.append(report)
         self.assertEqual(reports[0]["state_digest"], reports[1]["state_digest"])
         self.assertEqual(reports[0]["trace_digest"], reports[1]["trace_digest"])
@@ -254,6 +269,10 @@ class CliContract(unittest.TestCase):
         for workload in suite["workloads"].values():
             self.assertTrue(workload["replay_verified"])
             self.assertEqual(set(workload["modes"]), {"direct", "queued"})
+            for mode in workload["modes"].values():
+                for report in mode["reports"]:
+                    self.assertEqual(report["state_digest"], workload["verified_run_digests"]["state_digest"])
+                    self.assertEqual(report["trace_digest"], workload["verified_run_digests"]["trace_digest"])
 
 
 if __name__ == "__main__":

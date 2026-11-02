@@ -18,7 +18,7 @@ python3 tools/generate_workload.py --output-dir build/workload --profile mixed -
 
 `direct` executes on the calling thread. `queued` separates a producer, one authoritative execution worker, and a canonical-output consumer through bounded blocking queues. There is still one book writer. The comparison tests the cost/benefit of that topology on equivalent business work; concurrency is not assumed faster. Queue pressure can increase tail latency even if some work overlaps.
 
-Both modes use the same engine and canonical serialization. They report logical trace and final-state digests. The benchmark suite requires agreement across repetitions/modes; file execution and replay additionally compare exact bytes. A digest alone is not proof of collision-free equality or of matching correctness, which comes from separate reference/invariant tests.
+Both modes use the same engine and canonical serialization. They report logical trace and final-state digests. After file execution and exact replay comparison, the benchmark suite independently fingerprints the actual event/state files and requires every warmup and measured sample to match that fixed baseline. A digest alone is not proof of collision-free equality or of matching correctness, which comes from separate reference/invariant tests.
 
 ## What each number means
 
