@@ -213,6 +213,44 @@ class CliContract(unittest.TestCase):
             results.append((events.read_bytes(), state.read_bytes()))
         self.assertEqual(results[0], results[1])
 
+    def test_closed_stdout_pipe_reports_failure(self) -> None:
+        directory = self.directory("closed-stdout")
+        events, state, journal = self.run_paths(directory)
+        cases = [
+            ["--version"],
+            ["bench", "--config", self.config, "--input", self.demo, "--mode", "direct"],
+            ["run", "--config", self.config, "--input", self.demo,
+             "--output", directory / "run-events", "--state", directory / "run-state"],
+            ["replay", "--journal", journal, "--expect", events, "--expect-state", state],
+        ]
+        for arguments in cases:
+            with self.subTest(arguments=arguments):
+                read_fd, write_fd = os.pipe()
+                try:
+                    os.close(read_fd)
+                    read_fd = None
+                    result = subprocess.run([str(BINARY), *map(str, arguments)], stdout=write_fd,
+                                            stderr=subprocess.PIPE, cwd=self.workspace,
+                                            text=True, timeout=15, check=False)
+                finally:
+                    if read_fd is not None:
+                        os.close(read_fd)
+                    os.close(write_fd)
+                self.assertEqual(result.returncode, 2,
+                                 f"closed stdout must report system error exit 2: {arguments!r}; stderr={result.stderr!r}")
+
+    @unittest.skipUnless(os.name != "nt" and Path("/dev/full").exists(), "requires Linux /dev/full")
+    def test_stdout_device_failure_reports_failure(self) -> None:
+        for arguments in (["--version"],
+                          ["bench", "--config", self.config, "--input", self.demo, "--mode", "direct"]):
+            with self.subTest(arguments=arguments):
+                with Path("/dev/full").open("wb") as output:
+                    result = subprocess.run([str(BINARY), *map(str, arguments)], stdout=output,
+                                            stderr=subprocess.PIPE, cwd=self.workspace,
+                                            text=True, timeout=15, check=False)
+                self.assertEqual(result.returncode, 2,
+                                 f"failed stdout device must report system error exit 2: {arguments!r}; stderr={result.stderr!r}")
+
     def test_direct_and_queued_benchmarks_agree(self) -> None:
         directory = self.directory("benchmarks")
         events, state, _ = self.run_paths(directory)

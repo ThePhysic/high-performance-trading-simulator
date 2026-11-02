@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <chrono>
+#include <csignal>
 #include <ctime>
 #include <exception>
 #include <filesystem>
@@ -467,6 +468,13 @@ int benchmark(const Args& args) {
     else std::cout << report.str();
     return 0;
 }
+
+int checked_success(int result = 0) {
+    // Destruction-time flushing cannot report a failed pipe/file to main.
+    // Keep the final flush inside main's exception boundary for every mode.
+    std::cout.flush();
+    return result;
+}
 }  // namespace
 
 int main(int argc, char* argv[]) {
@@ -474,8 +482,13 @@ int main(int argc, char* argv[]) {
     std::cerr.imbue(std::locale::classic());
     std::cout.exceptions(std::ios::badbit | std::ios::failbit);
     try {
-        if (argc == 1 || (argc == 2 && (std::string(argv[1]) == "--help" || std::string(argv[1]) == "-h"))) { std::cout << help; return 0; }
-        if (argc == 2 && std::string(argv[1]) == "--version") { std::cout << "hpts 0.1.0 rules=1 canonical=1\n"; return 0; }
+#ifndef _WIN32
+        // Convert EPIPE into the documented checked I/O error exit rather than
+        // process termination by SIGPIPE. No network transport is installed.
+        if (std::signal(SIGPIPE, SIG_IGN) == SIG_ERR) throw std::runtime_error("cannot configure broken-pipe handling");
+#endif
+        if (argc == 1 || (argc == 2 && (std::string(argv[1]) == "--help" || std::string(argv[1]) == "-h"))) { std::cout << help; return checked_success(); }
+        if (argc == 2 && std::string(argv[1]) == "--version") { std::cout << "hpts 0.1.0 rules=1 canonical=1\n"; return checked_success(); }
         const std::string mode = argv[1];
         Args args;
         if (mode == "run") args = arguments(argc, argv, {"--config", "--input", "--output", "--state", "--journal"});
@@ -484,10 +497,10 @@ int main(int argc, char* argv[]) {
         else if (mode == "interactive") args = arguments(argc, argv, {"--config"});
         else throw std::runtime_error("unknown mode: " + mode);
         distinct_paths(args);
-        if (mode == "run") return run(args);
-        if (mode == "replay") return replay(args);
-        if (mode == "bench") return benchmark(args);
-        return interactive(args);
+        if (mode == "run") return checked_success(run(args));
+        if (mode == "replay") return checked_success(replay(args));
+        if (mode == "bench") return checked_success(benchmark(args));
+        return checked_success(interactive(args));
     } catch (const std::exception& error) {
         std::cerr << "error: " << error.what() << '\n';
         return 2;
