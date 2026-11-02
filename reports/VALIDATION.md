@@ -15,6 +15,14 @@ Environment: AMD Ryzen 9 7940HS, Windows x64, MSVC 19.51.36260.0, C++20, Visual 
 
 Retained raw logs: [Release CTest](native-release-ctest.log), [AddressSanitizer CTest](native-asan-ctest.log). Native builds emitted MSB8029 about the temporary build directory; the sanitizer link also emitted LNK4302 recommending linker debug information. Neither was a source compiler warning or a runtime finding. Windows ASan is not evidence of Linux ASan/UBSan/TSan coverage.
 
+## Adversarial-review output failure fix
+
+Astra medium review reproduced a buffered stdout error: version, benchmark stdout, run summary, and replay summary could lose all output on a closed pipe while exiting zero. Commit `bb48c7b` adds one checked stdout flush on every successful top-level exit and ignores POSIX SIGPIPE so EPIPE can become the documented error exit. Regression tests first reproduced all four failures against the old native binary; the corrected native binary passes exact exit-code-2 assertions.
+
+The corrected build passed 16 registered native CLI cases (14 passed, two expected Linux-only skips) in 3.392 seconds. An affected-target AddressSanitizer rebuild then passed the same CLI suite in 8.76 seconds, with no runtime findings; [retained fix validation](native-asan-cli-stdout.log). The unchanged engine and queue retain their full prior sanitizer evidence. Linux closed-pipe and `/dev/full` stdout cases remain to execute on Linux. The benchmark artifact below was regenerated with the corrected binary, and its hash matches the refreshed build record.
+
+Astra found no additional concrete matching/risk/replay/concurrency defect in its first review, but explicitly withheld completion approval because actual Linux validation/profiling and private publication are still missing. Re-review of the corrected final implementation is pending.
+
 ## Measured native topology comparison
 
 The [full benchmark artifact](native-suite.json) contains all raw samples, variability summaries, input manifests/fingerprints, replay verification, and fixed file-run digest baselines. Eight profiles each used 20,000 commands, seed 42, queue capacity 256, three measured repetitions per mode, and one discarded fresh-process invocation per mode. All warmup and measured samples matched the file-run trace/state fingerprints after exact replay. Synthetic workloads, preloaded input, and in-process timing boundaries apply; see [methodology](../docs/PERFORMANCE.md).
@@ -23,14 +31,14 @@ Values below are means across three runs. p99 columns are mean per-run p99 core 
 
 | Workload | Direct commands/s | Queued commands/s | Direct core p99 us | Queued core p99 us |
 |---|---:|---:|---:|---:|
-| resting | 123,615 | 143,660 | 5.20 | 8.90 |
-| crossing | 107,111 | 116,904 | 4.60 | 7.43 |
-| cancel | 128,330 | 129,966 | 3.20 | 6.33 |
-| replace | 118,939 | 125,035 | 4.37 | 7.03 |
-| dense | 119,065 | 137,280 | 5.70 | 8.60 |
-| sparse | 105,102 | 146,254 | 10.90 | 9.93 |
-| burst | 137,404 | 143,602 | 3.53 | 6.07 |
-| mixed | 113,337 | 116,990 | 4.63 | 7.43 |
+| resting | 123,837 | 148,734 | 5.13 | 8.13 |
+| crossing | 112,267 | 115,126 | 3.97 | 7.47 |
+| cancel | 140,215 | 140,071 | 2.93 | 6.37 |
+| replace | 127,308 | 143,388 | 3.37 | 6.43 |
+| dense | 128,975 | 139,569 | 5.20 | 8.57 |
+| sparse | 112,094 | 144,290 | 8.20 | 10.40 |
+| burst | 139,648 | 130,384 | 3.37 | 6.80 |
+| mixed | 125,427 | 127,504 | 3.37 | 6.37 |
 
 This comparison documents a concurrency tradeoff on this specific native host. It does not establish Linux performance, a specific cache/allocation bottleneck, or a profiling-backed optimization gain. No call-stack/hardware-counter profile was collected here. Durations are short and the host was not isolated, so these results should not support broad low-latency claims.
 

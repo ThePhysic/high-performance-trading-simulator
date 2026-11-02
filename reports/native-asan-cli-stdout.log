@@ -1,0 +1,39 @@
+Start testing: Nov 01 19:46 Pacific Standard Time
+----------------------------------------------------------
+3/3 Testing: cli_contract
+3/3 Test: cli_contract
+Command: "C:/Users/ridle/AppData/Local/Programs/Python/Python313/python.exe" "C:/Users/ridle/AppData/Local/Temp/high-performance-trading-simulator/tests/test_cli.py" "C:/Users/ridle/AppData/Local/Temp/high-performance-trading-simulator/build-asan-native/Release/hpts.exe" "C:/Users/ridle/AppData/Local/Temp/high-performance-trading-simulator"
+Directory: C:/Users/ridle/AppData/Local/Temp/high-performance-trading-simulator/build-asan-native
+"cli_contract" start time: Nov 01 19:46 Pacific Standard Time
+Output:
+----------------------------------------------------------
+test_all_generated_profiles_run_and_replay (__main__.CliContract.test_all_generated_profiles_run_and_replay) ... ok
+test_benchmark_suite_collects_real_reports (__main__.CliContract.test_benchmark_suite_collects_real_reports) ... ok
+test_business_rejections_are_recorded_without_process_failure (__main__.CliContract.test_business_rejections_are_recorded_without_process_failure) ... ok
+test_closed_stdout_pipe_reports_failure (__main__.CliContract.test_closed_stdout_pipe_reports_failure) ... ok
+test_direct_and_queued_benchmarks_agree (__main__.CliContract.test_direct_and_queued_benchmarks_agree) ... ok
+test_help_version_and_argument_errors (__main__.CliContract.test_help_version_and_argument_errors) ... ok
+test_interactive_inspection_and_controls (__main__.CliContract.test_interactive_inspection_and_controls) ... ok
+test_journal_requires_completion_footer_and_no_trailing_commands (__main__.CliContract.test_journal_requires_completion_footer_and_no_trailing_commands) ... ok
+test_locale_environment_does_not_change_canonical_results (__main__.CliContract.test_locale_environment_does_not_change_canonical_results) ... ok
+test_malformed_input_and_config_are_errors (__main__.CliContract.test_malformed_input_and_config_are_errors) ... ok
+test_midstream_output_failure_never_completes_journal (__main__.CliContract.test_midstream_output_failure_never_completes_journal) ... skipped 'requires Linux /dev/full'
+test_output_aliases_and_open_failures (__main__.CliContract.test_output_aliases_and_open_failures) ... ok
+test_seeded_malformed_command_corpus (__main__.CliContract.test_seeded_malformed_command_corpus) ... ok
+test_self_contained_replay_and_tamper_detection (__main__.CliContract.test_self_contained_replay_and_tamper_detection) ... ok
+test_stdout_device_failure_reports_failure (__main__.CliContract.test_stdout_device_failure_reports_failure) ... skipped 'requires Linux /dev/full'
+test_windows_output_case_aliases (__main__.CliContract.test_windows_output_case_aliases) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 8.535s
+
+OK (skipped=2)
+<end of output>
+Test time =   8.76 sec
+----------------------------------------------------------
+Test Passed.
+"cli_contract" end time: Nov 01 19:46 Pacific Standard Time
+"cli_contract" time elapsed: 00:00:08
+----------------------------------------------------------
+
+End testing: Nov 01 19:46 Pacific Standard Time

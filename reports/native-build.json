@@ -1,5 +1,5 @@
 {
-  "collected_at_utc": "2026-11-02T03:42:34.293202+00:00",
+  "collected_at_utc": "2026-11-02T03:47:28.744006+00:00",
   "platform": "Windows-11-10.0.26200-SP0",
   "cpu_model": "AMD Ryzen 9 7940HS w/ Radeon 780M Graphics",
   "logical_cpus": 16,
@@ -23,12 +23,12 @@
     "/Zi",
     "/INCREMENTAL:NO"
   ],
-  "binary_sha256": "002844c2519d780cc5faee6407644b9dd9172bf909d921a28db747bb96e0fcf4",
+  "binary_sha256": "58f58d060401bb26aa9e76d2587a8e6ce97b5e60f277af1491e8897f45e03ad6",
   "source_sha256": {
     "CMakeLists.txt": "2ab4f40c9121f0ede684ccb39b4dc3c645eb92ae253fd7105d3e814cc6f7fa73",
     "src/engine.cpp": "f7fbb93482fbaf15a1997aeefceae4358230917bb275e831b7cbd7f925785915",
     "src/io.cpp": "bcc6dd6457619dd3e9998025acaac2e332b28d2c3aa47848e41467769c4fe100",
-    "src/main.cpp": "a71b839834d8f893c9849ba009c7dfe11807d09912cafd899b412c32dc63a710",
+    "src/main.cpp": "24727220a0c3e3b340a21a601715ba1c24f2a281389229bd49c6e3ed3ca78b20",
     "include/hpts/engine.hpp": "a0f82bd9bba3433c1bbfd6b33295d3612606e6532b03997a9d3a0fe69aaaaf80",
     "include/hpts/io.hpp": "595b489384ccd03ecee1b97c98039a92b40e7716a3d57e75a9acd70a6de9224d",
     "include/hpts/queue.hpp": "e312bc9445092c9f215d3dafc36e5220b40d53697fe9c376c79047d15edb6484"
@@ -40,5 +40,6 @@
     "No explicit scheduling isolation or affinity.",
     "Peak RSS includes benchmark harness.",
     "No hardware counter, allocation, or call-stack profile collected."
-  ]
+  ],
+  "stdout_fix_commit": "bb48c7b"
 }
